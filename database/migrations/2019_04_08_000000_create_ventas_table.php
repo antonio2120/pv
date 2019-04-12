@@ -10,7 +10,7 @@ class CreateVentasTable extends Migration
     public function up()
     {
         Schema::create('ventas', function (Blueprint $table) {
-            $table->bigIncrements('idVenta');
+            $table->increments('idVenta');
             $table->date('fecha');
             $table->float('total');
             $table->float('can_art');
