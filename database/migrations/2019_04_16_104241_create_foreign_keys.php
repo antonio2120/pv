@@ -12,6 +12,9 @@ class CreateForeignKeys extends Migration
         Schema::table('productos', function (Blueprint $table){
             $table->foreign('proveedor_id')->references('id')
                 ->on('proveedores')->onDelete('cascade');
+
+            $table->foreign('categoria_id')->references('id')
+                ->on('categorias')->onDelete('cascade');
         });
 
         Schema::table('ventas', function (Blueprint $table){
@@ -27,7 +30,7 @@ class CreateForeignKeys extends Migration
     {
         Schema::table('productos', function (Blueprint $table){
             $table->dropForeign('productos_proveedor_id_foreign');
-
+            $table->dropForeign('productos_categoria_id_foreign');
         });
         Schema::table('ventas', function (Blueprint $table){
             $table->dropForeign('ventas_empleado_id_foreign');
