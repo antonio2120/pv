@@ -8,9 +8,9 @@ class Product extends Model
 {
 
     protected $table = 'productos';
-    protected $fillable = ['nombre', 'descripcion', 'precio','costo'];
-/*
-    public function collection(){
+    protected $fillable = ['nombre', 'descripcion', 'precio','costo'];//campos visibles
+
+   /* public function collection(){
         return $this->belongsTo(Collection::class);
     }
 
