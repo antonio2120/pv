@@ -10,11 +10,11 @@ class CreateVentasTable extends Migration
     public function up()
     {
         Schema::create('ventas', function (Blueprint $table) {
-            $table->increments('idVenta');
+            $table->increments('id_Venta');
             $table->date('fecha');
+            $table->string('hora');
             $table->float('total');
-            $table->float('can_art');
-            $table->string('descrip');
+            $table->unsignedInteger('id');
             $table->timestamps();
         });
     }
