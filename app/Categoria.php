@@ -1,14 +1,14 @@
 <?php
 
-namespace App\product;
+namespace App\categoria;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Categoria extends Model
 {
 
-    protected $table = 'productos';
-    protected $fillable = ['nombre', 'descripcion', 'precio','costo'];//campos visibles 
+    protected $table = 'categorias';
+    protected $fillable = ['id','nombre'];//campos visibles 
 
    /* public function collection(){
         return $this->belongsTo(Collection::class);
