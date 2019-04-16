@@ -1,16 +1,16 @@
 <?php
 
-namespace App\product;
+namespace App\empleado;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Empleado extends Model
 {
 
-    protected $table = 'productos';
-    protected $fillable = ['nombre', 'descripcion', 'precio','costo'];//campos visibles 
+    protected $table = 'empleados';
+    protected $fillable = ['nombre', 'apellido', 'nombreUsuario','password'];
 
-   /* public function collection(){
+    /*public function collection(){
         return $this->belongsTo(Collection::class);
     }
 
