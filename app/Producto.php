@@ -1,10 +1,10 @@
 <?php
 
-namespace App\product;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Producto extends Model
 {
 
     protected $table = 'productos';

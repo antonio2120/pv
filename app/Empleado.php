@@ -1,15 +1,16 @@
 <?php
-namespace App\product;
+
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ventas extends Model
+class Empleado extends Model
 {
 
-    protected $table = 'ventass';
-    protected $fillable = ['fecha', 'hora', 'total','costo'];
-/*
-    public function collection(){
+    protected $table = 'empleados';
+    protected $fillable = ['nombre', 'apellido', 'nombreUsuario','password'];
+
+    /*public function collection(){
         return $this->belongsTo(Collection::class);
     }
 
@@ -19,7 +20,6 @@ class ventas extends Model
 
     public function categories(){
         return $this->belongsToMany(Category::class);
-    }
-*/
+    }*/
 
 }

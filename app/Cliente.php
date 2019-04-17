@@ -1,14 +1,14 @@
 <?php
 
-namespace App\empleado;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Empleado extends Model
+class Cliente extends Model
 {
 
-    protected $table = 'empleados';
-    protected $fillable = ['nombre', 'apellido', 'nombreUsuario','password'];
+    protected $table = 'clientes';
+    protected $fillable = ['nombres', 'apaterno', 'amaterno', 'direccion', 'telefono', 'correo'];
 
     /*public function collection(){
         return $this->belongsTo(Collection::class);
