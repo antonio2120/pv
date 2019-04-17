@@ -14,7 +14,7 @@ class CreateVentasTable extends Migration
             $table->date('fecha');
             $table->string('hora');
             $table->float('total');
-            $table->unsignedInteger('id');
+            $table->unsignedInteger('empleado_id');
             $table->timestamps();
         });
     }
