@@ -4,13 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Producto extends Model
+class Empleado extends Model
 {
 
-    protected $table = 'productos';
-    protected $fillable = ['nombre', 'descripcion', 'precio','costo'];//campos visibles
+    protected $table = 'empleados';
+    protected $fillable = ['nombre', 'apellido', 'nombreUsuario','password'];
 
-   /* public function collection(){
+    /*public function collection(){
         return $this->belongsTo(Collection::class);
     }
 
@@ -20,6 +20,6 @@ class Producto extends Model
 
     public function categories(){
         return $this->belongsToMany(Category::class);
-    }
-*/
+    }*/
+
 }

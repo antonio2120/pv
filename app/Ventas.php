@@ -1,9 +1,9 @@
 <?php
-namespace App\product;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Ventas extends Model
 {
 
     protected $table = 'ventass';

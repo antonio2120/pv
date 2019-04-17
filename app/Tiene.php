@@ -4,13 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Producto extends Model
+class Tiene extends Model
 {
 
-    protected $table = 'productos';
-    protected $fillable = ['nombre', 'descripcion', 'precio','costo'];//campos visibles
-
-   /* public function collection(){
+    protected $table = 'tiene';
+    protected $fillable = ['id', 'id_venta', 'codigo_barras','cantidadPro'];
+/*
+    public function collection(){
         return $this->belongsTo(Collection::class);
     }
 
@@ -22,4 +22,5 @@ class Producto extends Model
         return $this->belongsToMany(Category::class);
     }
 */
+
 }
