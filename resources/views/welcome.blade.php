@@ -88,6 +88,7 @@
                     <a href="productos/">Productos</a>
                     <a href="proveedores/">Proveedores</a>
                     <a href="empleados/">Empleados</a>
+                    <a href="clientes/">Clientes</a>
                 </div>
             </div>
         </div>
