@@ -14,10 +14,10 @@ class VentasSeeder extends Seeder
     {
         DB::table($this->table)->delete();
         DB::table($this->table)->insert([
-            'fecha' => '08/05/2019',
-            'hora' => '14:00'
-            'total' => '200',
-            'empleado_id' => '4'
+            'fecha' => '2012-02-29',
+            'hora' => '14:00',
+            'total' => 200.5,
+            'empleado_id' => App\Empleado::all()->random()->id,
             'created_at' => '2019-04-16',
             'updated_at' => '2019-04-16',
         ]);
