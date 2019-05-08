@@ -10,7 +10,7 @@ class CreateComprasTable extends Migration
     public function up()
     {
         Schema::create('compras', function (Blueprint $table) {
-            $table->bigIncrements('idCompra');
+            $table->increments('id');
             $table->date('fecha');
             $table->float('total');
             $table->float('can_art');

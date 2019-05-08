@@ -1,16 +1,15 @@
 <?php
-
-namespace App\Clientes;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Clientes extends Model
+class Ventas extends Model
 {
 
-    protected $table = 'clientes';
-    protected $fillable = ['nombres', 'apaterno', 'amaterno', 'direccion', 'telefono', 'correo'];
-
-    /*public function collection(){
+    protected $table = 'ventass';
+    protected $fillable = ['fecha', 'hora', 'total','costo'];
+/*
+    public function collection(){
         return $this->belongsTo(Collection::class);
     }
 
@@ -20,6 +19,7 @@ class Clientes extends Model
 
     public function categories(){
         return $this->belongsToMany(Category::class);
-    }*/
+    }
+*/
 
 }
