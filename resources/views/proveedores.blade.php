@@ -3,8 +3,8 @@
     <h1>{{$title}}</h1>
 
    <div class="table-responsive">
-     <table class="table table-striped table-dark">
-  <thead>
+     <table class="table">
+  <thead class="thead-dark">
     <tr style="text-align: center;">
       <th scope="col">ID</th>
       <th scope="col">Nombre</th>
