@@ -17,3 +17,5 @@ Route::get('/', function () {
 Route::get('/productos', 'ProductoController@index');
 
 Route::get('/proveedores', 'ProveedoresController@index');
+
+Route::get('/clientes', 'ClientesController@index');
