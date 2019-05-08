@@ -81,17 +81,10 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Punto de Venta
+                    Login
                 </div>
 
-                <div class="links">
-                    <a href="productos/">Productos</a>
-                    <a href="proveedores/">Proveedores</a>
-                    <a href="empleados/">Empleados</a>
-                    <a href="clientes/">Clientes</a>
-                    <a href="categorias/">Categorias</a>
-                    <a href="categorias/">Ventas</a>
-                </div>
+
             </div>
         </div>
     </body>

@@ -4,24 +4,24 @@
      <table border="1">
      	 <tr>
             <th>ID</th>
-            <th>Nombre Categoria</th>
+            <th>Nombre ventas</th>
         </tr>
-    @foreach($tiene as $tiene)
+    @foreach($ventas as $venta)
              <tr>
                    <td>
-                    {{$tiene->ID}}
+                    {{$venta->idVenta}}
                    </td>
                    <td>
-                       {{$tiene->id_tiene}}
+                       {{$venta->fecha}}
                    </td>
                    <td>
-                       {{$tiene->id_venta}}
+                       {{$venta->total}}
                    </td>
                    <td>
-                       {{$tiene->codigo_barras}}
+                       {{$venta->can_art}}
                    </td>
                    <td>
-                       {{$tiene->cantidadPro}}
+                       {{$venta->descrip}}
                    </td>
                </tr>
     @endforeach
