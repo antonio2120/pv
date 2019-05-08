@@ -1,18 +1,27 @@
 @extends('layout_principal')
 @section('content')
     <h1>{{$title}}</h1>
-    <table border="1">
-        <tr>
-            <th>Nombre Proveedor</th>
-            <th>Direección</th>
-            <th>Ciudad</th>
-            <th>Teléfono</th>
-            <th>Fax</th>
-            <th>Correo</th>
-        </tr>
-        @foreach($proveedores as $proveedor)
-               <tr>
-                   <td>
+
+   <div class="table-responsive">
+     <table class="table">
+  <thead class="thead-dark">
+    <tr style="text-align: center;">
+      <th scope="col">ID</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Dirección</th>
+      <th scope="col">Ciudad</th>
+      <th scope="col">Teléfono</th>
+      <th scope="col">Fax</th>
+      <th scope="col">Correo</th>
+      <th scope="col">Editar</th>
+      <th scope="col">Eliminar</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach($proveedores as $proveedor)
+    <tr>
+      <th scope="row">1</th>
+      <td>
                     {{$proveedor->nombre}}
                    </td>
                    <td>
@@ -30,7 +39,12 @@
                    <td>
                        {{$proveedor->correo}}
                    </td>
-               </tr>
-        @endforeach
-    </table>
+                   <td><button type="button" class="btn btn-primary"><i class="fas fa-edit"></i></button></td>
+                   <td><button type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button></td>
+    </tr>
+  </tbody>
+   @endforeach
+</table>
+   </div>
 @endsection
+
