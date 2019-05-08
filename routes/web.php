@@ -21,8 +21,4 @@ Route::get('/proveedores', 'ProveedoresController@index');
 
 Route::get('/clientes', 'ClientesController@index');
 
-<<<<<<< HEAD
 Route::get('/ventas', 'VentasController@index');
-=======
-Route::get('/empleados', 'EmpleadosController@index');
->>>>>>> f8e662c81eb862627c680ca600468b4ef784e046
