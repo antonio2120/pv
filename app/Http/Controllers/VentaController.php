@@ -1,15 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Producto;
+use App\Ventas;
 
 class ProductoController extends Controller {
     public function index()
     {
-        $productos = Producto::all();
-        $title = "Lista de Productos";
-        return view('productos')
-            ->with('productos', $productos)
+        $ventas = Ventas::all();
+        $title = "Ventas";
+        return view('Ventas de día')
+            ->with('Descripción', $ventas)
             ->with('title', $title);
     }
 }

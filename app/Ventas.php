@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 class Ventas extends Model
 {
 
-    protected $table = 'ventass';
+    protected $table = 'ventas';
     protected $fillable = ['fecha', 'hora', 'total','costo'];
 /*
     public function collection(){
