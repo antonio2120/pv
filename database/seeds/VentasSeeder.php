@@ -2,26 +2,24 @@
 
 use Illuminate\Database\Seeder;
 
-class ClientesSeeder extends Seeder
+class VentasSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
+    protected $table;
+
+    public function __construct()
+    {
+        $this->table = 'ventas';
+    }
     public function run()
     {
-        DB::table('ventas')->delete();
-
-        DB::table('ventas')->insert([
+        DB::table($this->table)->delete();
+        DB::table($this->table)->insert([
             'fecha' => '08/05/2019',
+            'hora' => '14:00'
             'total' => '200',
-            'can_art' => '3',
-            'descrip' => 'Productos lacteos',
-            
+            'empleado_id' => '4'
+            'created_at' => '2019-04-16',
+            'updated_at' => '2019-04-16',
         ]);
-
-               
     }
 }
-

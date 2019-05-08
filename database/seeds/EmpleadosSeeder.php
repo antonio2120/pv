@@ -16,7 +16,7 @@ class EmpleadosSeeder extends Seeder
         DB::table($this->table)->insert([
             'nombre' => 'Luis',
             'apellido' => 'Duron',
-            'nombreUsurio' => 'luis01',
+            'nombreUsuario' => 'luis01',
             'password' => 'hola123',
             'created_at' => '2019-05-08',
             'updated_at' => '2019-05-08',
@@ -25,7 +25,7 @@ class EmpleadosSeeder extends Seeder
         DB::table($this->table)->insert([
             'nombre' => 'Alejandra',
             'apellido' => 'Ponce',
-            'nombreUsurio' => 'aleP',
+            'nombreUsuario' => 'aleP',
             'password' => 'hola321',
             'created_at' => '2019-05-08',
             'updated_at' => '2019-05-08',
@@ -34,7 +34,7 @@ class EmpleadosSeeder extends Seeder
         DB::table($this->table)->insert([
             'nombre' => 'Daniela',
             'apellido' => 'Garcia',
-            'nombreUsurio' => 'dani00',
+            'nombreUsuario' => 'dani00',
             'password' => 'hola23',
             'created_at' => '2019-05-08',
             'updated_at' => '2019-05-08',
