@@ -15,6 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/productos', 'ProductoController@index');
+Route::get('/productosEliminar/{producto_id}', 'ProductoController@delete');
 
 Route::get('/proveedores', 'ProveedoresController@index');
 
