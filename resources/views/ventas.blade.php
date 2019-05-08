@@ -6,22 +6,22 @@
             <th>ID</th>
             <th>Nombre ventas</th>
         </tr>
-    @foreach($venta as $ventas)
+    @foreach($ventas as $venta)
              <tr>
                    <td>
-                    {{$ventas->idVenta}}
+                    {{$venta->idVenta}}
                    </td>
                    <td>
-                       {{$ventas->fecha}}
+                       {{$venta->fecha}}
                    </td>
                    <td>
-                       {{$ventas->total}}
+                       {{$venta->total}}
                    </td>
                    <td>
-                       {{$ventas->can_art}}
+                       {{$venta->can_art}}
                    </td>
                    <td>
-                       {{$ventas->descrip}}
+                       {{$venta->descrip}}
                    </td>
                </tr>
     @endforeach
