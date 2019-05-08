@@ -7,7 +7,7 @@ class Ventas extends Model
 {
 
     protected $table = 'ventas';
-    protected $fillable = ['fecha', 'hora', 'total','costo'];
+    protected $fillable = ['fecha', 'hora', 'total'];
 /*
     public function collection(){
         return $this->belongsTo(Collection::class);

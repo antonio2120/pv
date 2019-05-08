@@ -24,3 +24,5 @@ Route::get('/clientes', 'ClientesController@index');
 Route::get('/ventas', 'VentasController@index');
 
 Route::get('/empleados', 'EmpleadosController@index');
+
+Route::get('/categorias', 'CategoriasController@index');
