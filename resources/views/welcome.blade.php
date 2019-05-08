@@ -90,6 +90,7 @@
                     <a href="empleados/">Empleados</a>
                     <a href="clientes/">Clientes</a>
                     <a href="categorias/">Categorias</a>
+                    <a href="categorias/">Ventas</a>
                 </div>
             </div>
         </div>
