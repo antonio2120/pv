@@ -9,9 +9,9 @@
     <title><?php echo $title ?></title>
 </head>
 <body>
-    <h1><?php echo $title ?></h1>
-    <?php  foreach($productos as $producto): ?>
-               <li><?php echo $producto->nombre ?></li>
-    <?php  endforeach; ?>
+    <h1>{{$title}}</h1>
+    @foreach($productos as $producto): ?>
+               <li>{{$producto->nombre}}</li>
+    @endforeach
 </body>
 </html>

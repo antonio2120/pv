@@ -9,7 +9,7 @@
     <title>{{$title}}</title>
 </head>
 <body>
-    <h1>{{$title}} </h1>
+    <h1>{{$title}}</h1>
     <table border="1">
         <tr>
             <th>Nombre Proveedor</th>
