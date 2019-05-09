@@ -35,3 +35,4 @@ Route::get('/categorias', 'CategoriasController@index');
 
 Route::get('/apartados', 'ApartadosController@index');
 
+Route::get('/aparece', 'ApareceController@index');
