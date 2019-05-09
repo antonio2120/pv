@@ -91,6 +91,7 @@
                     <a href="clientes/">Clientes</a>
                     <a href="categorias/">Categorias</a>
                     <a href="ventas/">Ventas</a>
+                    <a href="apartados/">Apartados</a>
                 </div>
             </div>
         </div>
