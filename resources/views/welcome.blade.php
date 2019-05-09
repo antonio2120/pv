@@ -91,11 +91,7 @@
                     <a href="clientes/">Clientes</a>
                     <a href="categorias/">Categorias</a>
                     <a href="ventas/">Ventas</a>
-<<<<<<< HEAD
                     <a href="apartados/">Apartados</a>
-=======
-                    <a href="sucursal/">Sucursal</a>
->>>>>>> f63f9c6979c06ea1f0db888b2a811d20d8a5d796
                 </div>
             </div>
         </div>
