@@ -14,6 +14,7 @@ class ComprasSeeder extends Seeder
     {
         DB::table($this->table)->delete();
         DB::table($this->table)->insert([
+            
             'fecha' => '2019-05-08',
             'total' => '36',
             'can_art' => '2',
