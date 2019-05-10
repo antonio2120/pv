@@ -55,6 +55,13 @@
                     <a class="dropdown-item" href="categoriasNuevo">Nuevo</a>
                 </div>
             </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="proveedorMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Proveedores</a>
+                <div class="dropdown-menu" aria-labelledby="proveedorMenu">
+                    <a class="dropdown-item" href="proveedores/">Listar</a>
+                    <a class="dropdown-item" href="proveedoresNuevo">Nuevo</a>
+                </div>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Link</a>
             </li>
@@ -88,6 +95,7 @@
 </main>
 
 <footer class="container">
+    <br>
     <p>&copy; Company 2017-2019</p>
 </footer>
 
