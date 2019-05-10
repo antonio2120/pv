@@ -23,7 +23,7 @@
                 <td>{{$producto->precio}}</td>
                 <td>{{$producto->costo}}</td>
                 <td><button type="button" class="btn btn-primary"><i class="fas fa-edit"></i></button></td>
-                <td><button type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button></td>
+                <td><button href="productosEliminar/{{$producto->id}}" type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button></td>
             </tr>
         @endforeach
 
