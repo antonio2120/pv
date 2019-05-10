@@ -93,6 +93,7 @@
                     <a href="ventas/">Ventas</a>
                     <a href="apartados/">Apartados</a>
                     <a href="aparece/">Aparece</a>
+                    <a href="aparece/">Compras</a>
                 </div>
             </div>
         </div>
