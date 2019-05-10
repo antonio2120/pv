@@ -3,6 +3,7 @@
     <h1>{{$title}}</h1>
     <table border="1">
         <tr>
+            <th>ID </th>
             <th>Fecha </th>
             <th>Total </th>
             <th>can_art </th>
@@ -10,6 +11,9 @@
         </tr>
         @foreach($compras as $compra)
                <tr>
+                    <td>
+                    {{$compra->id}}
+                   </td>
                    <td>
                     {{$compra->fecha}}
                    </td>
