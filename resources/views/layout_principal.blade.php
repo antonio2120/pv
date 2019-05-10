@@ -52,7 +52,7 @@
                 <a class="nav-link dropdown-toggle" href="#" id="productoMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Productos</a>
                 <div class="dropdown-menu" aria-labelledby="productoMenu">
                     <a class="dropdown-item" href="productos/">Listar</a>
-                    <a class="dropdown-item" href="productosNuevo">Nuevo</a>
+                    <a class="dropdown-item" href="categoriasNuevo">Nuevo</a>
                 </div>
             </li>
             <li class="nav-item">

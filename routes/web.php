@@ -24,8 +24,6 @@ Route::get('/productosNuevo/', 'ProductoController@nuevo');
 
 Route::get('/ventas', 'VentaController@index');
 
-Route::get('/productosEliminar/{producto_id}', 'ProductoController@delete');
-
 Route::get('/proveedores', 'ProveedoresController@index');
 
 Route::get('/clientes', 'ClientesController@index');
@@ -34,9 +32,13 @@ Route::get('/ventas', 'VentasController@index');
 
 Route::get('/empleados', 'EmpleadosController@index');
 
-Route::get('/categorias', 'CategoriasController@index');
+Route::get('/categorias', 'CategoriaController@index');
+Route::get('/categoriasEliminar/{categoria_id}', 'CategoriaController@delete');
+Route::get('/categoriasNuevo/', 'CategoriaController@nuevo');
 
-Route::get('/apartados', 'ApartadosController@index');
+Route::get('/apartados', 'ApartadoController@index');
+Route::get('/apartadosEliminar/{apartados_id}', 'ApartadoController@delete');
+Route::get('/apartadosNuevo/', 'apartadoController@nuevo');
 
 Route::get('/aparece', 'ApareceController@index');
 
