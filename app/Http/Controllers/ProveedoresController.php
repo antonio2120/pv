@@ -12,4 +12,11 @@ class ProveedoresController extends Controller {
             ->with('proveedores', $proveedores)
             ->with('title', $title);
     }
+    public function nuevo()
+    {
+        $title = "Nuevo Proveedor";
+        return view('proveedoresNuevo')
+            ->with('title', $title);
+
+    }
 }
