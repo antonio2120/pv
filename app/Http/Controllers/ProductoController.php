@@ -24,4 +24,11 @@ class ProductoController extends Controller {
 
 
     }
+    public function nuevo()
+    {
+        $title = "Nuevo Producto";
+        return view('productosNuevo')
+            ->with('title', $title);
+
+    }
 }
