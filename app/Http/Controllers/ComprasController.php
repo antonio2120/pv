@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Compras;
+use App\Compra;
 
 class ComprasController extends Controller {
     public function index()
     {
-        $compras = Compras::all();
+        $compras = Compra::all();
         $title = "Lista de Compras";
         return view('compras')
             ->with('compras', $compras)
