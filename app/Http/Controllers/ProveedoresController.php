@@ -7,7 +7,7 @@ class ProveedoresController extends Controller {
     public function index()
     {
         $proveedores = Proveedor::all();
-        $title = "Lista de Proveedores";
+        $title = "Tabla de Proveedores";
         return view('proveedores')
             ->with('proveedores', $proveedores)
             ->with('title', $title);

@@ -12,4 +12,16 @@ class ProductoController extends Controller {
             ->with('productos', $productos)
             ->with('title', $title);
     }
+    public function delete($producto_id)
+    {
+        $producto = Producto::find($producto_id);
+        if($producto){
+            $producto->deleted();
+            echo "Producto eliminado";
+        }else{
+            echo "Producto no existe";
+        }
+
+
+    }
 }

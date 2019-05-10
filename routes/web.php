@@ -18,6 +18,7 @@ Route::get('/login', function () {
     return view('login');
 });
 Route::get('/productos', 'ProductoController@index');
+Route::get('/productosEliminar/{producto_id}', 'ProductoController@delete');
 
 Route::get('/ventas', 'VentaController@index');
 
