@@ -58,7 +58,7 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="proveedorMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Proveedores</a>
                 <div class="dropdown-menu" aria-labelledby="proveedorMenu">
-                    <a class="dropdown-item" href="productos/">Listar</a>
+                    <a class="dropdown-item" href="proveedores/">Listar</a>
                     <a class="dropdown-item" href="proveedoresNuevo">Nuevo</a>
                 </div>
             </li>
