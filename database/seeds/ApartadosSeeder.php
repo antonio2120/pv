@@ -8,7 +8,7 @@ class ApartadosSeeder extends Seeder
 
     public function __construct()
     {
-        $this->table = 'apartado';
+        $this->table = 'apartados';
     }
     public function run()
     {
