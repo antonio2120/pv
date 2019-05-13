@@ -12,5 +12,25 @@ class EmpleadosController extends Controller {
             ->with('empleados', $empleados)
             ->with('title', $title);
     }
+
+    public function delete($empleado_id)
+    {
+        $empleado = Producto::find($empleado_id);
+        if($empleado){
+            $empleado->deleted();
+            echo "Empleado eliminado";
+        }else{
+            echo "Empleado no existe";
+        }
+
+
+    }
+    public function nuevo()
+    {
+        $title = "Nuevo Empleado";
+        return view('empleadosNuevo')
+            ->with('title', $title);
+
+    }
 }
 

@@ -32,6 +32,8 @@ Route::get('/clientes', 'ClientesController@index');
 Route::get('/ventas', 'VentasController@index');
 
 Route::get('/empleados', 'EmpleadosController@index');
+Route::get('/empleadosEliminar/{empleado_id}', 'EmpleadosController@delete');
+Route::get('/empleadosNuevo/', 'EmpleadosController@nuevo');
 
 Route::get('/categorias', 'CategoriaController@index');
 Route::get('/categoriasEliminar/{categoria_id}', 'CategoriaController@delete');

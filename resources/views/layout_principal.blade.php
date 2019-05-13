@@ -63,6 +63,13 @@
                 </div>
             </li>
             <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="empleadoMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Empleados</a>
+                <div class="dropdown-menu" aria-labelledby="empleadoMenu">
+                    <a class="dropdown-item" href="empleados/">Listar</a>
+                    <a class="dropdown-item" href="empleadosNuevo">Nuevo</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="categoriaMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categorias</a>
                 <div class="dropdown-menu" aria-labelledby="categoriaMenu">
                     <a class="dropdown-item" href="categorias/">Listar</a>
