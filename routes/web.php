@@ -28,6 +28,7 @@ Route::get('/ventas', 'VentaController@index');
 Route::get('/proveedores', 'ProveedoresController@index');
 
 Route::get('/clientes', 'ClientesController@index');
+Route::get('/clientesNuevo/', 'ClientesController@nuevo');
 
 Route::get('/ventas', 'VentasController@index');
 
