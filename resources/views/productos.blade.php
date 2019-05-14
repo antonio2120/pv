@@ -35,26 +35,6 @@
         @endforeach
         </tbody>
     </table>
-
-    <div class="modal fade" id="confirmar-eliminar" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Eliminar registro</h4>
-                </div>
-                <div class="modal-body">
-                    <label>¿Estás seguro de eliminar el registro?</label>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default btn-ok" data-dismiss="modal">Sí</button>
-                    <a class="btn btn-danger" data-dismiss="modal">No
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
     <script type="text/javascript">
 
         function eliminarProducto(producto_id){

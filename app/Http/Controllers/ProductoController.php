@@ -19,7 +19,7 @@ class ProductoController extends Controller {
                 if(Producto::destroy($producto_id)){
                     return response()->json(['mensaje' => 'Producto eliminado', 'status' => 'ok'], 200);
                 }else{
-                    return response()->json(['mensaje' => 'El producto no existe', 'status' => 'error'], 400);
+                    return response()->json(['mensaje' => 'El producto no se pudo eliminar', 'status' => 'error'], 400);
                 }
             } catch (Exception $e) {
                 return response()->json(['mensaje' => 'Error al eliminar el producto'], 400);

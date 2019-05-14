@@ -23,7 +23,6 @@ Route::get('/productosNuevo/', 'ProductoController@nuevo');
 Route::post('/productosGuardar/', 'ProductoController@guardar');
 
 Route::get('/proveedoresNuevo/', 'ProveedoresController@nuevo');
-
 Route::get('/proveedores', 'ProveedoresController@index');
 
 Route::get('/clientes', 'ClientesController@index');
