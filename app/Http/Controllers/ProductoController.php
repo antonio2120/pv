@@ -12,23 +12,42 @@ class ProductoController extends Controller {
             ->with('productos', $productos)
             ->with('title', $title);
     }
-    public function delete($producto_id)
+    public function eliminar($producto_id)
     {
-        $producto = Producto::find($producto_id);
-        if($producto){
-            $producto->deleted();
-            echo "Producto eliminado";
+        if ($producto_id) {
+            try {
+                if(Producto::destroy($producto_id)){
+                    return response()->json(['mensaje' => 'Producto eliminado', 'status' => 'ok'], 200);
+                }else{
+                    return response()->json(['mensaje' => 'El producto no existe', 'status' => 'error'], 400);
+                }
+            } catch (Exception $e) {
+                return response()->json(['mensaje' => 'Error al eliminar el producto'], 400);
+            }
         }else{
-            echo "Producto no existe";
+            return response()->json(['mensaje' => 'Error al eliminar el producto, producto no encontrado '], 400);
         }
-
 
     }
     public function nuevo()
     {
         $title = "Nuevo Producto";
-        return view('productosNuevo')
+        return view('productosForm')
             ->with('title', $title);
+
+    }
+    public function editar($request)
+    {
+
+        $producto=Producto::where('id', '=', "$request->id")->first();
+
+
+        if(count($producto)>=1){
+
+            $producto->nombre = $request->nombre;
+            $producto->save();
+        }
+
 
     }
 }
