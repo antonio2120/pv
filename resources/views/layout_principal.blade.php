@@ -91,10 +91,17 @@
                 </div>
             </li>
             <li class="nav-item dropdown">
+<<<<<<< HEAD
+                <a class="nav-link dropdown-toggle" href="#" id="clienteMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Clientes</a>
+                <div class="dropdown-menu" aria-labelledby="apartadoMenu">
+                    <a class="dropdown-item" href="clientes/">Listar</a>
+                    <a class="dropdown-item" href="clientesNuevo/">Nuevo</a>
+=======
                 <a class="nav-link dropdown-toggle" href="#" id="apartadoMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ventas</a>
                 <div class="dropdown-menu" aria-labelledby="ventasMenu">
                     <a class="dropdown-item" href="ventas/">Listar</a>
                     <a class="dropdown-item" href="ventasNuevo">Nuevo</a>
+>>>>>>> 16c93e0b37b0f35b73cad850339d1c57e3fc8893
                 </div>
             </li>
             <li class="nav-item">

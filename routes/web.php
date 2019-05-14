@@ -26,6 +26,7 @@ Route::get('/proveedoresNuevo/', 'ProveedoresController@nuevo');
 Route::get('/proveedores', 'ProveedoresController@index');
 
 Route::get('/clientes', 'ClientesController@index');
+Route::get('/clientesNuevo/', 'ClientesController@nuevo');
 
 Route::get('/ventas', 'VentasController@index');
 Route::get('/ventasEliminar/{venta_id}', 'VentasController@delete');
