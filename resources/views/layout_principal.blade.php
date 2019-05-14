@@ -91,7 +91,6 @@
                 </div>
             </li>
             <li class="nav-item dropdown">
-<<<<<<< HEAD
                 <a class="nav-link dropdown-toggle" href="#" id="clienteMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Clientes</a>
                 <div class="dropdown-menu" aria-labelledby="apartadoMenu">
                     <a class="dropdown-item" href="clientes/">Listar</a>
