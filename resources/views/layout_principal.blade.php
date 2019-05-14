@@ -59,28 +59,28 @@
                 <a class="nav-link dropdown-toggle" href="#" id="productoMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Productos</a>
                 <div class="dropdown-menu" aria-labelledby="productoMenu">
                     <a class="dropdown-item" href="productos/">Listar</a>
-                    <a class="dropdown-item" href="categoriasNuevo">Nuevo</a>
+                    <a class="dropdown-item" href="productosNuevo/">Nuevo</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="proveedorMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Proveedores</a>
                 <div class="dropdown-menu" aria-labelledby="proveedorMenu">
                     <a class="dropdown-item" href="proveedores/">Listar</a>
-                    <a class="dropdown-item" href="proveedoresNuevo">Nuevo</a>
+                    <a class="dropdown-item" href="proveedoresNuevo/">Nuevo</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="empleadoMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Empleados</a>
                 <div class="dropdown-menu" aria-labelledby="empleadoMenu">
                     <a class="dropdown-item" href="empleados/">Listar</a>
-                    <a class="dropdown-item" href="empleadosNuevo">Nuevo</a>
+                    <a class="dropdown-item" href="empleadosNuevo/">Nuevo</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="categoriaMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categorias</a>
                 <div class="dropdown-menu" aria-labelledby="categoriaMenu">
                     <a class="dropdown-item" href="categorias/">Listar</a>
-                    <a class="dropdown-item" href="categoriasNuevo">Nuevo</a>
+                    <a class="dropdown-item" href="categoriasNuevo/">Nuevo</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -91,31 +91,18 @@
                 </div>
             </li>
             <li class="nav-item dropdown">
-<<<<<<< HEAD
                 <a class="nav-link dropdown-toggle" href="#" id="clienteMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Clientes</a>
                 <div class="dropdown-menu" aria-labelledby="apartadoMenu">
                     <a class="dropdown-item" href="clientes/">Listar</a>
                     <a class="dropdown-item" href="clientesNuevo/">Nuevo</a>
-=======
+                </div>
+            </li>
+            <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="apartadoMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ventas</a>
                 <div class="dropdown-menu" aria-labelledby="ventasMenu">
                     <a class="dropdown-item" href="ventas/">Listar</a>
                     <a class="dropdown-item" href="ventasNuevo">Nuevo</a>
->>>>>>> 16c93e0b37b0f35b73cad850339d1c57e3fc8893
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                <div class="dropdown-menu" aria-labelledby="dropdown01">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
+
                 </div>
             </li>
         </ul>

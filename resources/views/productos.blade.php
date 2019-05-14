@@ -38,7 +38,6 @@
     <script type="text/javascript">
 
         function eliminarProducto(producto_id){
-            alert(producto_id);
             $.ajax({
                 url: 'productosEliminar/'+producto_id,
                 method: 'GET',
