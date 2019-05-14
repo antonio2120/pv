@@ -22,20 +22,27 @@ Route::get('/productosEliminar/{producto_id}', 'ProductoController@eliminar');
 Route::get('/productosNuevo/', 'ProductoController@nuevo');
 Route::post('/productosGuardar/', 'ProductoController@guardar');
 
-
-Route::get('/ventas', 'VentaController@index');
+Route::get('/proveedoresNuevo/', 'ProveedoresController@nuevo');
 
 Route::get('/proveedores', 'ProveedoresController@index');
 
 Route::get('/clientes', 'ClientesController@index');
 
 Route::get('/ventas', 'VentasController@index');
+Route::get('/ventasEliminar/{venta_id}', 'VentasController@delete');
+Route::get('/ventasNuevo/', 'VentasController@nuevo');
 
 Route::get('/empleados', 'EmpleadosController@index');
+Route::get('/empleadosEliminar/{empleado_id}', 'EmpleadosController@delete');
+Route::get('/empleadosNuevo/', 'EmpleadosController@nuevo');
 
-Route::get('/categorias', 'CategoriasController@index');
+Route::get('/categorias', 'CategoriaController@index');
+Route::get('/categoriasEliminar/{categoria_id}', 'CategoriaController@delete');
+Route::get('/categoriasNuevo/', 'CategoriaController@nuevo');
 
-Route::get('/apartados', 'ApartadosController@index');
+Route::get('/apartados', 'ApartadoController@index');
+Route::get('/apartadosEliminar/{apartados_id}', 'ApartadoController@delete');
+Route::get('/apartadosNuevo/', 'apartadoController@nuevo');
 
 Route::get('/aparece', 'ApareceController@index');
 

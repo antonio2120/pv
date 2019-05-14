@@ -11,4 +11,23 @@ class VentasController extends Controller{
             ->with('ventas', $ventas)
             ->with('title', $title);
     }
+    public function delete($venta_id)
+    {
+        $venta = Producto::find($venta_id);
+        if($venta){
+            $venta->deleted();
+            echo "Venta eliminada";
+        }else{
+            echo "Venta no existe";
+        }
+
+
+    }
+    public function nuevo()
+    {
+        $title = "Nueva Venta";
+        return view('ventasNuevo')
+            ->with('title', $title);
+
+    }
 }

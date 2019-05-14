@@ -48,7 +48,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <a class="navbar-brand" href="#">PV</a>
+    <a class="navbar-brand" href="/">PV</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -59,7 +59,42 @@
                 <a class="nav-link dropdown-toggle" href="#" id="productoMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Productos</a>
                 <div class="dropdown-menu" aria-labelledby="productoMenu">
                     <a class="dropdown-item" href="productos/">Listar</a>
-                    <a class="dropdown-item" href="productosNuevo">Nuevo</a>
+                    <a class="dropdown-item" href="categoriasNuevo">Nuevo</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="proveedorMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Proveedores</a>
+                <div class="dropdown-menu" aria-labelledby="proveedorMenu">
+                    <a class="dropdown-item" href="proveedores/">Listar</a>
+                    <a class="dropdown-item" href="proveedoresNuevo">Nuevo</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="empleadoMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Empleados</a>
+                <div class="dropdown-menu" aria-labelledby="empleadoMenu">
+                    <a class="dropdown-item" href="empleados/">Listar</a>
+                    <a class="dropdown-item" href="empleadosNuevo">Nuevo</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="categoriaMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categorias</a>
+                <div class="dropdown-menu" aria-labelledby="categoriaMenu">
+                    <a class="dropdown-item" href="categorias/">Listar</a>
+                    <a class="dropdown-item" href="categoriasNuevo">Nuevo</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="apartadoMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Apartados</a>
+                <div class="dropdown-menu" aria-labelledby="apartadoMenu">
+                    <a class="dropdown-item" href="apartados/">Listar</a>
+                    <a class="dropdown-item" href="apartadosNuevo">Nuevo</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="apartadoMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ventas</a>
+                <div class="dropdown-menu" aria-labelledby="ventasMenu">
+                    <a class="dropdown-item" href="ventas/">Listar</a>
+                    <a class="dropdown-item" href="ventasNuevo">Nuevo</a>
                 </div>
             </li>
             <li class="nav-item">
@@ -95,6 +130,7 @@
 </main>
 
 <footer class="container">
+    <br>
     <p>&copy; Company 2017-2019</p>
 </footer>
 
