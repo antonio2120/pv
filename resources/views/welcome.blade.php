@@ -92,6 +92,7 @@
                     <a href="categorias/">Categorias</a>
                     <a href="ventas/">Ventas</a>
                     <a href="apartados/">Apartados</a>
+                    <a href="aparece/">Aparece</a>
                 </div>
             </div>
         </div>
