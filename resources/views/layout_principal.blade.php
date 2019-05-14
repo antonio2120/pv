@@ -83,6 +83,13 @@
                     <a class="dropdown-item" href="apartadosNuevo">Nuevo</a>
                 </div>
             </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="apartadoMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ventas</a>
+                <div class="dropdown-menu" aria-labelledby="ventasMenu">
+                    <a class="dropdown-item" href="ventas/">Listar</a>
+                    <a class="dropdown-item" href="ventasNuevo">Nuevo</a>
+                </div>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Link</a>
             </li>
