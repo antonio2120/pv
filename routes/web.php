@@ -41,8 +41,9 @@ Route::get('/categoriasEliminar/{categoria_id}', 'CategoriaController@delete');
 Route::get('/categoriasNuevo/', 'CategoriaController@nuevo');
 
 Route::get('/apartados', 'ApartadoController@index');
-Route::get('/apartadosEliminar/{apartados_id}', 'ApartadoController@delete');
-Route::get('/apartadosNuevo/', 'apartadoController@nuevo');
+Route::get('/apartadosEliminar/{apartado_id}', 'ApartadoController@eliminar');
+Route::get('/apartadosNuevo/', 'ApartadoController@nuevo');
+Route::post('/apartadosGuardar/', 'ApartadoController@guardar');
 
 Route::get('/aparece', 'ApareceController@index');
 
