@@ -12,6 +12,23 @@ class ProveedoresController extends Controller {
             ->with('proveedores', $proveedores)
             ->with('title', $title);
     }
+    public function eliminar($proveedor_id)
+    {
+        if ($proveedor_id) {
+            try {
+                if(Proveedor::destroy($proveedor_id)){
+                    return response()->json(['mensaje' => 'Proveedor eliminado', 'status' => 'ok'], 200);
+                }else{
+                    return response()->json(['mensaje' => 'El proveedor no se pudo eliminar', 'status' => 'error'], 400);
+                }
+            } catch (Exception $e) {
+                return response()->json(['mensaje' => 'Error al eliminar al proveedor'], 400);
+            }
+        }else{
+            return response()->json(['mensaje' => 'Error al eliminar el proveedor, proveedor no encontrado '], 400);
+        }
+
+    }
     public function nuevo()
     {
         $title = "Nuevo Proveedor";
