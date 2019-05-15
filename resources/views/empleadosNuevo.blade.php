@@ -11,8 +11,6 @@
       <label for="inputApellido">Apellido</label>
     <input type="text" class="form-control" id="forApellido" placeholder="Apellido" name="apellido">
     </div>
-  </div>
-  <div class="row">
     <div class="col">
       <label for="inputUsuario">Nombre de usuario</label>
       <input type="text" class="form-control" placeholder="Usuario" id="forUsuario" name="usuario">
@@ -66,7 +64,7 @@
             
             },
             messages:{
-              
+
                 nombre:{
                     required : "Campo obligatorio",
                     minlength : "minimo 1 caracter",
