@@ -40,22 +40,22 @@
 
                 nombre:{
                     required: true,
-                    minlength : 1,
+                    minlength : 5,
                     maxlength : 15
                 },
                 apellido:{
                     required: true,
-                    minlength : 1,
+                    minlength : 5,
                     maxlength : 15
                 },
                 usuario:{
                     required: true,
-                    minlength : 1,
+                    minlength : 5,
                     maxlength : 10
                 },
                 password:{
                     required: true,
-                    minlength : 1,
+                    minlength : 8,
                     maxlength : 12
                 },
                 terminos:{
@@ -67,24 +67,24 @@
 
                 nombre:{
                     required : "Campo obligatorio",
-                    minlength : "minimo 1 caracter",
-                    maxlength : "máximo 15 caracteres"
+                    minlength : "Minimo 5 caracteres",
+                    maxlength : "Máximo 15 caracteres"
                 },
 
                 apellido:{
                     required : "Campo obligatorio",
-                    minlength : "minimo 1 caracter",
-                    maxlength : "máximo 15 caracteres"
+                    minlength : "Minimo 5 caracteres",
+                    maxlength : "Máximo 15 caracteres"
                 },
                 usuario:{
                     required : "Campo obligatorio",
-                    minlength : " minimo 1 caracter",
-                    maxlength : "máximo 10 caracteres"
+                    minlength : "Minimo 5 caracteres",
+                    maxlength : "Máximo 10 caracteres"
                 },
                 password:{
                     required : "Campo obligatorio",
-                    minlength : " minimo 1 caracter",
-                    maxlength : " maximo 12 caracteres"
+                    minlength : "Minimo 8 caracteres",
+                    maxlength : "Máximo 12 caracteres"
                 },
                 terminos:{
                     required : "Campo obligatorio",
