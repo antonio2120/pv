@@ -28,6 +28,9 @@
 
 
     <style>
+    input.error{
+  border: solid 2px red;
+}
         .bd-placeholder-img {
             font-size: 1.125rem;
             text-anchor: middle;
