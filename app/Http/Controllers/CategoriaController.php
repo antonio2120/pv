@@ -12,22 +12,44 @@ class CategoriaController extends Controller {
             ->with('categorias', $categorias)
             ->with('title', $title);
     }
-    public function delete($categoria_id)
+    public function eliminar($categoria_id)
     {
-        $categoria = Categoria::find($categoria_id);
-        if($categoria){
-            $categoria->deleted();
-            echo "categoria eliminado";
-        }else{
-            echo "categoria no existe";
-        }
+       if($categoria_id){
+         try{
+            if(Categoria::destroy($categoria_id)){
+               return response()->json(['mensaje' => 'Categoria Elimindada', 'status' => 'ok'], 200);
+            }else{
+                return response()->json(['mensaje'=>'La categoria no existe','status' =>'error'],400);
+              }
+         } catch (Exception $e){
+             return response()->json(['mensaje'=>'Error al eliminar la categoria'],400);
+      }
 
+    }else {
+        return response()->json(['mensaje'=>'Error al eliminar la categoria, categoria no encontrada'],400);
+        }
     }
+   
     public function nuevo()
     {
         $title = "Nuevo categoria";
         return view('categoriasNuevo')
             ->with('title', $title);
+
+    }
+
+    public function editar($request)
+    {
+
+        $categoria=Categoria::where('id', '=', "$request->id")->first();
+
+
+        if(count($categoria)>=1){
+
+            $categoria->nombre = $request->nombre;
+            $categoria->save();
+        }
+
 
     }
 }
