@@ -30,7 +30,7 @@
       </label>
     </div>
   </div>
-  <button type="submit" class="btn btn-primary">Agregar empleado</button>
+  <button type="submit" class="btn btn-primary">Guardar nuevo empleado</button>
 </form>
 
 @endsection
