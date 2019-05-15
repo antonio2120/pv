@@ -105,6 +105,14 @@
 
                 </div>
             </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="aparceMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Aparece</a>
+                <div class="dropdown-menu" aria-labelledby="apareceMenu">
+                    <a class="dropdown-item" href="aparece/">Listar</a>
+                    <a class="dropdown-item" href="apareceNuevo">Nuevo</a>
+
+                </div>
+            </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
