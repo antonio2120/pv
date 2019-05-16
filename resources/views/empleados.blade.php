@@ -51,7 +51,7 @@
                 success: function (response) {
                     if(response.status == 'ok'){
                         toastr["success"](response.mensaje);
-                        $("#renglon_"+producto_id).remove();
+                        $("#renglon_"+empleado_id).remove();
                     }else{
                         toastr["error"](response.mensaje);
                     }
