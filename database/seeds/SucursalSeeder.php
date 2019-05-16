@@ -20,5 +20,45 @@ class SucursalSeeder extends Seeder
             'created_at' => '2019-05-08',
             'updated_at' => '2019-05-08',
         ]);
+         DB::table($this->table)->delete();
+        DB::table($this->table)->insert([
+            'nombre' => 'Raime',
+            'direccion' => 'costas del Humo',
+            'telefono' => '11000',
+            'created_at' => '2019-05-08',
+            'updated_at' => '2019-05-08',
+        ]);
+        DB::table($this->table)->delete();
+        DB::table($this->table)->insert([
+            'nombre' => 'Velstad',
+            'direccion' => 'cripta',
+            'telefono' => '106065',
+            'created_at' => '2019-05-08',
+            'updated_at' => '2019-05-08',
+        ]);
+        DB::table($this->table)->delete();
+        DB::table($this->table)->insert([
+            'nombre' => 'Industrias Stark',
+            'direccion' => 'edificios baxter',
+            'telefono' => '91834095',
+            'created_at' => '2019-05-08',
+            'updated_at' => '2019-05-08',
+        ]);
+              DB::table($this->table)->delete();
+        DB::table($this->table)->insert([
+            'nombre' => 'Gigante',
+            'direccion' => 'jotunheim',
+            'telefono' => '106065',
+            'created_at' => '2019-05-08',
+            'updated_at' => '2019-05-08',
+        ]);
+        DB::table($this->table)->delete();
+        DB::table($this->table)->insert([
+            'nombre' => 'WarGod',
+            'direccion' => 'sparta',
+            'telefono' => '913455',
+            'created_at' => '2019-05-08',
+            'updated_at' => '2019-05-08',
+        ]);
     }
 }

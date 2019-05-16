@@ -53,3 +53,8 @@ Route::get('/apareceEliminar/{aparece_id}','ApareceController@eliminar');
 Route::get('/apareceNuevo/','ApareceController@nuevo');
 
 Route::get('/compras', 'ComprasController@index');
+
+
+Route::get('/sucursal', 'SucursalController@index');
+Route::get('/sucursalEliminar/{sucursal_id}', 'SucursalController@eliminar');
+Route::get('/sucursalNuevo/', 'SucursalController@nuevo');

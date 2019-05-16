@@ -116,6 +116,15 @@
 
                 </div>
             </li>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="aparceMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sucursal</a>
+                <div class="dropdown-menu" aria-labelledby="apareceMenu">
+                    <a class="dropdown-item" href="sucursal/">Listar</a>
+                    <a class="dropdown-item" href="sucursalNuevo">Nuevo</a>
+
+                </div>
+            </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
