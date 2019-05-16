@@ -20,7 +20,7 @@ class SucursalSeeder extends Seeder
             'created_at' => '2019-05-08',
             'updated_at' => '2019-05-08',
         ]);
-         DB::table($this->table)->delete();
+        
         DB::table($this->table)->insert([
             'nombre' => 'Raime',
             'direccion' => 'costas del Humo',
@@ -28,7 +28,7 @@ class SucursalSeeder extends Seeder
             'created_at' => '2019-05-08',
             'updated_at' => '2019-05-08',
         ]);
-        DB::table($this->table)->delete();
+      
         DB::table($this->table)->insert([
             'nombre' => 'Velstad',
             'direccion' => 'cripta',
@@ -36,7 +36,7 @@ class SucursalSeeder extends Seeder
             'created_at' => '2019-05-08',
             'updated_at' => '2019-05-08',
         ]);
-        DB::table($this->table)->delete();
+    
         DB::table($this->table)->insert([
             'nombre' => 'Industrias Stark',
             'direccion' => 'edificios baxter',
@@ -44,7 +44,7 @@ class SucursalSeeder extends Seeder
             'created_at' => '2019-05-08',
             'updated_at' => '2019-05-08',
         ]);
-              DB::table($this->table)->delete();
+        
         DB::table($this->table)->insert([
             'nombre' => 'Gigante',
             'direccion' => 'jotunheim',
@@ -52,7 +52,7 @@ class SucursalSeeder extends Seeder
             'created_at' => '2019-05-08',
             'updated_at' => '2019-05-08',
         ]);
-        DB::table($this->table)->delete();
+  
         DB::table($this->table)->insert([
             'nombre' => 'WarGod',
             'direccion' => 'sparta',
