@@ -46,87 +46,112 @@
   <button type="submit" class="btn btn-primary">Agregar proveedor</button>
 </form>
 <script>
-  
         $("#FormularioForm").validate({
-
-          error: function(input){
-            $(this).addClass('error');
-          },
-            rules:{
-
+            rules: {
                 nombre:{
-                    required: true,
-                    minlength : 1,
-                    maxlength : 20
+                    required: true
                 },
                 direccion:{
-                    required: true,
-                    minlength : 1,
-                    maxlength : 30
+                    required: true
+                },
+                precio: {
+                    required: true
                 },
                 ciudad:{
-                    required: true,
-                    minlength : 1,
-                    maxlength : 30
+                    required: true
                 },
                 correo:{
-                    required: true,
-               
+                    required: true
                 },
                 telefono:{
                     required: true,
-                    minlength : 1,
-                    maxlength : 30
                 },
                 fax:{
                     required: true,
-                    minlength : 1,
-                    maxlength : 30
                 },
                 terminos:{
                     required: true,
-              
                 }
             },
-            messages:{
-                nombre:{
-                    required : "Este campo es obligatorio",
-                    minlength : "minimo de 1 caracter",
-                    maxlength : "maximo de 20 caracteres"
+            messages: {
+                nombre: {
+                    required: "Ingresar Nombre del proveedor"
                 },
-
-                direccion:{
-                    required : "Este campo es obligatorio",
-                    minlength : "minimo 1 caracter",
-                    maxlength : " maximo de 30 caracteres"
+                direccion: {
+                    required: "Ingresar Dirección del proveedor"
                 },
-                ciudad:{
-                    required : "Este campo es obligatorio",
-                    minlength : " minimo de 1 caracter",
-                    maxlength : " maximo de 15 caracteres"
+                ciudad: {
+                    required: "Ingresar Ciudad del proveedor"
                 },
-                telefono:{
-                    required : "Este campo es obligatorio",
-                    minlength : " minimo de 1 caracter",
-                    maxlength : " maximo de 15 caracteres"
+                correo: {
+                    required: "Ingresar Correo del proveedor"
                 },
-                fax:{
-                    required : "Este campo es obligatorio",
-                    minlength : " minimo de 1 caracter",
-                    maxlength : " maximo de 15 caracteres"
+                telefono: {
+                    required: "Ingresar Teléfono del proveedor"
                 },
-                terminos:{
-                    required : "Este campo es obligatorio",
-            
+                fax: {
+                    required: "Ingresar Fax del proveedor"
                 },
-
-               correo:{
-                    required: "Este campo es obligatorio",
-                  
-                }
+                terminos: {
+                    required: "Este campo es obligatorio"
+                },
             },
+            highlight: function(element) {
+
+            },
+            unhighlight: function(element) {
+
+            },
+            errorPlacement: function(error, element) {
+
+            },
+            submitHandler: function(form) {
+                return true;
+            }
+
         });
 
+        $("#FormularioForm").submit(function (event ) {
+            console.log('submit');
+            console.log('validate', $("#FormularioForm").validate());
+            event.preventDefault();
+
+            if( $("#FormularioForm").validate()) {
+                $.ajax({
+                    url: 'proveedoresGuardar',
+                    method: 'POST',
+                    data: {
+                        nombre: $("#nombre").val(),
+                        direccion: $("#direccion").val(),
+                        ciudad: $("#ciudad").val(),
+                        correo: $("#correo").val(),
+                        telefono: $("#telefono").val(),
+                        fax: $("#fax").val(),
+      terminos: $("#terminos").val(),
+                    },
+                    dataType: 'json',
+                    beforeSend: function () {
+
+                    },
+                    success: function (response) {
+                        console.log("response", response);
+                        if (response.resgistrado == 'ok') {
+                            toastr["success"](response.mensaje);
+                            $("#FormularioForm").trigger("reset");
+                        } else {
+                            toastr["error"](response.mensaje);
+                        }
+                    },
+                    error: function () {
+                        toastr["error"]("Error al guardar proveedor");
+                    },
+                    complete: function () {
+
+                    }
+
+                })
+            }
+        });
     </script>
 
 @endsection

@@ -46,6 +46,7 @@
    @endforeach
 </table>
    </div>
+   
    <script type="text/javascript">
 
         function eliminarProveedor(proveedor_id){
@@ -62,7 +63,7 @@
                 success: function (response) {
                     if(response.status == 'ok'){
                         toastr["success"](response.mensaje);
-                        $("#renglon_"+producto_id).remove();
+                        $("#renglon_"+proveedor_id).remove();
                     }else{
                         toastr["error"](response.mensaje);
                     }

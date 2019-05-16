@@ -36,4 +36,18 @@ class ProveedoresController extends Controller {
             ->with('title', $title);
 
     }
+    public function editar($request)
+    {
+
+        $proveedor=Proveedor::where('id', '=', "$request->id")->first();
+
+
+        if(count($proveedor)>=1){
+
+            $proveedor->nombre = $request->nombre;
+            $proveedor->save();
+        }
+
+
+    }
 }
