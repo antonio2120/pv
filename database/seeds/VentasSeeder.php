@@ -21,5 +21,32 @@ class VentasSeeder extends Seeder
             'created_at' => '2019-04-16',
             'updated_at' => '2019-04-16',
         ]);
+
+        DB::table($this->table)->insert([
+            'fecha' => '2012-03-05',
+            'hora' => '12:00',
+            'total' => 89.70,
+            'empleado_id' => App\Empleado::all()->random()->id,
+            'created_at' => '2019-05-16',
+            'updated_at' => '2019-05-16',
+        ]);
+
+        DB::table($this->table)->insert([
+            'fecha' => '2012-05-05',
+            'hora' => '13:35',
+            'total' => 170.5,
+            'empleado_id' => App\Empleado::all()->random()->id,
+            'created_at' => '2019-05-16',
+            'updated_at' => '2019-05-16',
+        ]);
+
+        DB::table($this->table)->insert([
+            'fecha' => '2012-06-03',
+            'hora' => '10:40',
+            'total' => 5500,
+            'empleado_id' => App\Empleado::all()->random()->id,
+            'created_at' => '2019-05-16',
+            'updated_at' => '2019-05-16',
+        ]);
     }
 }

@@ -29,7 +29,7 @@ Route::get('/clientes', 'ClientesController@index');
 Route::get('/clientesNuevo/', 'ClientesController@nuevo');
 
 Route::get('/ventas', 'VentasController@index');
-Route::get('/ventasEliminar/{venta_id}', 'VentasController@delete');
+Route::get('/ventasEliminar/{venta_id}', 'VentasController@eliminar');
 Route::get('/ventasNuevo/', 'VentasController@nuevo');
 
 Route::get('/empleados', 'EmpleadosController@index');
