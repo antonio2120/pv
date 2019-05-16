@@ -13,7 +13,7 @@
         <tbody>
         @foreach($categorias as $categoria)
 
-            <tr id="reglon_{{$categoria->id}}">
+            <tr id="renglon_{{$categoria->id}}">
                 <th scope="row">{{$categoria->id}}</th>
                 <td>{{$categoria->nombre}}</td>
                 <td>

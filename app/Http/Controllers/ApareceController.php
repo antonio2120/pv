@@ -13,11 +13,11 @@ class ApareceController extends Controller {
             ->with('title', $title);
     }
 
-      public function eliminar($apartado_id)
+      public function eliminar($aparece_id)
     {
        if($aparece_id){
          try{
-            if(Aparece::destroy($apartado_id)){
+            if(Aparece::destroy($aparece_id)){
                return response()->json(['mensaje' => 'Aparece Elimindada', 'status' => 'ok'], 200);
             }else{
                 return response()->json(['mensaje'=>'Aprece no existe','status' =>'error'],400);
