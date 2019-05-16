@@ -22,4 +22,47 @@
   </div>
   <button type="submit" class="btn btn-primary">Agregar Categoria</button>
 </form>
+
+<script>
+  $("#FormularioForm").validate({
+          error: function(input){
+            $(this).addClass('error');
+          },
+            rules:{
+
+                id:{
+                    required: true,
+                    minlength : 1,
+                    maxlength : 15
+                },
+                nombre:{
+                    required: true,
+                    minlength : 3,
+                    maxlength : 15
+                },
+                terminos:{
+                    required: true,
+                }
+            
+            },
+            messages:{
+
+                id:{
+                    required : "Campo obligatorio",
+                    minlength : "Minimo 1 caracteres",
+                    maxlength : "Máximo 15 caracteres"
+                },
+
+                nombre:{
+                    required : "Campo obligatorio",
+                    minlength : "Minimo 3 caracteres",
+                    maxlength : "Máximo 15 caracteres"
+                },
+                terminos:{
+                    required : "Campo obligatorio",
+            
+                }
+            },
+        });
+</script>
 @endsection
