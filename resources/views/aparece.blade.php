@@ -15,7 +15,7 @@
         <tbody>
         @foreach($aparece as $aparece)
 
-            <tr id="reglon_{{$aparece->id}}">
+            <tr id="renglon_{{$aparece->id}}">
                 <th scope="row">{{$aparece->id}}</th>
                 <td>{{$aparece->apartado_id}}</td>
                 <td>{{$aparece->codigo_barras}}</td>
@@ -44,7 +44,7 @@
 
         function eliminarAparece(aparece_id){
             $.ajax({
-                url: 'aparceEliminar/'+aparece_id,
+                url: 'apareceEliminar/'+aparece_id,
                 method: 'GET',
                 data:{
                 },
