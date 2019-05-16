@@ -1,5 +1,6 @@
 @extends('layout_principal')
 @section('content')
+
     <h1>{{$title}}</h1>
     <form id="FormularioForm" action="regis_val.php" method="POST">
   <div class="row">
@@ -44,5 +45,88 @@
   </div>
   <button type="submit" class="btn btn-primary">Agregar proveedor</button>
 </form>
+<script>
+  
+        $("#FormularioForm").validate({
+
+          error: function(input){
+            $(this).addClass('error');
+          },
+            rules:{
+
+                nombre:{
+                    required: true,
+                    minlength : 1,
+                    maxlength : 20
+                },
+                direccion:{
+                    required: true,
+                    minlength : 1,
+                    maxlength : 30
+                },
+                ciudad:{
+                    required: true,
+                    minlength : 1,
+                    maxlength : 30
+                },
+                correo:{
+                    required: true,
+               
+                },
+                telefono:{
+                    required: true,
+                    minlength : 1,
+                    maxlength : 30
+                },
+                fax:{
+                    required: true,
+                    minlength : 1,
+                    maxlength : 30
+                },
+                terminos:{
+                    required: true,
+              
+                }
+            },
+            messages:{
+                nombre:{
+                    required : "Este campo es obligatorio",
+                    minlength : "minimo de 1 caracter",
+                    maxlength : "maximo de 20 caracteres"
+                },
+
+                direccion:{
+                    required : "Este campo es obligatorio",
+                    minlength : "minimo 1 caracter",
+                    maxlength : " maximo de 30 caracteres"
+                },
+                ciudad:{
+                    required : "Este campo es obligatorio",
+                    minlength : " minimo de 1 caracter",
+                    maxlength : " maximo de 15 caracteres"
+                },
+                telefono:{
+                    required : "Este campo es obligatorio",
+                    minlength : " minimo de 1 caracter",
+                    maxlength : " maximo de 15 caracteres"
+                },
+                fax:{
+                    required : "Este campo es obligatorio",
+                    minlength : " minimo de 1 caracter",
+                    maxlength : " maximo de 15 caracteres"
+                },
+                terminos:{
+                    required : "Este campo es obligatorio",
+            
+                },
+
+               correo:{
+                    required: "Este campo es obligatorio",
+                  
+                }
+            },
+        });
+
+    </script>
 
 @endsection

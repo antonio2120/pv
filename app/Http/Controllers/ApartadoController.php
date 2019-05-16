@@ -12,14 +12,20 @@ class ApartadoController extends Controller {
             ->with('apartados', $apartados)
             ->with('title', $title);
     }
-    public function delete($apartado_id)
+    public function eliminar($apartado_id)
     {
-        $apartado = apartado::find($apartado_id);
-        if($apartado){
-            $apartado->deleted();
-            echo "apartado eliminado";
+        if ($apartado_id) {
+            try {
+                if(Apppartado::destroy($apartado_id)){
+                    return response()->json(['mensaje' => 'apartado eliminado', 'status' => 'ok'], 200);
+                }else{
+                    return response()->json(['mensaje' => 'El apartado no se pudo eliminar', 'status' => 'error'], 400);
+                }
+            } catch (Exception $e) {
+                return response()->json(['mensaje' => 'Error al eliminar el apartado'], 400);
+            }
         }else{
-            echo "apartado no existe";
+            return response()->json(['mensaje' => 'Error al eliminar el apartado, apartado no encontrado '], 400);
         }
 
     }
@@ -28,6 +34,20 @@ class ApartadoController extends Controller {
         $title = "Nuevo apartado";
         return view('apartadosNuevo')
             ->with('title', $title);
+
+    }
+    public function editar($request)
+    {
+
+        $apartado=Apartado::where('id', '=', "$request->id")->first();
+
+
+        if(count($apartado)>=1){
+
+            $apartado->nombre = $request->nombre;
+            $apartado->save();
+        }
+
 
     }
 }

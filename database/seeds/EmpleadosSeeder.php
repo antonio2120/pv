@@ -39,5 +39,23 @@ class EmpleadosSeeder extends Seeder
             'created_at' => '2019-05-08',
             'updated_at' => '2019-05-08',
         ]);
+
+        DB::table($this->table)->insert([
+            'nombre' => 'Maria',
+            'apellido' => 'Torres',
+            'nombreUsuario' => 'mariT56',
+            'password' => 'contra1',
+            'created_at' => '2019-05-15',
+            'updated_at' => '2019-05-15',
+        ]);
+
+        DB::table($this->table)->insert([
+            'nombre' => 'Mario',
+            'apellido' => 'Flores',
+            'nombreUsuario' => 'marioF',
+            'password' => 'contra2',
+            'created_at' => '2019-05-15',
+            'updated_at' => '2019-05-15',
+        ]);
     }
 }

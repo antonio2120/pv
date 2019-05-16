@@ -17,8 +17,7 @@
         </thead>
         <tbody>
         @foreach($apartados as $apartado)
-
-            <tr>
+            <tr id="renglon_{{$apartado->id}}">
                 <th scope="row">{{$apartado->id}}</th>
                 <td>{{$apartado->clientes_id}}</td>
                 <td>{{$apartado->fecha_inicio}}</td>
@@ -26,17 +25,54 @@
                 <td>{{$apartado->anticipo}}</td>
                 <td>{{$apartado->total}}</td>
                 <td>{{$apartado->empleados_id}}</td>
-                <td><button type="button" class="btn btn-primary"><i class="fas fa-edit"></i></button></td>
-                <td><button type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button></td>
+                <td>
+                    <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar">
+                        <button type="button" class="btn btn-primary"><i class="fas fa-edit"></i></button>
+                    </span>
+                </td>
+                <td>
+                    <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Eliminar">
+                        <button onclick="eliminarApartado({{$apartado->id}})" type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                    </span>
+                </td>
             </tr>
         @endforeach
-
-
         </tbody>
     </table>
+    <script type="text/javascript">
 
+        function eliminarApartado(apartado_id){
+            $.ajax({
+                url: 'apartadosEliminar/'+apartado_id,
+                method: 'GET',
+                data:{
+                },
+                dataType: 'json',
+                beforeSend: function () {
+                    //$("#form04_submit").removeClass("d-none");
 
-    </table>
-<p>Hector Gonzalez Mojarro</p>
+                },
+                success: function (response) {
+                    if(response.status == 'ok'){
+                        toastr["success"](response.mensaje);
+                        $("#renglon_"+apartado_id).remove();
+                    }else{
+                        toastr["error"](response.mensaje);
+                    }
+                },
+                error: function() {
+                    toastr["error"]("Error, no se pudo completar la operación");
+                },
+                complete: function () {
+
+                }
+
+            })
+
+        }
+        $(document).ready(function() {
+
+        });
+    </script>
 
 @endsection

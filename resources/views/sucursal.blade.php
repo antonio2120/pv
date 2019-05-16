@@ -19,10 +19,53 @@
                 <td>{{$sucursal->nombre}}</td>
                 <td>{{$sucursal->direccion}}</td>
                 <td>{{$sucursal->telefono}}</td>
-                <td><button type="button" class="btn btn-primary"><i class="fas fa-edit"></i></button></td>
-                <td><button type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button></td>
+                       <td>
+                    <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar">
+                        <button type="button" class="btn btn-primary"><i class="fas fa-edit"></i></button>
+                    </span>
+                </td>
+                <td>
+                    <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Eliminar">
+                        <button onclick="eliminarSucursal({{$sucursal->id}})" type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                    </span>
+                </td>
             </tr>
         @endforeach
         </tbody>
     </table>
+<script type="text/javascript">
+
+        function eliminarSucursal(sucursal_id){
+            $.ajax({
+                url: 'sucursalEliminar/'+sucursal_id,
+                method: 'GET',
+                data:{
+                },
+                dataType: 'json',
+                beforeSend: function () {
+                    //$("#form04_submit").removeClass("d-none");
+
+                },
+                success: function (response) {
+                    if(response.status == 'ok'){
+                        toastr["success"](response.mensaje);
+                        $("#renglon_"+sucursal_id).remove();
+                    }else{
+                        toastr["error"](response.mensaje);
+                    }
+                },
+                error: function() {
+                    toastr["error"]("Error, no se pudo completar la operación");
+                },
+                complete: function () {
+
+                }
+
+            })
+
+        }
+        $(document).ready(function() {
+
+        });
+    </script>
 @endsection
