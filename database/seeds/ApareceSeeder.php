@@ -23,6 +23,12 @@ class ApareceSeeder extends Seeder
             'codigo_barras' => '985',
             'cantidadxPro' => '5300',
         ]);
+        DB::table($this->table)->insert([
+            'apartado_id' => App\Apartado::all()->random()->id,
+            'codigo_barras' => '1325',
+            'cantidadxPro' => '500',
+        ]);
+
 
     }
 }

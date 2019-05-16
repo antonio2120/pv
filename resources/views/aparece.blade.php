@@ -42,9 +42,9 @@
 
     <script type="text/javascript">
 
-        function eliminarAparece(apartado_id){
+        function eliminarAparece(aparece_id){
             $.ajax({
-                url: 'aparceEliminar/'+apartado_id,
+                url: 'aparceEliminar/'+aparece_id,
                 method: 'GET',
                 data:{
                 },
@@ -56,7 +56,7 @@
                 success: function (response) {
                     if(response.status == 'ok'){
                         toastr["success"](response.mensaje);
-                        $("#renglon_"+apartado_id).remove();
+                        $("#renglon_"+aparece_id).remove();
                     }else{
                         toastr["error"](response.mensaje);
                     }
