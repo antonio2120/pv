@@ -32,65 +32,94 @@
 </form>
 
 <script>
-  $("#empleadoForm").validate({
-          error: function(input){
-            $(this).addClass('error');
-          },
-            rules:{
-
+        $("#empleadoForm").validate({
+            rules: {
                 nombre:{
-                    required: true,
-                    minlength : 5,
-                    maxlength : 15
+                    required: true
                 },
                 apellido:{
-                    required: true,
-                    minlength : 5,
-                    maxlength : 15
+                    required: true
                 },
-                usuario:{
-                    required: true,
-                    minlength : 5,
-                    maxlength : 10
+                usuario: {
+                    required: true
                 },
                 password:{
-                    required: true,
-                    minlength : 8,
-                    maxlength : 12
+                    required: true
                 },
                 terminos:{
                     required: true,
                 }
-            
             },
-            messages:{
-
-                nombre:{
-                    required : "Campo obligatorio",
-                    minlength : "Minimo 5 caracteres",
-                    maxlength : "Máximo 15 caracteres"
+            messages: {
+                nombre: {
+                    required: "Ingresar Nombre del empleado"
                 },
-
-                apellido:{
-                    required : "Campo obligatorio",
-                    minlength : "Minimo 5 caracteres",
-                    maxlength : "Máximo 15 caracteres"
+                apellido: {
+                    required: "Ingresar Apellido del empleado"
                 },
-                usuario:{
-                    required : "Campo obligatorio",
-                    minlength : "Minimo 5 caracteres",
-                    maxlength : "Máximo 10 caracteres"
+                usuario: {
+                    required: "Ingresar Nombre de Usuario del empleado"
                 },
-                password:{
-                    required : "Campo obligatorio",
-                    minlength : "Minimo 8 caracteres",
-                    maxlength : "Máximo 12 caracteres"
+                password: {
+                    required: "Ingresar Contraseña"
                 },
-                terminos:{
-                    required : "Campo obligatorio",
-            
-                }
+                terminos: {
+                    required: "Campo obligatorio"
+                },
             },
+            highlight: function(element) {
+
+            },
+            unhighlight: function(element) {
+
+            },
+            errorPlacement: function(error, element) {
+
+            },
+            submitHandler: function(form) {
+                return true;
+            }
+
         });
-</script>
+
+        $("#empleadoForm").submit(function (event ) {
+            console.log('submit');
+            console.log('validate', $("#empleadoForm").validate());
+            event.preventDefault();
+
+            if( $("#empleadoForm").validate()) {
+                $.ajax({
+                    url: 'empleadosGuardar',
+                    method: 'POST',
+                    data: {
+                        nombre: $("#nombre").val(),
+                        apellido: $("#apellido").val(),
+                        usuario: $("#usuario").val(),
+                        password: $("#password").val(),
+                        terminos: $("#terminos").val(),
+                    },
+                    dataType: 'json',
+                    beforeSend: function () {
+
+                    },
+                    success: function (response) {
+                        console.log("response", response);
+                        if (response.resgistrado == 'ok') {
+                            toastr["success"](response.mensaje);
+                            $("#empleadoForm").trigger("reset");
+                        } else {
+                            toastr["error"](response.mensaje);
+                        }
+                    },
+                    error: function () {
+                        toastr["error"]("Error al guardar empleado");
+                    },
+                    complete: function () {
+
+                    }
+
+                })
+            }
+        });
+    </script>
 @endsection
