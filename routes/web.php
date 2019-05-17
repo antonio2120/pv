@@ -53,6 +53,7 @@ Route::post('/apartadosGuardar/', 'ApartadoController@guardar');
 Route::get('/aparece', 'ApareceController@index');
 Route::get('/apareceEliminar/{aparece_id}','ApareceController@eliminar');
 Route::get('/apareceNuevo/','ApareceController@nuevo');
+Route::post('/apareceGuardar/','ApareceController@nuevo');
 
 Route::get('/compras', 'ComprasController@index');
 
