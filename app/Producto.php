@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Producto extends Model
 {
     protected $table = 'productos';
-    protected $fillable = ['nombre', 'descripcion', 'precio','costo'];
+    protected $fillable = ['nombre', 'descripcion', 'precio','costo','proveedor_id', 'categoria_id'];
 
    /* public function collection(){
         return $this->belongsTo(Collection::class);
