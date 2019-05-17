@@ -11,16 +11,21 @@ class VentasController extends Controller{
             ->with('ventas', $ventas)
             ->with('title', $title);
     }
-    public function delete($venta_id)
+    public function eliminar($venta_id)
     {
-        $venta = Producto::find($venta_id);
-        if($venta){
-            $venta->deleted();
-            echo "Venta eliminada";
+        if ($venta_id) {
+            try {
+                if(Ventas::destroy($venta_id)){
+                    return response()->json(['mensaje' => 'Venta eliminada', 'status' => 'ok'], 200);
+                }else{
+                    return response()->json(['mensaje' => 'La Venta no se pudo eliminar', 'status' => 'error'], 400);
+                }
+            } catch (Exception $e) {
+                return response()->json(['mensaje' => 'Error al eliminar la Venta'], 400);
+            }
         }else{
-            echo "Venta no existe";
+            return response()->json(['mensaje' => 'Error al eliminar la Venta, esta fué encontrada '], 400);
         }
-
 
     }
     public function nuevo()

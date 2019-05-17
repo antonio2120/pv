@@ -28,6 +28,9 @@
 
 
     <style>
+    input.error{
+  border: solid 2px red;
+}
         .bd-placeholder-img {
             font-size: 1.125rem;
             text-anchor: middle;
@@ -102,6 +105,23 @@
                 <div class="dropdown-menu" aria-labelledby="ventasMenu">
                     <a class="dropdown-item" href="ventas/">Listar</a>
                     <a class="dropdown-item" href="ventasNuevo">Nuevo</a>
+
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="aparceMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Aparece</a>
+                <div class="dropdown-menu" aria-labelledby="apareceMenu">
+                    <a class="dropdown-item" href="aparece/">Listar</a>
+                    <a class="dropdown-item" href="apareceNuevo">Nuevo</a>
+
+                </div>
+            </li>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="aparceMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sucursal</a>
+                <div class="dropdown-menu" aria-labelledby="apareceMenu">
+                    <a class="dropdown-item" href="sucursal/">Listar</a>
+                    <a class="dropdown-item" href="sucursalNuevo">Nuevo</a>
 
                 </div>
             </li>

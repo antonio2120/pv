@@ -1,7 +1,7 @@
 @extends('layout_principal')
 @section('content')
     <h1>{{$title}}</h1>
-    <form id="FormularioForm" action="regis_val.php" method="POST">
+    <form id="FormularioVenta" action="regis_val.php" method="POST">
   <div class="row">
     <div class="col">
       <label for="exampleInputEmail1">ID Empleado en turno</label>
@@ -36,5 +36,26 @@
   </div>
   <button type="submit" class="btn btn-primary">Agregar Venta</button>
 </form>
+
+    <script>
+
+       $("#FormularioVenta").validate({
+         errorClass:'errorForm',
+           rules:{
+             id_empleado:{required: true},
+             fecha:{required: true},
+             hora:{required: true},
+             Total:{required: true}
+          },
+           messages:{
+             id_empleado:{required: "El ID de Empleado es OBLIGATORIO"},
+             fecha:{required: "Introduce la FECHA de venta"},
+             hora:{required: "Introduce la HORA de venta",},
+             Total:{required: "El total es OBLIGATORIO",}
+
+           }
+      })
+
+    </script>
 
 @endsection
