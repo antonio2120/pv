@@ -43,6 +43,7 @@ Route::post('/empleadosGuardar/', 'EmpleadosController@nuevo');
 Route::get('/categorias', 'CategoriaController@index');
 Route::get('/categoriasEliminar/{categoria_id}', 'CategoriaController@eliminar');
 Route::get('/categoriasNuevo/', 'CategoriaController@nuevo');
+Route::post('/categoriaGuardar/','CategoriaController@nuevo');
 
 Route::get('/apartados', 'ApartadoController@index');
 Route::get('/apartadosEliminar/{apartado_id}', 'ApartadoController@eliminar');
