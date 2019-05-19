@@ -8,7 +8,7 @@ class Empleado extends Model
 {
 
     protected $table = 'empleados';
-    protected $fillable = ['nombre', 'apellido', 'nombreUsuario','password', 'terminos'];
+    protected $fillable = ['nombre', 'apellido', 'nombreUsuario','password'];
 
     /*public function collection(){
         return $this->belongsTo(Collection::class);

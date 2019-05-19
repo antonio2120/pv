@@ -44,9 +44,8 @@ class EmpleadosController extends Controller {
             $empleado = new Empleado();
             $empleado->nombre = $request->nombre;
             $empleado->apellido = $request->apellido;
-            $empleado->nombreUsuario = $request->nombreUsuario;
+            $empleado->nombreUsuario = $request->usuario;
             $empleado->password = $request->password;
-            $empleado->terminos = $request->terminos;
             if($empleado->save()){
                 return response()->json(['mensaje' => 'Empleado agregado', 'status' => 'ok'], 200);
             }else{
