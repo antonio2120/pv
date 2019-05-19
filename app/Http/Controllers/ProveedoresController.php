@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Proveedor;
+use Illuminate\Http\Request;
 
 class ProveedoresController extends Controller {
     public function index()
@@ -36,18 +37,25 @@ class ProveedoresController extends Controller {
             ->with('title', $title);
 
     }
-    public function editar($request)
+    
+    public function guardar(Request $request)
     {
-
-        $proveedor=Proveedor::where('id', '=', "$request->id")->first();
-
-
-        if(count($proveedor)>=1){
-
+        try {
+            $proveedor = new Proveedor();
             $proveedor->nombre = $request->nombre;
-            $proveedor->save();
+            $proveedor->direccion = $request->direccion;
+            $proveedor->ciudad = $request->ciudad;
+            $proveedor->telefono = $request->telefono;
+            $proveedor->fax = $request->fax;
+            $proveedor->correo = $request->correo;
+            $proveedor->terminos = $request->terminos;
+            if($proveedor->save()){
+                return response()->json(['mensaje' => 'Proveedor agregado', 'status' => 'ok'], 200);
+            }else{
+                return response()->json(['mensaje' => 'Error al agregar al Proveedor', 'status' => 'error'], 400);
+            }
+        } catch (Exception $e) {
+            return response()->json(['mensaje' => 'Error al agregar al Proveedor'], 403);
         }
-
-
     }
 }

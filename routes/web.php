@@ -20,12 +20,12 @@ Route::get('/login', function () {
 Route::get('/productos', 'ProductoController@index');
 Route::get('/productosEliminar/{producto_id}', 'ProductoController@eliminar');
 Route::get('/productosNuevo/', 'ProductoController@nuevo');
-Route::post('/productosGuardar/', 'ProductoController@nuevo');
+Route::post('/productosGuardar/', 'ProductoController@gnuevo');
 
 Route::get('/proveedoresNuevo/', 'ProveedoresController@nuevo');
 Route::get('/proveedoresEliminar/{proveedor_id}', 'ProveedoresController@eliminar');
 Route::get('/proveedores', 'ProveedoresController@index');
-Route::post('/proveedoresGuardar/', 'ProveedoresController@nuevo');
+Route::post('/proveedoresGuardar/', 'ProveedoresController@guardar');
 
 Route::get('/clientes', 'ClientesController@index');
 Route::get('/clientesEliminar/{cliente_id}', 'ClientesController@eliminar');
