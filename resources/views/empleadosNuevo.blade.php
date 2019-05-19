@@ -97,6 +97,7 @@
                         usuario: $("#usuario").val(),
                         password: $("#password").val(),
                         terminos: $("#terminos").val(),
+                        _token: "{{ csrf_token() }}",
                     },
                     dataType: 'json',
                     beforeSend: function () {
