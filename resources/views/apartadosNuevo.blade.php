@@ -1,73 +1,98 @@
 @extends('layout_principal')
 @section('content')
     <h1>{{$title}}</h1>
-<form id="apartadosNuevo" method="POST">
-        <div class="form-group">
-            <label for="clientes_id">Id del cliente</label>
-            <input type="text" class="form-control" id="clientes_id" name="clientes_id" placeholder="Producto">
-        </div>
-        <div class="form-group">
-            <label for="fecha_inicio">fecha_inicio</label>
-            <input type="text" class="form-control" id="fecha_inicio" name="fecha_inicio" placeholder="$">
-        </div>
-        <div class="form-group">
-            <label for="fecha_fin">fecha_fin</label>
-            <input type="text" class="form-control" id="fecha_fin" name="fecha_fin" placeholder="$">
-        </div>
-        <div class="form-group">
-            <label for="anticipo">anticipo</label>
-            <input type="text" class="form-control" id="anticipo" name="anticipo" placeholder="$">
-        </div>
-        <div class="form-group">
-            <label for="total">total</label>
-            <input type="text" class="form-control" id="total" name="total" placeholder="$">
-        </div>
-        <div class="form-group">
-            <label for="empleado_id">empleado_id</label>
-            <input type="text" class="form-control" id="empleado_id" name="empleado_id" placeholder="$">
-        </div>
-        <button type="submit" class="btn btn-primary">Guardar nuevo producto</button>
-    </form>
-    <script>
-        $("#apartadosNuevo").validate({
+    <form id="apartadoForm" action="regis_val.php" method="POST">
+  <div class="row">
+    <div class="col">
+      <label for="exampleInputCliente">cliente_id</label>
+      <input type="text" class="form-control" placeholder="id del cliente" id="forCliente_id" name="cliente_id">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <label for="inputDate">fecha_inicio</label>
+    <input type="text" class="form-control" id="forDate" placeholder="fecha_inicio" name="date">
+    </div>
+    <div class="col">
+      <label for="inputDateEnd">fecha_fin</label>
+      <input type="text" class="form-control" placeholder="fecha_fin" id="forFecha_fin" name="fecha_fin">
+    </div>
+
+  </div>
+  <div class="form-row">
+
+    <div class="form-group col-md-4">
+      <label for="inputAnticipo">Anticipo</label>
+      <input type="text" class="form-control" id="forAnticipo" placeholder="anticipo" name="anticipo">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="inputTotal">Total</label>
+      <input type="text" class="form-control" id="forTotal" placeholder="Total" name="total">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="inputEmpleado">ID de empleado</label>
+      <input type="text" class="form-control" placeholder="Id de empleado" id="forEmpleado" name="empleado">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="form-check" >
+      <input class="form-check-input" type="checkbox" id="forTerminos" name="terminos">
+      <label class="form-check-label" for="gridCheck">
+        Acepto los términos y condiciones
+      </label>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary">Agregar apartado</button>
+</form>
+<script>
+        $("#apartadoForm").validate({
             rules: {
-                clientes_id: {
+                cliente_id:{
                     required: true
                 },
-                fecha_inicio: {
+                date:{
                     required: true
                 },
-                fecha_fin: {
+                precio: {
                     required: true
                 },
-                anticipo: {
+                fecha_fin:{
                     required: true
                 },
-                total: {
+                anticipo:{
                     required: true
                 },
-                empleado_id: {
-                    required: true
+                total:{
+                    required: true,
                 },
+                empleado:{
+                    required: true,
+                },
+                terminos:{
+                    required: true,
+                }
             },
             messages: {
-                clientes_id: {
-                    required: "Ingresar Nombre del producto"
+                cliente_id: {
+                    required: "Ingresar id del cliente del proveedor"
                 },
-                fecha_inicio: {
-                    required: "Ingresar fecha_inicio del producto"
+                date: {
+                    required: "Ingresar fecha_inicio del proveedor"
                 },
                 fecha_fin: {
-                    required: "Ingresar fecha_fin del producto"
+                    required: "Ingresar fecha_fin del proveedor"
                 },
                 anticipo: {
-                    required: "Ingresar anticipo del producto"
+                    required: "Ingresar anticipo del proveedor"
                 },
                 total: {
-                    required: "Ingresar total del producto"
+                    required: "Ingresar Teléfono del proveedor"
                 },
-                empleado_id: {
-                    required: "Ingresar empleado_id del producto"
+                empleado: {
+                    required: "Ingresar empleado del proveedor"
+                },
+                terminos: {
+                    required: "Este campo es obligatorio"
                 },
             },
             highlight: function(element) {
@@ -85,21 +110,23 @@
 
         });
 
-        $("#apartadosNuevo").submit(function (event ) {
+        $("#apartadoForm").submit(function (event ) {
             console.log('submit');
-            console.log('validate', $("#apartadosNuevo").validate());
+            console.log('validate', $("#apartadoForm").validate());
             event.preventDefault();
 
-            if( $("#apartadosNuevo").validate()) {
+            if( $("#apartadoForm").validate()) {
                 $.ajax({
-                    url: 'productosGuardar',
+                    url: 'apartadosGuardar',
                     method: 'POST',
                     data: {
-                        clientes_id: $("#clientes_id").val(),
-                        fecha_inicio: $("#fecha_inicio").val(),
+                        cliente_id: $("#cliente_id").val(),
+                        date: $("#date").val(),
                         fecha_fin: $("#fecha_fin").val(),
                         anticipo: $("#anticipo").val(),
                         total: $("#total").val(),
+                        empleado: $("#empleado").val(),
+      terminos: $("#terminos").val(),
                     },
                     dataType: 'json',
                     beforeSend: function () {
@@ -109,13 +136,13 @@
                         console.log("response", response);
                         if (response.resgistrado == 'ok') {
                             toastr["success"](response.mensaje);
-                            $("#apartadosNuevo").trigger("reset");
+                            $("#apartadoForm").trigger("reset");
                         } else {
                             toastr["error"](response.mensaje);
                         }
                     },
                     error: function () {
-                        toastr["error"]("Error al realizar el registro");
+                        toastr["error"]("Error al guardar proveedor");
                     },
                     complete: function () {
 
