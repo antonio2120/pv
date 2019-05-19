@@ -20,14 +20,6 @@
       <input type="password" class="form-control" id="forPassword" placeholder="Password" name="password">
     </div>
   </div>
-  <div class="form-group">
-    <div class="form-check" >
-      <input class="form-check-input" type="checkbox" id="forTerminos" name="terminos">
-      <label class="form-check-label" for="gridCheck">
-        Acepto los términos y condiciones
-      </label>
-    </div>
-  </div>
   <button type="submit" class="btn btn-primary">Guardar nuevo empleado</button>
 </form>
 
@@ -44,9 +36,6 @@
                     required: true
                 },
                 password:{
-                    required: true
-                },
-                terminos:{
                     required: true,
                 }
             },
@@ -62,9 +51,6 @@
                 },
                 password: {
                     required: "Ingresar Contraseña"
-                },
-                terminos: {
-                    required: "Campo obligatorio"
                 },
             },
             highlight: function(element) {
@@ -96,7 +82,6 @@
                         apellido: $("#apellido").val(),
                         usuario: $("#usuario").val(),
                         password: $("#password").val(),
-                        terminos: $("#terminos").val(),
                         _token: "{{ csrf_token() }}",
                     },
                     dataType: 'json',
