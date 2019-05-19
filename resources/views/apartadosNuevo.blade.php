@@ -1,98 +1,87 @@
 @extends('layout_principal')
 @section('content')
     <h1>{{$title}}</h1>
-    <form id="apartadoForm" action="regis_val.php" method="POST">
-  <div class="row">
-    <div class="col">
-      <label for="exampleInputCliente">cliente_id</label>
-      <input type="text" class="form-control" placeholder="id del cliente" id="forCliente_id" name="cliente_id">
-    </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <label for="inputDate">fecha_inicio</label>
-    <input type="text" class="form-control" id="forDate" placeholder="fecha_inicio" name="date">
-    </div>
-    <div class="col">
-      <label for="inputDateEnd">fecha_fin</label>
-      <input type="text" class="form-control" placeholder="fecha_fin" id="forFecha_fin" name="fecha_fin">
-    </div>
-
-  </div>
-  <div class="form-row">
-
-    <div class="form-group col-md-4">
-      <label for="inputAnticipo">Anticipo</label>
-      <input type="text" class="form-control" id="forAnticipo" placeholder="anticipo" name="anticipo">
-    </div>
-    <div class="form-group col-md-4">
-      <label for="inputTotal">Total</label>
-      <input type="text" class="form-control" id="forTotal" placeholder="Total" name="total">
-    </div>
-    <div class="form-group col-md-4">
-      <label for="inputEmpleado">ID de empleado</label>
-      <input type="text" class="form-control" placeholder="Id de empleado" id="forEmpleado" name="empleado">
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="form-check" >
-      <input class="form-check-input" type="checkbox" id="forTerminos" name="terminos">
-      <label class="form-check-label" for="gridCheck">
-        Acepto los términos y condiciones
-      </label>
-    </div>
-  </div>
-  <button type="submit" class="btn btn-primary">Agregar apartado</button>
-</form>
-<script>
+    <form id="apartadoForm" method="POST">
+        <div class="form-group">
+            <label for="cliente">Nombre del cliente</label>
+            <select class="form-control" id="cliente" name="cliente" >
+                @foreach($clientes as $cliente)
+                    <option value="{{$cliente->id}}">{{$cliente->nombres}}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="fecha_inicio">Fecha inicial</label>
+            <input type="text" class="form-control" id="fecha_inicio" name="fecha_inicio" placeholder="##/##/####">
+        </div>
+        <div class="form-group">
+            <label for="fecha_fin">Fecha final</label>
+            <input type="text" class="form-control" id="fecha_fin" name="fecha_fin" placeholder="##/##/####">
+        </div>
+        <div class="form-group">
+            <label for="anticipo">Anticipo</label>
+            <input type="text" class="form-control" id="anticipo" name="anticipo" placeholder="$">
+        </div>
+        <div class="form-group">
+            <label for="Total">Total</label>
+            <input type="text" class="form-control" id="Total" name="Total" placeholder="$">
+        </div>
+        <div class="form-group">
+            <label for="empleado">empleado</label>
+            <select class="form-control" id="empleado" name="empleado" >
+                @foreach($empleados as $empleado)
+                    <option value="{{$empleado->id}}">{{$empleado->nombre}}</option>
+                @endforeach
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar nuevo apartado</button>
+    </form>
+    <script>
         $("#apartadoForm").validate({
             rules: {
-                cliente_id:{
+                cliente: {
                     required: true
                 },
-                date:{
+                fecha_inicio: {
                     required: true
-                },
-                precio: {
-                    required: true
-                },
-                fecha_fin:{
-                    required: true
-                },
-                anticipo:{
-                    required: true
-                },
-                total:{
-                    required: true,
-                },
-                empleado:{
-                    required: true,
-                },
-                terminos:{
-                    required: true,
-                }
-            },
-            messages: {
-                cliente_id: {
-                    required: "Ingresar id del cliente del proveedor"
-                },
-                date: {
-                    required: "Ingresar fecha_inicio del proveedor"
                 },
                 fecha_fin: {
-                    required: "Ingresar fecha_fin del proveedor"
+                    required: true
                 },
                 anticipo: {
-                    required: "Ingresar anticipo del proveedor"
+                    required: true
                 },
-                total: {
-                    required: "Ingresar Teléfono del proveedor"
+                Total: {
+                    required: true
+                },
+                cliente: {
+                    required: true
                 },
                 empleado: {
-                    required: "Ingresar empleado del proveedor"
+                    required: true
                 },
-                terminos: {
-                    required: "Este campo es obligatorio"
+            },
+            messages: {
+                cliente: {
+                    required: "Ingresar Nombre del producto"
+                },
+                fecha_inicio: {
+                    required: "Ingresar Descripción del producto"
+                },
+                fecha_fin: {
+                    required: "Ingresar fecha_fin del producto"
+                },
+                anticipo: {
+                    required: "Ingresar anticipo del producto"
+                },
+                Total: {
+                    required: "Ingresar total del producto"
+                },
+                cliente: {
+                    required: "Seleccionar cliente del producto"
+                },
+                empleado: {
+                    required: "Seleccionar empleado del producto"
                 },
             },
             highlight: function(element) {
@@ -115,18 +104,20 @@
             console.log('validate', $("#apartadoForm").validate());
             event.preventDefault();
 
+
             if( $("#apartadoForm").validate()) {
                 $.ajax({
                     url: 'apartadosGuardar',
                     method: 'POST',
                     data: {
-                        cliente_id: $("#cliente_id").val(),
-                        date: $("#date").val(),
+                        cliente: $("#cliente").val(),
+                        fecha_inicio: $("#fecha_inicio").val(),
                         fecha_fin: $("#fecha_fin").val(),
                         anticipo: $("#anticipo").val(),
-                        total: $("#total").val(),
+                        total: $("#anticipo").val(),
+                        cliente: $("#cliente").val(),
                         empleado: $("#empleado").val(),
-      terminos: $("#terminos").val(),
+                        _token: "{{ csrf_token() }}",
                     },
                     dataType: 'json',
                     beforeSend: function () {
@@ -134,7 +125,7 @@
                     },
                     success: function (response) {
                         console.log("response", response);
-                        if (response.resgistrado == 'ok') {
+                        if (response.status == 'ok') {
                             toastr["success"](response.mensaje);
                             $("#apartadoForm").trigger("reset");
                         } else {
@@ -142,7 +133,7 @@
                         }
                     },
                     error: function () {
-                        toastr["error"]("Error al guardar proveedor");
+                        toastr["error"]("Error al realizar el registro");
                     },
                     complete: function () {
 
