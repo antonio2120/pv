@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 use App\Producto;
+use App\Proveedor;
+use App\Categoria;
+use Illuminate\Http\Request;
 
 class ProductoController extends Controller {
     public function index()
@@ -32,22 +35,31 @@ class ProductoController extends Controller {
     public function nuevo()
     {
         $title = "Nuevo Producto";
+        $proveedores = Proveedor::all();
+        $categorias = Categoria::all();
         return view('productosForm')
-            ->with('title', $title);
+            ->with('title', $title)
+            ->with('proveedores', $proveedores)
+            ->with('categorias', $categorias);
 
     }
-    public function editar($request)
+    public function guardar(Request $request)
     {
-
-        $producto=Producto::where('id', '=', "$request->id")->first();
-
-
-        if(count($producto)>=1){
-
-            $producto->nombre = $request->nombre;
-            $producto->save();
+        try {
+            $producto = new Producto();
+            $producto->nombre = $request->nombre_producto;
+            $producto->descripcion = $request->descripcion;
+            $producto->precio = $request->precio;
+            $producto->costo = $request->costo;
+            $producto->proveedor_id = $request->proveedor;
+            $producto->categoria_id = $request->categoria;
+            if($producto->save()){
+                return response()->json(['mensaje' => 'Producto agregado', 'status' => 'ok'], 200);
+            }else{
+                return response()->json(['mensaje' => 'Error al agregar el producto', 'status' => 'error'], 400);
+            }
+        } catch (Exception $e) {
+            return response()->json(['mensaje' => 'Error al agregar el producto'], 403);
         }
-
-
     }
 }

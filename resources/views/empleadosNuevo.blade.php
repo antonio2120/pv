@@ -97,6 +97,7 @@
                         usuario: $("#usuario").val(),
                         password: $("#password").val(),
                         terminos: $("#terminos").val(),
+                        _token: "{{ csrf_token() }}",
                     },
                     dataType: 'json',
                     beforeSend: function () {
@@ -104,7 +105,7 @@
                     },
                     success: function (response) {
                         console.log("response", response);
-                        if (response.resgistrado == 'ok') {
+                        if (response.status == 'ok') {
                             toastr["success"](response.mensaje);
                             $("#empleadoForm").trigger("reset");
                         } else {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Empleado;
+use Illuminate\Http\Request;
 
 class EmpleadosController extends Controller {
     public function index()
@@ -30,26 +31,30 @@ class EmpleadosController extends Controller {
         }
 
     }
-    public function nuevo()
+   public function nuevo()
     {
         $title = "Nuevo Empleado";
         return view('empleadosNuevo')
             ->with('title', $title);
 
     }
-    public function editar($request)
+    public function guardar(Request $request)
     {
-
-        $empleado=Empleado::where('id', '=', "$request->id")->first();
-
-
-        if(count($empleado)>=1){
-
+        try {
+            $empleado = new Empleado();
             $empleado->nombre = $request->nombre;
-            $empleado->save();
+            $empleado->apellido = $request->apellido;
+            $empleado->nombreUsuario = $request->nombreUsuario;
+            $empleado->password = $request->password;
+            $empleado->terminos = $request->terminos;
+            if($empleado->save()){
+                return response()->json(['mensaje' => 'Empleado agregado', 'status' => 'ok'], 200);
+            }else{
+                return response()->json(['mensaje' => 'Error al agregar Empleado', 'status' => 'error'], 400);
+            }
+        } catch (Exception $e) {
+            return response()->json(['mensaje' => 'Error al agregar Empleado'], 403);
         }
-
-
     }
 
 }

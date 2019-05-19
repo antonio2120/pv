@@ -21,21 +21,17 @@
         <div class="form-group">
             <label for="proveedor">Proveedor</label>
             <select class="form-control" id="proveedor" name="proveedor" >
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
+                @foreach($proveedores as $proveedor)
+                    <option value="{{$proveedor->id}}">{{$proveedor->nombre}}</option>
+                @endforeach
             </select>
         </div>
         <div class="form-group">
             <label for="categoria">Categoria</label>
             <select class="form-control" id="categoria" name="categoria" >
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
+                @foreach($categorias as $categoria)
+                    <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
+                @endforeach
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Guardar nuevo producto</button>
@@ -102,6 +98,7 @@
             console.log('validate', $("#productoForm").validate());
             event.preventDefault();
 
+
             if( $("#productoForm").validate()) {
                 $.ajax({
                     url: 'productosGuardar',
@@ -113,6 +110,7 @@
                         costo: $("#costo").val(),
                         proveedor: $("#proveedor").val(),
                         categoria: $("#categoria").val(),
+                        _token: "{{ csrf_token() }}",
                     },
                     dataType: 'json',
                     beforeSend: function () {
@@ -120,7 +118,7 @@
                     },
                     success: function (response) {
                         console.log("response", response);
-                        if (response.resgistrado == 'ok') {
+                        if (response.status == 'ok') {
                             toastr["success"](response.mensaje);
                             $("#productoForm").trigger("reset");
                         } else {
