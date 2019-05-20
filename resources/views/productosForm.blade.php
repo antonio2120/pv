@@ -9,7 +9,7 @@
                    id="nombre_producto"
                    name="nombre_producto"
                    placeholder="Producto"
-                   value="{{$producto->nombre}}"
+                   value="{{isset($producto) ? $producto->nombre : ''}}"
             >
         </div>
         <div class="form-group">
@@ -17,7 +17,7 @@
             <textarea class="form-control"
                       id="descripcion"
                       name="descripcion"
-                      rows="3">{{$producto->descripcion}}</textarea>
+                      rows="3">{{isset($producto) ? $producto->descripcion : ''}}</textarea>
         </div>
         <div class="form-group">
             <label for="precio">Precio</label>
@@ -26,7 +26,7 @@
                    id="precio"
                    name="precio"
                    placeholder="$"
-                   value="{{$producto->precio}}"
+                   value="{{isset($producto) ? $producto->precio : ''}}"
             >
         </div>
         <div class="form-group">
@@ -36,26 +36,45 @@
                    id="costo"
                    name="costo"
                    placeholder="$"
-                   value="{{$producto->costo}}"
+                   value="{{isset($producto) ? $producto->costo : ''}}"
             >
         </div>
         <div class="form-group">
             <label for="proveedor">Proveedor</label>
             <select class="form-control" id="proveedor" name="proveedor" >
+                <option value="">-------------</option>
                 @foreach($proveedores as $proveedor)
-                    <option value="{{$proveedor->id}}">{{$proveedor->nombre}}</option>
+                    @if(isset($producto))
+                        @if($producto->proveedor_id == $proveedor->id )
+                            <option selected value="{{$proveedor->id}}" >{{$proveedor->nombre}}</option>
+                        @else
+                            <option value="{{$proveedor->id}}">{{$proveedor->nombre}}</option>
+                        @endif
+                    @else
+                        <option value="{{$proveedor->id}}">{{$proveedor->nombre}}</option>
+                    @endif
                 @endforeach
             </select>
         </div>
         <div class="form-group">
             <label for="categoria">Categoria</label>
             <select class="form-control" id="categoria" name="categoria" >
+                <option value="">-------------</option>
                 @foreach($categorias as $categoria)
-                    <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
+                    @if(isset($producto))
+                        @if($producto->categoria_id == $categoria->id )
+                            <option selected value="{{$categoria->id}}" >{{$categoria->nombre}}</option>
+                        @else
+                            <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
+                        @endif
+                    @else
+                        <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
+                    @endif
                 @endforeach
+
             </select>
         </div>
-        <button type="submit" class="btn btn-primary">Guardar nuevo producto</button>
+        <button type="submit" class="btn btn-primary">{{$accion == 'nuevo' ? 'Alta de producto' : 'Guardar cambios' }}</button>
     </form>
     <script>
         $("#productoForm").validate({
@@ -122,7 +141,7 @@
 
             if( $("#productoForm").validate()) {
                 $.ajax({
-                    url: 'productosGuardar',
+                    url: "{{ asset('productosGuardar')}}",
                     method: 'POST',
                     data: {
                         nombre_producto: $("#nombre_producto").val(),
@@ -132,7 +151,8 @@
                         proveedor: $("#proveedor").val(),
                         categoria: $("#categoria").val(),
                         _token: "{{ csrf_token() }}",
-                        id:"{{$producto->id}}"
+                        id:"{{isset($producto) ? $producto->id : ''}}",
+                        accion: "{{$accion}}"
                     },
                     dataType: 'json',
                     beforeSend: function () {
