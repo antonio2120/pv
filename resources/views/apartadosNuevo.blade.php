@@ -4,7 +4,7 @@
     <form id="apartadoForm" method="POST">
         <div class="form-group">
             <label for="cliente">Nombre del cliente</label>
-            <select class="form-control" id="cliente" name="cliente" >
+            <select class="form-control" id="cliente" name="cliente">
                 @foreach($clientes as $cliente)
                     <option value="{{$cliente->id}}">{{$cliente->nombres}}</option>
                 @endforeach
@@ -27,7 +27,7 @@
             <input type="text" class="form-control" id="Total" name="Total" placeholder="$">
         </div>
         <div class="form-group">
-            <label for="empleado">empleado</label>
+            <label for="empleado">Empleado</label>
             <select class="form-control" id="empleado" name="empleado" >
                 @foreach($empleados as $empleado)
                     <option value="{{$empleado->id}}">{{$empleado->nombre}}</option>
@@ -39,9 +39,6 @@
     <script>
         $("#apartadoForm").validate({
             rules: {
-                cliente: {
-                    required: true
-                },
                 fecha_inicio: {
                     required: true
                 },
@@ -57,31 +54,19 @@
                 cliente: {
                     required: true
                 },
-                empleado: {
-                    required: true
-                },
             },
             messages: {
-                cliente: {
-                    required: "Ingresar Nombre del producto"
-                },
                 fecha_inicio: {
-                    required: "Ingresar Descripción del producto"
+                    required: "Ingresar fecha inicial"
                 },
                 fecha_fin: {
-                    required: "Ingresar fecha_fin del producto"
+                    required: "Ingresar fecha final"
                 },
                 anticipo: {
                     required: "Ingresar anticipo del producto"
                 },
                 Total: {
                     required: "Ingresar total del producto"
-                },
-                cliente: {
-                    required: "Seleccionar cliente del producto"
-                },
-                empleado: {
-                    required: "Seleccionar empleado del producto"
                 },
             },
             highlight: function(element) {

@@ -19,7 +19,14 @@ class ApartadoController extends Controller {
     {
         if ($apartado_id) {
             try {
-                if(Apartado::destroy($apartado_id)){
+                if(Apartado::find($apartado_id)){
+                    $title = "Editar Apartado";
+                    $clientes = Cliente::all();
+                    $empleados = Empleado::all();
+                    return view('apartadosNuevo')
+                    ->with('title', $title)
+                    ->with('clientes', $clientes)
+                    ->with('empleados', $empleados);
                     return response()->json(['mensaje' => 'apartado eliminado', 'status' => 'ok'], 200);
                 }else{
                     return response()->json(['mensaje' => 'El apartado no se pudo eliminar', 'status' => 'error'], 400);
@@ -64,4 +71,23 @@ class ApartadoController extends Controller {
             return response()->json(['mensaje' => 'Error al agregar el apartado'], 403);
         }
     }
+
+    public function editar($apartado_id)
+    {
+        if ($apartado_id) {
+            try {
+                if(Apartado::destroy($apartado_id)){
+                    return response()->json(['mensaje' => 'apartado eliminado', 'status' => 'ok'], 200);
+                }else{
+                    return response()->json(['mensaje' => 'El apartado no se pudo eliminar', 'status' => 'error'], 400);
+                }
+            } catch (Exception $e) {
+                return response()->json(['mensaje' => 'Error al eliminar el apartado'], 400);
+            }
+        }else{
+            return response()->json(['mensaje' => 'Error al eliminar el apartado, apartado no encontrado '], 400);
+        }
+
+    }
+
 }
