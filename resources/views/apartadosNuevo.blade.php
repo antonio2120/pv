@@ -1,37 +1,45 @@
 @extends('layout_principal')
 @section('content')
     <h1>{{$title}}</h1>
-<form id="apartadosNuevo" method="POST">
+    <form id="apartadoForm" method="POST">
         <div class="form-group">
-            <label for="clientes_id">Id del cliente</label>
-            <input type="text" class="form-control" id="clientes_id" name="clientes_id" placeholder="Producto">
+            <label for="cliente">Nombre del cliente</label>
+            <select class="form-control" id="cliente" name="cliente" >
+                @foreach($clientes as $cliente)
+                    <option value="{{$cliente->id}}">{{$cliente->nombres}}</option>
+                @endforeach
+            </select>
         </div>
         <div class="form-group">
-            <label for="fecha_inicio">fecha_inicio</label>
-            <input type="text" class="form-control" id="fecha_inicio" name="fecha_inicio" placeholder="$">
+            <label for="fecha_inicio">Fecha inicial</label>
+            <input type="text" class="form-control" id="fecha_inicio" name="fecha_inicio" placeholder="##/##/####">
         </div>
         <div class="form-group">
-            <label for="fecha_fin">fecha_fin</label>
-            <input type="text" class="form-control" id="fecha_fin" name="fecha_fin" placeholder="$">
+            <label for="fecha_fin">Fecha final</label>
+            <input type="text" class="form-control" id="fecha_fin" name="fecha_fin" placeholder="##/##/####">
         </div>
         <div class="form-group">
-            <label for="anticipo">anticipo</label>
+            <label for="anticipo">Anticipo</label>
             <input type="text" class="form-control" id="anticipo" name="anticipo" placeholder="$">
         </div>
         <div class="form-group">
-            <label for="total">total</label>
-            <input type="text" class="form-control" id="total" name="total" placeholder="$">
+            <label for="Total">Total</label>
+            <input type="text" class="form-control" id="Total" name="Total" placeholder="$">
         </div>
         <div class="form-group">
-            <label for="empleado_id">empleado_id</label>
-            <input type="text" class="form-control" id="empleado_id" name="empleado_id" placeholder="$">
+            <label for="empleado">empleado</label>
+            <select class="form-control" id="empleado" name="empleado" >
+                @foreach($empleados as $empleado)
+                    <option value="{{$empleado->id}}">{{$empleado->nombre}}</option>
+                @endforeach
+            </select>
         </div>
-        <button type="submit" class="btn btn-primary">Guardar nuevo producto</button>
+        <button type="submit" class="btn btn-primary">Guardar nuevo apartado</button>
     </form>
     <script>
-        $("#apartadosNuevo").validate({
+        $("#apartadoForm").validate({
             rules: {
-                clientes_id: {
+                cliente: {
                     required: true
                 },
                 fecha_inicio: {
@@ -43,19 +51,22 @@
                 anticipo: {
                     required: true
                 },
-                total: {
+                Total: {
                     required: true
                 },
-                empleado_id: {
+                cliente: {
+                    required: true
+                },
+                empleado: {
                     required: true
                 },
             },
             messages: {
-                clientes_id: {
+                cliente: {
                     required: "Ingresar Nombre del producto"
                 },
                 fecha_inicio: {
-                    required: "Ingresar fecha_inicio del producto"
+                    required: "Ingresar Descripción del producto"
                 },
                 fecha_fin: {
                     required: "Ingresar fecha_fin del producto"
@@ -63,11 +74,14 @@
                 anticipo: {
                     required: "Ingresar anticipo del producto"
                 },
-                total: {
+                Total: {
                     required: "Ingresar total del producto"
                 },
-                empleado_id: {
-                    required: "Ingresar empleado_id del producto"
+                cliente: {
+                    required: "Seleccionar cliente del producto"
+                },
+                empleado: {
+                    required: "Seleccionar empleado del producto"
                 },
             },
             highlight: function(element) {
@@ -85,21 +99,25 @@
 
         });
 
-        $("#apartadosNuevo").submit(function (event ) {
+        $("#apartadoForm").submit(function (event ) {
             console.log('submit');
-            console.log('validate', $("#apartadosNuevo").validate());
+            console.log('validate', $("#apartadoForm").validate());
             event.preventDefault();
 
-            if( $("#apartadosNuevo").validate()) {
+
+            if( $("#apartadoForm").validate()) {
                 $.ajax({
-                    url: 'productosGuardar',
+                    url: 'apartadosGuardar',
                     method: 'POST',
                     data: {
-                        clientes_id: $("#clientes_id").val(),
+                        cliente: $("#cliente").val(),
                         fecha_inicio: $("#fecha_inicio").val(),
                         fecha_fin: $("#fecha_fin").val(),
                         anticipo: $("#anticipo").val(),
-                        total: $("#total").val(),
+                        total: $("#anticipo").val(),
+                        cliente: $("#cliente").val(),
+                        empleado: $("#empleado").val(),
+                        _token: "{{ csrf_token() }}",
                     },
                     dataType: 'json',
                     beforeSend: function () {
@@ -107,9 +125,9 @@
                     },
                     success: function (response) {
                         console.log("response", response);
-                        if (response.resgistrado == 'ok') {
+                        if (response.status == 'ok') {
                             toastr["success"](response.mensaje);
-                            $("#apartadosNuevo").trigger("reset");
+                            $("#apartadoForm").trigger("reset");
                         } else {
                             toastr["error"](response.mensaje);
                         }

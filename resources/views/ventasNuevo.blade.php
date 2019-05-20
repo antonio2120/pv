@@ -21,7 +21,7 @@
       <label for="inputHora">Hora de la venta</label>
       <input type="text" class="form-control" placeholder="Hora" id="Hora" name="hora">
     </div>
-    
+
   </div>
   <div class="form-row">
 
