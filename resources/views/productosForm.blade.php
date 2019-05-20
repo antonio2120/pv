@@ -77,105 +77,96 @@
         <button type="submit" class="btn btn-primary">{{$accion == 'nuevo' ? 'Alta de producto' : 'Guardar cambios' }}</button>
     </form>
     <script>
-        $("#productoForm").validate({
-            rules: {
-                nombre_producto: {
-                    required: true
+        $(document).ready(function () {
+            $('#productoForm').validate({
+                rules: {
+                    nombre_producto: {
+                        required: true
+                    },
+                    descripcion: {
+                        required: true
+                    },
+                    precio: {
+                        required: true
+                    },
+                    costo: {
+                        required: true
+                    },
+                    proveedor: {
+                        required: true
+                    },
+                    categoria: {
+                        required: true
+                    },
                 },
-                descripcion: {
-                    required: true
-                },
-                precio: {
-                    required: true
-                },
-                costo: {
-                    required: true
-                },
-                proveedor: {
-                    required: true
-                },
-                categoria: {
-                    required: true
-                },
-            },
-            messages: {
-                nombre_producto: {
-                    required: "Ingresar Nombre del producto"
-                },
-                descripcion: {
-                    required: "Ingresar Descripción del producto"
-                },
-                precio: {
-                    required: "Ingresar Precio del producto"
-                },
-                costo: {
-                    required: "Ingresar Costo del producto"
-                },
-                proveedor: {
-                    required: "Seleccionar Proveedor del producto"
-                },
-                categoria: {
-                    required: "Seleccionar Categoria del producto"
-                },
-            },
-            highlight: function(element) {
 
-            },
-            unhighlight: function(element) {
+                messages: {
+                    nombre_producto: {
+                        required: "Ingresar Nombre del producto"
+                    },
+                    descripcion: {
+                        required: "Ingresar Descripción del producto"
+                    },
+                    precio: {
+                        required: "Ingresar Precio del producto"
+                    },
+                    costo: {
+                        required: "Ingresar Costo del producto"
+                    },
+                    proveedor: {
+                        required: "Seleccionar Proveedor del producto"
+                    },
+                    categoria: {
+                        required: "Seleccionar Categoria del producto"
+                    },
+                },
 
-            },
-            errorPlacement: function(error, element) {
-
-            },
-            submitHandler: function(form) {
-                return true;
-            }
-
+            });
         });
-
         $("#productoForm").submit(function (event ) {
             console.log('submit');
             console.log('validate', $("#productoForm").validate());
             event.preventDefault();
 
+            var $form = $(this);
+            if(! $form.valid()) return false;
 
-            if( $("#productoForm").validate()) {
-                $.ajax({
-                    url: "{{ asset('productosGuardar')}}",
-                    method: 'POST',
-                    data: {
-                        nombre_producto: $("#nombre_producto").val(),
-                        descripcion: $("#descripcion").val(),
-                        precio: $("#precio").val(),
-                        costo: $("#costo").val(),
-                        proveedor: $("#proveedor").val(),
-                        categoria: $("#categoria").val(),
-                        _token: "{{ csrf_token() }}",
-                        id:"{{isset($producto) ? $producto->id : ''}}",
-                        accion: "{{$accion}}"
-                    },
-                    dataType: 'json',
-                    beforeSend: function () {
+            $.ajax({
+                url: "{{ asset('productosGuardar')}}",
+                method: 'POST',
+                data: {
+                    nombre_producto: $("#nombre_producto").val(),
+                    descripcion: $("#descripcion").val(),
+                    precio: $("#precio").val(),
+                    costo: $("#costo").val(),
+                    proveedor: $("#proveedor").val(),
+                    categoria: $("#categoria").val(),
+                    _token: "{{ csrf_token() }}",
+                    id:"{{isset($producto) ? $producto->id : ''}}",
+                    accion: "{{$accion}}"
+                },
+                dataType: 'json',
+                beforeSend: function () {
 
-                    },
-                    success: function (response) {
-                        console.log("response", response);
-                        if (response.status == 'ok') {
-                            toastr["success"](response.mensaje);
-                            $("#productoForm").trigger("reset");
-                        } else {
-                            toastr["error"](response.mensaje);
-                        }
-                    },
-                    error: function () {
-                        toastr["error"]("Error al realizar el registro");
-                    },
-                    complete: function () {
-
+                },
+                success: function (response) {
+                    console.log("response", response);
+                    if (response.status == 'ok') {
+                        toastr["success"](response.mensaje);
+                        $("#productoForm").trigger("reset");
+                    } else {
+                        toastr["error"](response.mensaje);
                     }
+                },
+                error: function () {
+                    toastr["error"]("Error al realizar el registro");
+                },
+                complete: function () {
 
-                })
-            }
+                }
+
+            })
+
         });
     </script>
 @endsection
