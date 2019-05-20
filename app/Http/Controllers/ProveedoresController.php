@@ -49,7 +49,7 @@ class ProveedoresController extends Controller {
             $proveedor->fax = $request->fax;
             $proveedor->correo = $request->correo;
             if($proveedor->save()){
-                return response()->json(['mensaje' => 'Proveedor agregado', 'status' => 'ok'], 200);
+                return response()->json(['mensaje' => 'El proveedor ha sido agregado', 'status' => 'ok'], 200);
             }else{
                 return response()->json(['mensaje' => 'Error al agregar al Proveedor', 'status' => 'error'], 400);
             }
