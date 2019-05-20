@@ -62,4 +62,28 @@ class ProductoController extends Controller {
             return response()->json(['mensaje' => 'Error al agregar el producto'], 403);
         }
     }
+    public function editar($producto_id)
+    {
+        if ($producto_id) {
+            try {
+                if($producto = Producto::find($producto_id)){
+                    $title = "Editar Producto";
+                    $proveedores = Proveedor::all();
+                    $categorias = Categoria::all();
+                    return view('productosForm')
+                        ->with('title', $title)
+                        ->with('proveedores', $proveedores)
+                        ->with('categorias', $categorias)
+                        ->with('producto', $producto);
+                }else{
+                    return response()->json(['mensaje' => 'El producto no se pudo eliminar', 'status' => 'error'], 400);
+                }
+            } catch (Exception $e) {
+                return response()->json(['mensaje' => 'Error al eliminar el producto'], 400);
+            }
+        }else{
+            return response()->json(['mensaje' => 'Error al eliminar el producto, producto no encontrado '], 400);
+        }
+
+    }
 }

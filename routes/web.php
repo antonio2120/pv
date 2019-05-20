@@ -21,6 +21,7 @@ Route::get('/productos', 'ProductoController@index');
 Route::get('/productosEliminar/{producto_id}', 'ProductoController@eliminar');
 Route::get('/productosNuevo/', 'ProductoController@nuevo');
 Route::post('/productosGuardar/', 'ProductoController@guardar');
+Route::get('/productosEditar/{producto_id}', 'ProductoController@editar');
 
 Route::get('/proveedoresNuevo/', 'ProveedoresController@nuevo');
 Route::get('/proveedoresEliminar/{proveedor_id}', 'ProveedoresController@eliminar');

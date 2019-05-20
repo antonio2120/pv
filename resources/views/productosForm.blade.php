@@ -4,19 +4,40 @@
     <form id="productoForm" method="POST">
         <div class="form-group">
             <label for="nombre_producto">Nombre</label>
-            <input type="text" class="form-control" id="nombre_producto" name="nombre_producto" placeholder="Producto">
+            <input type="text"
+                   class="form-control"
+                   id="nombre_producto"
+                   name="nombre_producto"
+                   placeholder="Producto"
+                   value="{{$producto->nombre}}"
+            >
         </div>
         <div class="form-group">
             <label for="descripcion">Descripción</label>
-            <textarea class="form-control" id="descripcion" name="descripcion" rows="3"></textarea>
+            <textarea class="form-control"
+                      id="descripcion"
+                      name="descripcion"
+                      rows="3">{{$producto->descripcion}}</textarea>
         </div>
         <div class="form-group">
             <label for="precio">Precio</label>
-            <input type="text" class="form-control" id="precio" name="precio" placeholder="$">
+            <input type="text"
+                   class="form-control"
+                   id="precio"
+                   name="precio"
+                   placeholder="$"
+                   value="{{$producto->precio}}"
+            >
         </div>
         <div class="form-group">
             <label for="costo">Costo</label>
-            <input type="text" class="form-control" id="costo" name="costo" placeholder="$">
+            <input type="text"
+                   class="form-control"
+                   id="costo"
+                   name="costo"
+                   placeholder="$"
+                   value="{{$producto->costo}}"
+            >
         </div>
         <div class="form-group">
             <label for="proveedor">Proveedor</label>
@@ -111,6 +132,7 @@
                         proveedor: $("#proveedor").val(),
                         categoria: $("#categoria").val(),
                         _token: "{{ csrf_token() }}",
+                        id:"{{$producto->id}}"
                     },
                     dataType: 'json',
                     beforeSend: function () {
