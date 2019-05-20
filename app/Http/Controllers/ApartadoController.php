@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 use App\Apartado;
+use App\Cliente;
+use App\Empleado;
+use Illuminate\Http\Request;
 
 class ApartadoController extends Controller {
     public function index()
@@ -16,7 +19,7 @@ class ApartadoController extends Controller {
     {
         if ($apartado_id) {
             try {
-                if(Apppartado::destroy($apartado_id)){
+                if(Apartado::destroy($apartado_id)){
                     return response()->json(['mensaje' => 'apartado eliminado', 'status' => 'ok'], 200);
                 }else{
                     return response()->json(['mensaje' => 'El apartado no se pudo eliminar', 'status' => 'error'], 400);
@@ -29,25 +32,36 @@ class ApartadoController extends Controller {
         }
 
     }
+
     public function nuevo()
     {
-        $title = "Nuevo apartado";
+        $title = "Nuevo Apartado";
+        $clientes = Cliente::all();
+        $empleados = Empleado::all();
         return view('apartadosNuevo')
-            ->with('title', $title);
+            ->with('title', $title)
+            ->with('clientes', $clientes)
+            ->with('empleados', $empleados);
 
     }
-    public function editar($request)
+
+    public function guardar(Request $request)
     {
-
-        $apartado=Apartado::where('id', '=', "$request->id")->first();
-
-
-        if(count($apartado)>=1){
-
-            $apartado->nombre = $request->nombre;
-            $apartado->save();
+        try {
+            $apartado = new Apartado();
+            $apartado->clientes_id = $request->cliente;
+            $apartado->fecha_inicio = $request->fecha_inicio;
+            $apartado->fecha_fin = $request->fecha_fin;
+            $apartado->anticipo = $request->anticipo;
+            $apartado->total = $request->total;
+            $apartado->empleados_id = $request->empleado;
+            if($apartado->save()){
+                return response()->json(['mensaje' => 'Apartado agregado', 'status' => 'ok'], 200);
+            }else{
+                return response()->json(['mensaje' => 'Error al agregar el apartado', 'status' => 'error'], 400);
+            }
+        } catch (Exception $e) {
+            return response()->json(['mensaje' => 'Error al agregar el apartado'], 403);
         }
-
-
     }
 }

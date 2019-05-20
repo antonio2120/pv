@@ -43,7 +43,7 @@
       </label>
     </div>
   </div>
-  <button type="submit" class="btn btn-primary">Agregar proveedor</button>
+  <button type="submit" class="btn btn-primary">Agregar</button>
 </form>
 <script>
         $("#FormularioForm").validate({
@@ -52,9 +52,6 @@
                     required: true
                 },
                 direccion:{
-                    required: true
-                },
-                precio: {
                     required: true
                 },
                 ciudad:{
@@ -127,7 +124,8 @@
                         correo: $("#correo").val(),
                         telefono: $("#telefono").val(),
                         fax: $("#fax").val(),
-      terminos: $("#terminos").val(),
+                        terminos: $("#terminos").val(),
+                        _token: "{{ csrf_token() }}",
                     },
                     dataType: 'json',
                     beforeSend: function () {
@@ -135,7 +133,7 @@
                     },
                     success: function (response) {
                         console.log("response", response);
-                        if (response.resgistrado == 'ok') {
+                        if (response.status == 'ok') {
                             toastr["success"](response.mensaje);
                             $("#FormularioForm").trigger("reset");
                         } else {
