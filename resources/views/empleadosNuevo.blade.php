@@ -1,7 +1,7 @@
 @extends('layout_principal')
 @section('content')
     <h1>{{$title}}</h1>
-    <form id="empleadoForm" action="regis_val.php" method="POST">
+    <form id="empleadoForm" >
   <div class="row">
     <div class="col">
       <label for="inputNombre">Nombre</label>
@@ -78,10 +78,10 @@
                     url: 'empleadosGuardar',
                     method: 'POST',
                     data: {
-                        nombre: $("#nombre").val(),
-                        apellido: $("#apellido").val(),
-                        usuario: $("#usuario").val(),
-                        password: $("#password").val(),
+                        nombre: $("#forNombre").val(),
+                        apellido: $("#forApellido").val(),
+                        usuario: $("#forUsuario").val(),
+                        password: $("#forPassword").val(),
                         _token: "{{ csrf_token() }}",
                     },
                     dataType: 'json',

@@ -6,17 +6,17 @@
   <div class="row">
     <div class="col">
       <label for="exampleInputEmail1">Nombre</label>
-      <input type="text" class="form-control" placeholder="Nombre(s) del proveedor" id="forNombre" name="nombre">
+      <input type="text" class="form-control" placeholder="Nombre(s) del proveedor" id="nombre" name="nombre">
     </div>
   </div>
   <div class="row">
   	<div class="col">
       <label for="inputAddress">Dirección</label>
-    <input type="text" class="form-control" id="forDireccion" placeholder="Dirección" name="direccion">
+    <input type="text" class="form-control" id="direccion" placeholder="Dirección" name="direccion">
     </div>
     <div class="col">
       <label for="inputCity">Ciudad</label>
-      <input type="text" class="form-control" placeholder="Ciudad" id="forCiudad" name="ciudad">
+      <input type="text" class="form-control" placeholder="Ciudad" id="ciudad" name="ciudad">
     </div>
     
   </div>
@@ -24,20 +24,20 @@
 
     <div class="form-group col-md-4">
       <label for="inputEmail">Correo Electrónico</label>
-      <input type="email" class="form-control" id="forCorreo" placeholder="Correo" name="correo">
+      <input type="email" class="form-control" id="correo" placeholder="Correo" name="correo">
     </div>
     <div class="form-group col-md-4">
       <label for="inputPhone">Teléfono</label>
-      <input type="text" class="form-control" id="forTelefono" placeholder="Teléfono" name="telefono">
+      <input type="text" class="form-control" id="telefono" placeholder="Teléfono" name="telefono">
     </div>
     <div class="form-group col-md-4">
       <label for="inputZip">Fax</label>
-      <input type="text" class="form-control" placeholder="Fax" id="forFax" name="fax">
+      <input type="text" class="form-control" placeholder="Fax" id="fax" name="fax">
     </div>
   </div>
   <div class="form-group">
     <div class="form-check" >
-      <input class="form-check-input" type="checkbox" id="forTerminos" name="terminos">
+      <input class="form-check-input" type="checkbox" id="terminos" name="terminos">
       <label class="form-check-label" for="gridCheck">
         Acepto los términos y condiciones
       </label>
@@ -113,6 +113,7 @@
             console.log('validate', $("#FormularioForm").validate());
             event.preventDefault();
 
+
             if( $("#FormularioForm").validate()) {
                 $.ajax({
                     url: 'proveedoresGuardar',
@@ -141,7 +142,7 @@
                         }
                     },
                     error: function () {
-                        toastr["error"]("Error al guardar proveedor");
+                        toastr["error"]("Error al realizar el registro");
                     },
                     complete: function () {
 
