@@ -21,6 +21,7 @@ Route::get('/productos', 'ProductoController@index');
 Route::get('/productosEliminar/{producto_id}', 'ProductoController@eliminar');
 Route::get('/productosNuevo/', 'ProductoController@nuevo');
 Route::post('/productosGuardar/', 'ProductoController@guardar');
+Route::get('/productosEditar/{producto_id}', 'ProductoController@editar');
 
 Route::get('/proveedoresNuevo/', 'ProveedoresController@nuevo');
 Route::get('/proveedoresEliminar/{proveedor_id}', 'ProveedoresController@eliminar');
@@ -51,6 +52,7 @@ Route::get('/apartados', 'ApartadoController@index');
 Route::get('/apartadosEliminar/{apartado_id}', 'ApartadoController@eliminar');
 Route::get('/apartadosNuevo/', 'ApartadoController@nuevo');
 Route::post('/apartadosGuardar/', 'ApartadoController@guardar');
+Route::get('/apartadosEditar/{apartado_id}', 'ApartadoController@editar');
 
 Route::get('/aparece', 'ApareceController@index');
 Route::get('/apareceEliminar/{aparece_id}','ApareceController@eliminar');
