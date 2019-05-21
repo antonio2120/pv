@@ -146,7 +146,7 @@
                         cliente: $("#cliente").val(),
                         empleado: $("#empleado").val(),
                         _token: "{{ csrf_token() }}",
-                        id:"{{isset($producto) ? $producto->id : ''}}",
+                        id:"{{isset($apartado) ? $apartado->id : ''}}",
                         accion: "{{$accion}}"
                     },
                     dataType: 'json',

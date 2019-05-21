@@ -61,18 +61,18 @@ class ApartadoController extends Controller {
                 $apartado->total = $request->total;
                 $apartado->empleados_id = $request->empleado;
                 if ($apartado->save()) {
-                    return response()->json(['mensaje' => 'Apartado agregado', 'status' => 'ok'], 200);
+                    return response()->json(['mensaje' => 'apartado agregado', 'status' => 'ok'], 200);
                 } else {
                     return response()->json(['mensaje' => 'Error al agregar el apartado', 'status' => 'error'], 400);
                 }
             }else if($request->accion == 'editar'){
                 if($apartado = Apartado::find($request->id)){
-                    $apartado->clientes_id = $request->cliente;
-                    $apartado->fecha_inicio = $request->fecha_inicio;
-                    $apartado->fecha_fin = $request->fecha_fin;
-                    $apartado->anticipo = $request->anticipo;
-                    $apartado->total = $request->total;
-                    $apartado->empleados_id = $request->empleado;
+                $apartado->clientes_id = $request->cliente;
+                $apartado->fecha_inicio = $request->fecha_inicio;
+                $apartado->fecha_fin = $request->fecha_fin;
+                $apartado->anticipo = $request->anticipo;
+                $apartado->total = $request->total;
+                $apartado->empleados_id = $request->empleado;
                     if ($apartado->save()) {
                         return response()->json(['mensaje' => 'Cambios guardados correctamente', 'status' => 'ok'], 200);
                     } else {
