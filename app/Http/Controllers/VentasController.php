@@ -56,4 +56,27 @@ class VentasController extends Controller{
             return response()->json(['mensaje' => 'Error al agregar la Venta'], 403);
         }
     }
+
+
+    public function editar($venta_id)
+    {
+        if ($venta_id) {
+            try {
+                if(Ventas::find($venta_id)){
+                    $title = "Edita Venta";
+                    $empleados = Empleado::All();
+                    return view('ventasNuevo')
+                        ->with('title', $title)
+                        ->with('empleados', $empleados);
+                    return response()->json(['mensaje' => 'Venta eliminada', 'status' => 'ok'], 200);
+                }else{
+                    return response()->json(['mensaje' => 'La Venta no se pudo eliminar', 'status' => 'error'], 400);
+                }
+            } catch (Exception $e) {
+                return response()->json(['mensaje' => 'Error al eliminar la Venta'], 400);
+            }
+        }else{
+            return response()->json(['mensaje' => 'Error al eliminar la Venta, esta fué encontrada '], 400);
+        }
+    }
 }

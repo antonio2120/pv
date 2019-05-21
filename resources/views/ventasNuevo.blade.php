@@ -5,7 +5,7 @@
   <div class="row">
     <div class="col">
       <label for="exampleInputEmail1">Nombre de Empleado en turno</label>
-      <select class="form-control" id="id_empleado" name="id_empleado">
+      <select class="form-control" id="id_empleado" name="id_empleado" value="{{$venta->id_empleado}}">
         @foreach($empleados as $empleado)
           <option value="{{$empleado->id}}">{{$empleado->nombre}}</option>
         @endforeach
@@ -15,11 +15,11 @@
   <div class="row">
   	<div class="col">
       <label for="inputFecha">Fecha de la venta (AA-MM-DD)</label>
-    <input type="text" class="form-control" id="Fecha" placeholder="Fecha" name="fecha">
+    <input type="text" class="form-control" id="Fecha" placeholder="Fecha" name="fecha" value="{{$venta->fecha}}">
     </div>
     <div class="col">
       <label for="inputHora">Hora de la venta</label>
-      <input type="text" class="form-control" placeholder="Hora" id="Hora" name="hora">
+      <input type="text" class="form-control" placeholder="Hora" id="Hora" name="hora" value="{{$venta->hora}}">
     </div>
 
   </div>
@@ -27,7 +27,7 @@
 
     <div class="form-group col-md-4">
       <label for="inputTotal">Total de la venta</label>
-      <input type="Total" class="form-control" id="Total" placeholder="Total" name="Total">
+      <input type="Total" class="form-control" id="Total" placeholder="Total" name="Total" value="{{$venta->total}}">
     </div>
   </div>
   <div class="form-group">
