@@ -44,7 +44,7 @@
 
         function eliminarCliente(cliente_id){
             $.ajax({
-                url: 'clientesEliminar/'+cliente_id,
+                url: "{{asset('clientesEliminar')}}/"+cliente_id,
                 method: 'GET',
                 data:{
                 },
