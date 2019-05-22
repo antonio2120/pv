@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Sucursal;
+use Illuminate\Http\Request;
 
 class SucursalController extends Controller{
     public function index(){
@@ -28,11 +29,71 @@ class SucursalController extends Controller{
         } 
 
     }
+  
     public function nuevo()
     {
-        $title = "Nueva sucursal";
-        return view('SucursalNuevo')
-            ->with('title', $title);
+        $title = "Nueva Sucursal";
+        $sucursal = null;
+        $accion = "nuevo";
+        return view('SucursalForm')
+            ->with('title', $title)
+            ->with('sucursal', $sucursal)
+            ->with('accion', $accion);
+
+    }
+    public function guardar(Request $request)
+    {
+        try {
+            if($request->accion == 'nuevo') {
+                $sucursal = new Sucursal();
+                $sucursal->nombre = $request->forNombre;
+                $sucursal->direccion = $request->forDireccion;
+                $sucursal->telefono = $request->forTelefono;
+            
+                if ($sucursal->save()) {
+                    return response()->json(['mensaje' => 'Sucursal agregada', 'status' => 'ok'], 200);
+                } else {
+                    return response()->json(['mensaje' => 'Error al agregar Sucursal', 'status' => 'error'], 400);
+                }
+            }else if($request->accion == 'editar'){
+                if($su = Producto::find($request->id)){
+                    $sucursal->nombre = $request->forNombre;
+                    $sucursal->direccion = $request->forDireccion;
+                    $sucursal->telefono = $request->forTelefono;
+                    if ($sucursal->save()) {
+                        return response()->json(['mensaje' => 'Cambios guardados correctamente', 'status' => 'ok'], 200);
+                    } else {
+                        return response()->json(['mensaje' => 'Error al intentar guardar los cambios', 'status' => 'error'], 400);
+                    }
+                }else{
+                    return response()->json(['mensaje' => 'Sucursal no encontrada', 'status' => 'error'], 400);
+                }
+            }
+        } catch (Exception $e) {
+            return response()->json(['mensaje' => 'Error al agregar'], 403);
+        }
+    }
+    public function editar($producto_id)
+    {
+        if ($sucursal_id) {
+            $accion = "editar";
+            try {
+                if($sucursal = Sucursal::find($sucursal_id)){
+                    $title = "Editar Sucursal";
+        
+                    return view('SucursalForm')
+                        ->with('title', $title)
+                        ->with('sucursal', $sucursal)
+                        ->with('accion', $accion);
+                }else{
+                    return response()->json(['mensaje' => 'Sucursal no encontrada', 'status' => 'error'], 400);
+                }
+            } catch (Exception $e) {
+                return response()->json(['mensaje' => 'Error al eliminar la Sucursal'], 400);
+            }
+        }else{
+            return response()->json(['mensaje' => 'Error al eliminar Sucursal, Sucursal no encontrada'], 400);
+        }
 
     }
 }

@@ -1,36 +1,103 @@
 @extends('layout_principal')
 @section('content')
     <h1>{{$title}}</h1>
-    <form id="FormularioForm" action="regis_val.php" method="POST">
-  <div class="row">
-    <div class="col">
-      <label for="exampleInputEmail1">Nombre</label>
-      <input type="text" class="form-control" placeholder="Nombre(s) del proveedor" id="forNombre" name="nombre">
-    </div>
-  </div>
-  <div class="row">
-  	<div class="col">
-      <label for="inputAddress">Dirección</label>
-    <input type="text" class="form-control" id="forDireccion" placeholder="Dirección" name="direccion">
+    <form id="SucursalForm" method="POST">
+        <div class="form-group">
+            <label for="nombre_producto">Nombre</label>
+            <input type="text" class="form-control" id="forNombre" name="forNombre" placeholder="Sucursal">
+        </div>
+        <div class="form-group">
+            <label for="descripcion">Direccion</label>
+            <textarea class="form-control" id="forDireccion" name="forDireccion" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="precio">Telefono</label>
+            <input type="text" class="form-control" id="forTelefono" name="forTelefono" placeholder="$">
+        </div>
+       
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar nueva sucursal</button>
+    </form>
+    <script>
 
-    
-  </div>
-  <div class="form-row">
 
-    <div class="form-group col-md-4">
-      <label for="inputEmail">Correo Electrónico</label>
-      <input type="email" class="form-control" id="forCorreo" placeholder="Correo" name="correo">
-    </div>
- 
-  <div class="form-group">
-    <div class="form-check" >
-      <input class="form-check-input" type="checkbox" id="forTerminos" name="terminos">
-      <label class="form-check-label" for="gridCheck">
-        Acepto los términos y condiciones
-      </label>
-    </div>
-  </div>
-  <button type="submit" class="btn btn-primary">nueva sucursal</button>
-</form>
+        $("#SucursalForm").validate({
+            rules: {
+                forNombre: {
+                    required: true
+                },
+                forDireccion: {
+                    required: true
+                },
+                fortelefono: {
+                    required: true
+                },
+               },
+            messages: {
+                forNombre: {
+                    required: "Ingresar Nombre de la sucursal"
+                },
+                forDireccion: {
+                    required: "Ingresar Direccion de la sucursal"
+                },
+                fortelefono: {
+                    required: "Ingresar Telefono de la sucursal"
+                },
+                
+            },
+            highlight: function(element) {
 
+            },
+            unhighlight: function(element) {
+
+            },
+            errorPlacement: function(error, element) {
+
+            },
+            submitHandler: function(form) {
+                return true;
+            }
+
+        });
+
+        $("#SucursalForm").submit(function (event ) {
+            console.log('submit');
+            console.log('validate', $("#SucursalForm").validate());
+            event.preventDefault();
+
+
+            if( $("#SucursalForm").validate()) {
+                $.ajax({
+                    url: 'SucursalGuardar',
+                    method: 'POST',
+                    data: {
+                        forNombre: $("#forNombre").val(),
+                        forDireccion: $("#forDireccion").val(),
+                        fortelefono: $("#forTelefono").val(),
+                        _token: "{{ csrf_token() }}",
+                    },
+                    dataType: 'json',
+                    beforeSend: function () {
+
+                    },
+                    success: function (response) {
+                        console.log("response", response);
+                        if (response.status == 'ok') {
+                            toastr["success"](response.mensaje);
+                            $("#SucursalForm").trigger("reset");
+                        } else {
+                            toastr["error"](response.mensaje);
+                        }
+                    },
+                    error: function () {
+                        toastr["error"]("Error al realizar el registro");
+                    },
+                    complete: function () {
+
+                    }
+
+                })
+            }
+        });
+    </script>
 @endsection

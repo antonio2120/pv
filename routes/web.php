@@ -63,3 +63,5 @@ Route::get('/compras', 'ComprasController@index');
 Route::get('/sucursal', 'SucursalController@index');
 Route::get('/sucursalEliminar/{sucursal_id}', 'SucursalController@eliminar');
 Route::get('/sucursalNuevo/', 'SucursalController@nuevo');
+Route::post('/sucursalGuardar/', 'SucursalController@guardar');
+Route::get('/sucursalEditar/{sucursal_id}', 'SucursalController@editar');

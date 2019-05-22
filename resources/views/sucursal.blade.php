@@ -14,7 +14,7 @@
         </thead>
         <tbody>
         @foreach($sucursal as $sucursal)
-            <tr>
+            <tr id="renglon_{{$sucursal->id}}">
                 <th scope="row">{{$sucursal->id}}</th>
                 <td>{{$sucursal->nombre}}</td>
                 <td>{{$sucursal->direccion}}</td>
