@@ -35,7 +35,12 @@
 
     <div class="form-group">
       <label for="inputPassword">Contraseña</label>
-      <input type="password" class="form-control" id="forPassword" placeholder="Password" name="password">
+      <input type="password" 
+      class="form-control" 
+      id="forPassword" 
+      placeholder="Password" 
+      name="password"
+      value="{{isset($empleado) ? $empleado->password : ''}}">
     </div>
   </div>
   <button type="submit" class="btn btn-primary">{{$accion == 'nuevo' ? 'Alta de empleado' : 'Guardar cambios' }}</button>
