@@ -43,6 +43,7 @@ Route::get('/empleados', 'EmpleadosController@index');
 Route::get('/empleadosEliminar/{empleado_id}', 'EmpleadosController@eliminar');
 Route::get('/empleadosNuevo/', 'EmpleadosController@nuevo');
 Route::post('/empleadosGuardar/', 'EmpleadosController@guardar');
+Route::get('/empleadosEditar/{empleado_id}', 'EmpleadosController@editar');
 
 Route::get('/categorias', 'CategoriaController@index');
 Route::get('/categoriasEliminar/{categoria_id}', 'CategoriaController@eliminar');
