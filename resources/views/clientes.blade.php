@@ -17,7 +17,7 @@
         </thead>
         <tbody>
         @foreach($clientes as $cliente)
-            <tr>
+            <tr id="renglon_{{$cliente->id}}">
                 <th scope="row">{{$cliente->id}}</th>
                 <td>{{$cliente->nombres}}</td>
                 <td>{{$cliente->apaterno}}</td>
