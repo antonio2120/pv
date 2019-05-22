@@ -48,6 +48,7 @@ Route::get('/categorias', 'CategoriaController@index');
 Route::get('/categoriasEliminar/{categoria_id}', 'CategoriaController@eliminar');
 Route::get('/categoriasNuevo/', 'CategoriaController@nuevo');
 Route::post('/categoriaGuardar/','CategoriaController@nuevo');
+Route::get('/categoriasEditar/{categoria_id}','CategoriaController@editar');
 
 Route::get('/apartados', 'ApartadoController@index');
 Route::get('/apartadosEliminar/{apartado_id}', 'ApartadoController@eliminar');
