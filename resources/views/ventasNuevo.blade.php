@@ -7,7 +7,6 @@
       <label for="exampleInputEmail1">Nombre de Empleado en turno</label>
 
       <select class="form-control" id="id_empleado" name="empleado_id">
-        <option value="">-------------</option>
         @foreach($empleados as $empleado)
           @if(isset($empleado))
             @if($empleado->empleado_id == $empleado->id )
@@ -28,7 +27,7 @@
     <input type="text" class="form-control" id="Fecha" placeholder="Fecha" name="fecha" value="{{isset($venta) ? $venta->fecha : ''}}">
     </div>
     <div class="col">
-      <label for="inputHora">Hora de la venta</label>
+      <label for="inputHora">Hora de la venta (HH:MM)</label>
       <input type="text" class="form-control" placeholder="Hora" id="Hora" name="hora" value="{{isset($venta) ? $venta->hora : ''}}">
     </div>
 
