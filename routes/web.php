@@ -21,16 +21,17 @@ Route::get('/productos', 'ProductoController@index');
 Route::get('/productosEliminar/{producto_id}', 'ProductoController@eliminar');
 Route::get('/productosNuevo/', 'ProductoController@nuevo');
 Route::post('/productosGuardar/', 'ProductoController@guardar');
-Route::get('/productosEditar/{producto_id}', 'ProductoController@editar');
 
 Route::get('/proveedoresNuevo/', 'ProveedoresController@nuevo');
 Route::get('/proveedoresEliminar/{proveedor_id}', 'ProveedoresController@eliminar');
 Route::get('/proveedores', 'ProveedoresController@index');
 Route::post('/proveedoresGuardar/', 'ProveedoresController@guardar');
+Route::get('/proveedoresEditar/{proveedor_id}', 'ProveedoresController@editar');
 
 Route::get('/clientes', 'ClientesController@index');
 Route::get('/clientesEliminar/{cliente_id}', 'ClientesController@eliminar');
 Route::get('/clientesNuevo/', 'ClientesController@nuevo');
+Route::post('/clientesGuardar/', 'ClientesController@guardar');
 
 Route::get('/ventas', 'VentasController@index');
 Route::get('/ventasEliminar/{venta_id}', 'VentasController@eliminar');
