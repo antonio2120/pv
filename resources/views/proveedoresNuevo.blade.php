@@ -43,7 +43,7 @@
       </label>
     </div>
   </div>
-  <button type="submit" class="btn btn-primary">Agregar</button>
+  <button type="submit" class="btn btn-primary">{{$accion == 'nuevo' ? 'Alta de proveedores' : 'Guardar cambios' }}</button>
 </form>
 <script>
         $("#FormularioForm").validate({
@@ -108,15 +108,16 @@
 
         });
 
-        $("#FormularioForm").submit(function (event ) {
+       $("#FormularioForm").submit(function (event ) {
             console.log('submit');
             console.log('validate', $("#FormularioForm").validate());
             event.preventDefault();
 
+            var $form = $(this);
+            if(! $form.valid()) return false;
 
-            if( $("#FormularioForm").validate()) {
                 $.ajax({
-                    url: 'proveedoresGuardar',
+                    url: "{{ asset('proveedoresGuardar')}}",
                     method: 'POST',
                     data: {
                         nombre: $("#nombre").val(),
@@ -127,6 +128,8 @@
                         fax: $("#fax").val(),
                         terminos: $("#terminos").val(),
                         _token: "{{ csrf_token() }}",
+                        id:"{{isset($proveedor) ? $proveedor->id : ''}}",
+                        accion: "{{$accion}}"
                     },
                     dataType: 'json',
                     beforeSend: function () {
@@ -149,7 +152,6 @@
                     }
 
                 })
-            }
         });
     </script>
 
