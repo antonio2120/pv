@@ -114,7 +114,7 @@
                         console.log("response", response);
                         if (response.status == 'ok') {
                             toastr["success"](response.mensaje);
-                            $("#empleadoForm").trigger("reset");
+                            $("#proveedorForm").trigger("reset");
                         } else {
                             toastr["error"](response.mensaje);
                         }
