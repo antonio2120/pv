@@ -1,16 +1,14 @@
 @extends('layout_principal')
 @section('content')
     <h1>{{$title}}</h1>
-       <form id="apareceForm" action="regis_val.php" method="POST">
+       <form id="apareceForm">
   <div class="row">
     <div class="col">
-            <label for="proveedor">Apartado</label>
-            <select class="form-control" id="apartado" name="apartado" >
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
+            <label for="inputApartadp">Apartado</label>
+            <select class="form-control" id="forApartado" name="apartado" >
+                @foreach($apartados as $apartado)
+                    <option value="{{$apartado->id}}">{{$apartado->id}}</option>
+                @endforeach
             </select>
     </div>
     <div class="col">
@@ -21,18 +19,10 @@
   <div class="form-row">
     <div class="form-group col-md-4">
       <label for="inputPhone">CantidadxPro</label>
-      <input type="text" class="form-control" id="forcantidadxPro" placeholder="CantidadxPro" name="cantidadxPro">
+      <input type="text" class="form-control" id="forCantidadxPro" placeholder="CantidadxPro" name="cantidadxPro">
     </div>
   </div>
-    
-  <div class="form-group">
-    <div class="form-check" >
-      <input class="form-check-input" type="checkbox" id="forTerminos" name="terminos">
-      <label class="form-check-label" for="gridCheck">
-        Acepto los términos y condiciones
-      </label>
-    </div>
-  </div>
+ 
   <button type="submit" class="btn btn-primary">Agregar</button>
 </form>
 
@@ -47,9 +37,6 @@
                 },
                 cantidadxPro: {
                     required: true
-                },
-                terminos:{
-                    required: true,
                 }
             },
             messages: {
@@ -62,9 +49,7 @@
                 cantidadxPro: {
                     required: "Ingresar Cantidad"
                 },
-                terminos: {
-                    required: "Campo obligatorio"
-                },
+                
             },
             highlight: function(element) {
 
@@ -91,10 +76,10 @@
                     url: 'apareceGuardar',
                     method: 'POST',
                     data: {
-                        apartado: $("#apartado").val(),
-                        codigo: $("#codigo").val(),
-                        cantidadxPro: $("#cantidadxPro").val(),
-                        terminos: $("#terminos").val(),
+                        apartado: $("#forApartado").val(),
+                        codigo: $("#forCodigo").val(),
+                        cantidadxPro: $("#forCantidadxPro").val(),
+                        _token: "{{ csrf_token() }}",
                     },
                     dataType: 'json',
                     beforeSend: function () {
@@ -102,7 +87,7 @@
                     },
                     success: function (response) {
                         console.log("response", response);
-                        if (response.resgistrado == 'ok') {
+                        if (response.status == 'ok') {
                             toastr["success"](response.mensaje);
                             $("#apareceForm").trigger("reset");
                         } else {
