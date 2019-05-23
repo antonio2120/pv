@@ -57,7 +57,6 @@ class EmpleadosController extends Controller {
             }
         }else if($request->accion == 'editar'){
             if($empleado = Empleado::find($request->id)){
-                $empleado = new Empleado();
                 $empleado->nombre = $request->nombre;
                 $empleado->apellido = $request->apellido;
                 $empleado->nombreUsuario = $request->usuario;
