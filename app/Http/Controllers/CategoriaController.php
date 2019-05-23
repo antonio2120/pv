@@ -1,56 +1,99 @@
-<?php
+@extends('layout_principal')
+@section('content')
+    <h1>{{$title}}</h1>
+       <form id="CategoriaForm" action="regis_val.php"  method="POST">
+  <div class="row">
+    <div class="col">
+      <label for="inputNombre">Nombre</label>
+    <input type="text" class="form-control" id="nombre" placeholder="Nombre de categoria" name="nombre" value="{{isset($categoria) ? $categoria->nombre: '' }}">
+    </div>
+    <div class="col">
+      
+    </div>
 
-namespace App\Http\Controllers;
-use App\Categoria;
+    
+  </div>
+  <div class="form-group">
+     <button type="submit" class="btn btn-primary">{{$accion =='nuevo' ? 'Alta de Categoria' : 'Guardar Cambios'}}</button> 
+      
+    </div>
+  </div
+  
+</form>
 
-class CategoriaController extends Controller {
-    public function index()
-    {
-        $categorias = Categoria::all();
-        $title = "Lista de Categorias";
-        return view('categorias')
-            ->with('categorias', $categorias)
-            ->with('title', $title);
-    }
-    public function eliminar($categoria_id)
-    {
-       if($categoria_id){
-         try{
-            if(Categoria::destroy($categoria_id)){
-               return response()->json(['mensaje' => 'Categoria Elimindada', 'status' => 'ok'], 200);
-            }else{
-                return response()->json(['mensaje'=>'La categoria no existe','status' =>'error'],400);
-              }
-         } catch (Exception $e){
-             return response()->json(['mensaje'=>'Error al eliminar la categoria'],400);
-      }
+<script>
+    $(document).ready(function{
+        $("#CategoriaForm").validate({
+            rules: {
+                
+                nombre:{
+                    required: true
+                },
+                
+            },
+            messages: {
+                
+                nombre: {
+                    required: "Ingresar Nombre d ela categoria"
+                },
+                
+            },
+            highlight: function(element) {
 
-    }else {
-        return response()->json(['mensaje'=>'Error al eliminar la categoria, categoria no encontrada'],400);
-        }
-    }
-   
-    public function nuevo()
-    {
-        $title = "Nuevo categoria";
-        return view('categoriasNuevo')
-            ->with('title', $title);
+            },
+            unhighlight: function(element) {
 
-    }
+            },
+            errorPlacement: function(error, element) {
 
-    public function editar($request)
-    {
+            },
+            submitHandler: function(form) {
+                return true;
+            }
 
-        $categoria=Categoria::where('id', '=', "$request->id")->first();
+        });
+    });
+        
 
+        $("#CategoriaForm").submit(function (event ) {
+            console.log('submit');
+            console.log('validate', $("#CategoriaForm").validate());
+            event.preventDefault();
 
-        if(count($categoria)>=1){
+            var $form = $(this);
+            if(! $form.valid()) return false ;
+            
+                $.ajax({
+                    url: "{{asset('categoriasGuardar')}}",
+                    method: 'POST',
+                    data: {
+                        
+                        nombre: $("#nombre").val(),
+                        _token: "{{ csrf_token() }}",
+                        id:"{{isset($categoria) ? $categoria->id: ''}}",accion: "{{$accion}}"
+                    },
+                    dataType: 'json',
+                    beforeSend: function () {
 
-            $categoria->nombre = $request->nombre;
-            $categoria->save();
-        }
+                    },
+                    success: function (response) {
+                        console.log("response", response);
+                        if (response.status == 'ok') {
+                            toastr["success"](response.mensaje);
+                            $("#CategoriaForm").trigger("reset");
+                        } else {
+                            toastr["error"](response.mensaje);
+                        }
+                    },
+                    error: function () {
+                        toastr["error"]("Error al guardar categoria");
+                    },
+                    complete: function () {
 
+                    }
 
-    }
-}
-
+                })
+            
+        });
+</script>
+@endsection
