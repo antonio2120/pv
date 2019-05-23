@@ -1,51 +1,42 @@
 @extends('layout_principal')
 @section('content')
     <h1>{{$title}}</h1>
-       <form id="CategoriaForm" action="regis_val.php" method="POST">
+       <form id="CategoriaForm" action="regis_val.php"  method="POST">
   <div class="row">
     <div class="col">
-      <label for="inputID">#ID</label>
-      <input type="text" class="form-control" placeholder="numero de IDcat" id="forID" name="ID">
+      <label for="inputNombre">Nombre</label>
+    <input type="text" class="form-control" id="nombre" placeholder="Nombre de categoria" name="nombre" value="{{isset($categoria) ? $categoria->nombre: '' }}">
     </div>
     <div class="col">
-      <label for="inputNombre">Nombre</label>
-    <input type="text" class="form-control" id="fornombre" placeholder="Nombre de categoria" name="nombre">
+      
     </div>
+
+    
   </div>
   <div class="form-group">
-    <div class="form-check" >
-      <input class="form-check-input" type="checkbox" id="forterminos" name="terminos">
-      <label class="form-check-label" for="gridCheck">
-        Acepto los términos y condiciones
-      </label>
+     <button type="submit" class="btn btn-primary">{{$accion =='nuevo' ? 'Alta de Categoria' : 'Guardar Cambios'}}</button> 
+      
     </div>
-  </div>
-  <button type="submit" class="btn btn-primary">Agregar Categoria</button>
+  </div
+  
 </form>
 
 <script>
+    $(document).ready(function{
         $("#CategoriaForm").validate({
             rules: {
-                ID:{
-                    required: true
-                },
+                
                 nombre:{
                     required: true
                 },
-                terminos:{
-                    required: true
-                }
+                
             },
             messages: {
-                ID: {
-                    required: "Ingresar id de la categoria"
-                },
+                
                 nombre: {
                     required: "Ingresar Nombre d ela categoria"
                 },
-                terminos: {
-                    required: "Campo obligatorio"
-                },
+                
             },
             highlight: function(element) {
 
@@ -61,20 +52,25 @@
             }
 
         });
+    });
+        
 
         $("#CategoriaForm").submit(function (event ) {
             console.log('submit');
-            console.log('validate', $("CategoriaForm").validate());
+            console.log('validate', $("#CategoriaForm").validate());
             event.preventDefault();
 
-            if( $("#CategoriaForm").validate()) {
+            var $form = $(this);
+            if(! $form.valid()) return false ;
+            
                 $.ajax({
-                    url: 'categoriaGuardar',
+                    url: "{{asset('categoriasGuardar')}}",
                     method: 'POST',
                     data: {
-                        nombre: $("#ID").val(),
+                        
                         nombre: $("#nombre").val(),
-                        terminos: $("#terminos").val(),
+                        _token: "{{ csrf_token() }}",
+                        id:"{{isset($categoria) ? $categoria->id: ''}}",accion: "{{$accion}}"
                     },
                     dataType: 'json',
                     beforeSend: function () {
@@ -82,7 +78,7 @@
                     },
                     success: function (response) {
                         console.log("response", response);
-                        if (response.resgistrado == 'ok') {
+                        if (response.status == 'ok') {
                             toastr["success"](response.mensaje);
                             $("#CategoriaForm").trigger("reset");
                         } else {
@@ -97,7 +93,7 @@
                     }
 
                 })
-            }
+            
         });
 </script>
 @endsection

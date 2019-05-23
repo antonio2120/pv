@@ -1,99 +1,103 @@
-@extends('layout_principal')
-@section('content')
-    <h1>{{$title}}</h1>
-       <form id="CategoriaForm" action="regis_val.php"  method="POST">
-  <div class="row">
-    <div class="col">
-      <label for="inputNombre">Nombre</label>
-    <input type="text" class="form-control" id="nombre" placeholder="Nombre de categoria" name="nombre" value="{{isset($categoria) ? $categoria->nombre: '' }}">
-    </div>
-    <div class="col">
-      
-    </div>
+<?php
 
-    
-  </div>
-  <div class="form-group">
-     <button type="submit" class="btn btn-primary">{{$accion =='nuevo' ? 'Alta de Categoria' : 'Guardar Cambios'}}</button> 
-      
-    </div>
-  </div
-  
-</form>
+namespace App\Http\Controllers;
+use App\Categoria;
+use Illuminate\Http\Request;
 
-<script>
-    $(document).ready(function{
-        $("#CategoriaForm").validate({
-            rules: {
-                
-                nombre:{
-                    required: true
-                },
-                
-            },
-            messages: {
-                
-                nombre: {
-                    required: "Ingresar Nombre d ela categoria"
-                },
-                
-            },
-            highlight: function(element) {
+class CategoriaController extends Controller {
+    public function index()
+    {
+        $categorias = Categoria::all();
+        $title = "Lista de Categorias";
+        return view('categorias')
+            ->with('categorias', $categorias)
+            ->with('title', $title);
+    }
+    public function eliminar($categoria_id)
+    {
+       if($categoria_id){
+         try{
+            if(Categoria::destroy($categoria_id)){
+               return response()->json(['mensaje' => 'Categoria Elimindada', 'status' => 'ok'], 200);
+            }else{
+                return response()->json(['mensaje'=>'La categoria no existe','status' =>'error'],400);
+              }
+         } catch (Exception $e){
+             return response()->json(['mensaje'=>'Error al eliminar la categoria'],400);
+      }
 
-            },
-            unhighlight: function(element) {
+    }else {
+        return response()->json(['mensaje'=>'Error al eliminar la categoria, categoria no encontrada'],400);
+        }
+    }
+   
+    public function nuevo()
+    {
+        $title = "Nuevo categoria";
+        $categoria = null;
+        $accion = "nuevo";
+        return view('categoriasNuevo')
+            ->with('title', $title)
+            ->with('categoria', $categoria)
+            ->with('accion', $accion);
 
-            },
-            errorPlacement: function(error, element) {
+    }
 
-            },
-            submitHandler: function(form) {
-                return true;
-            }
+    public function guardar(Request $request)
+    {
+        try{
+           
+            if($request->accion == 'nuevo'){
+                 $categoria = new Categoria();
+                 $categoria->nombre = $request->nombre;
 
-        });
-    });
-        
-
-        $("#CategoriaForm").submit(function (event ) {
-            console.log('submit');
-            console.log('validate', $("#CategoriaForm").validate());
-            event.preventDefault();
-
-            var $form = $(this);
-            if(! $form.valid()) return false ;
-            
-                $.ajax({
-                    url: "{{asset('categoriasGuardar')}}",
-                    method: 'POST',
-                    data: {
-                        
-                        nombre: $("#nombre").val(),
-                        _token: "{{ csrf_token() }}",
-                        id:"{{isset($categoria) ? $categoria->id: ''}}",accion: "{{$accion}}"
-                    },
-                    dataType: 'json',
-                    beforeSend: function () {
-
-                    },
-                    success: function (response) {
-                        console.log("response", response);
-                        if (response.status == 'ok') {
-                            toastr["success"](response.mensaje);
-                            $("#CategoriaForm").trigger("reset");
-                        } else {
-                            toastr["error"](response.mensaje);
-                        }
-                    },
-                    error: function () {
-                        toastr["error"]("Error al guardar categoria");
-                    },
-                    complete: function () {
-
+                     if($categoria->save()){
+                        return response()->json(['mensaje' =>'Categoria agregada','status'=>'ok'],200);
+                     }else{
+                        return reponse()->json(['mensaje' =>'Error al agregar categoria','status' =>'error'],400);
+                          }
+            }else  if($request->accion == 'editar'){
+                   if($categoria=  Categoria::find($request->id)){
+                    $categoria->nombre = $request->nombre;
+                    if($categoria->save()){
+                        return response()->json(['mensaje'=>'Cambios Guardados','status' => 'ok'],200);
+                      }else{
+                        return response()->json(['mensaje' =>'Error al guardar cambios','status' =>'error'],400);
+                      }
+                    }else{
+                        return response()->json(['mensaje' =>'Categoria no encontrada','status' =>'error'],400);
                     }
+               }
+            }catch(Exception $e){
+            return response()->json(['mensaje' =>'Error al agregar la categoria'],403);
+               }
+               
+        
+    }
 
-                })
-            
-        });
-</script>
-@endsection
+       
+    public function editar($categoria_id)
+       {
+         if ($categoria_id) {
+            $accion = "editar";
+            try {
+                if($categoria = Categoria::find($categoria_id)){
+                    $title = "Editar Categoria";
+                    return view('categoriasNuevo')
+                        ->with('title', $title)
+                        ->with('categoria', $categoria)
+                        ->with('accion', $accion);
+                }else{
+                    return response()->json(['mensaje' => 'No se encontro la categoria', 'status' => 'error'], 400);
+                }
+            } catch (Exception $e) {
+                return response()->json(['mensaje' => 'Error Categoria no Eliminada'], 400);
+            }
+           }else{
+            return response()->json(['mensaje' => 'Error al eliminar al Categoria, Categoria no encontrado '], 400);
+                  }
+
+        }
+
+     
+    }
