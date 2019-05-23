@@ -5,82 +5,43 @@
         <div class="form-group">
             <label for="cliente">Nombre del cliente</label>
             <select class="form-control" id="cliente" name="cliente" >
-                <option value="">-------------</option>
                 @foreach($clientes as $cliente)
-                    @if(isset($apartado))
-                        @if($apartado->cliente_id == $cliente->id )
-                            <option selected value="{{$cliente->id}}" >{{$cliente->nombres}}</option>
-                        @else
-                            <option value="{{$cliente->id}}">{{$cliente->nombres}}</option>
-                        @endif
-                    @else
-                        <option value="{{$cliente->id}}">{{$cliente->nombres}}</option>
-                    @endif
+                    <option value="{{$cliente->id}}">{{$cliente->nombres}}</option>
                 @endforeach
             </select>
         </div>
         <div class="form-group">
             <label for="fecha_inicio">Fecha inicial</label>
-            <input  type="text"
-                    class="form-control"
-                    id="fecha_inicio"
-                    name="fecha_inicio"
-                    placeholder="##/##/####"
-                    value="{{isset($apartado) ? $apartado->fecha_inicio : ''}}"
-            >
+            <input type="text" class="form-control" id="fecha_inicio" name="fecha_inicio" placeholder="##/##/####">
         </div>
         <div class="form-group">
             <label for="fecha_fin">Fecha final</label>
-            <input  type="text"
-                    class="form-control"
-                    id="fecha_fin"
-                    name="fecha_fin"
-                    placeholder="##/##/####"
-                    value="{{isset($apartado) ? $apartado->fecha_fin : ''}}"
-            >
+            <input type="text" class="form-control" id="fecha_fin" name="fecha_fin" placeholder="##/##/####">
         </div>
         <div class="form-group">
             <label for="anticipo">Anticipo</label>
-            <input  type="text"
-                    class="form-control"
-                    id="anticipo"
-                    name="anticipo"
-                    placeholder="$"
-                    value="{{isset($apartado) ? $apartado->anticipo : ''}}"
-            >
+            <input type="text" class="form-control" id="anticipo" name="anticipo" placeholder="$">
         </div>
         <div class="form-group">
-            <label for="total">Total</label>
-            <input  type="text"
-                    class="form-control"
-                    id="total"
-                    name="total"
-                    placeholder="$"
-                    value="{{isset($apartado) ? $apartado->total : ''}}"
-            >
+            <label for="Total">Total</label>
+            <input type="text" class="form-control" id="Total" name="Total" placeholder="$">
         </div>
         <div class="form-group">
-            <label for="empleado">Empleado</label>
+            <label for="empleado">empleado</label>
             <select class="form-control" id="empleado" name="empleado" >
-                <option value="">-------------</option>
                 @foreach($empleados as $empleado)
-                    @if(isset($apartado))
-                        @if($apartado->empleado_id == $empleado->id )
-                            <option selected value="{{$empleado->id}}" >{{$empleado->nombre}}</option>
-                        @else
-                            <option value="{{$empleado->id}}">{{$empleado->nombre}}</option>
-                        @endif
-                    @else
-                        <option value="{{$empleado->id}}">{{$empleado->nombre}}</option>
-                    @endif
+                    <option value="{{$empleado->id}}">{{$empleado->nombre}}</option>
                 @endforeach
             </select>
         </div>
-        <button type="submit" class="btn btn-primary">{{$accion == 'nuevo' ? 'Alta de apartado' : 'Guardar cambios' }}</button>
+        <button type="submit" class="btn btn-primary">Guardar nuevo apartado</button>
     </form>
     <script>
         $("#apartadoForm").validate({
             rules: {
+                cliente: {
+                    required: true
+                },
                 fecha_inicio: {
                     required: true
                 },
@@ -90,25 +51,37 @@
                 anticipo: {
                     required: true
                 },
-                total: {
+                Total: {
                     required: true
                 },
                 cliente: {
                     required: true
                 },
+                empleado: {
+                    required: true
+                },
             },
             messages: {
+                cliente: {
+                    required: "Ingresar Nombre del producto"
+                },
                 fecha_inicio: {
-                    required: "Ingresar fecha inicial"
+                    required: "Ingresar Descripción del producto"
                 },
                 fecha_fin: {
-                    required: "Ingresar fecha final"
+                    required: "Ingresar fecha_fin del producto"
                 },
                 anticipo: {
                     required: "Ingresar anticipo del producto"
                 },
-                total: {
+                Total: {
                     required: "Ingresar total del producto"
+                },
+                cliente: {
+                    required: "Seleccionar cliente del producto"
+                },
+                empleado: {
+                    required: "Seleccionar empleado del producto"
                 },
             },
             highlight: function(element) {
@@ -131,23 +104,20 @@
             console.log('validate', $("#apartadoForm").validate());
             event.preventDefault();
 
-            var $form = $(this);
-            if(! $form.valid()) return false;
 
+            if( $("#apartadoForm").validate()) {
                 $.ajax({
-                    url: "{{ asset('apartadosGuardar')}}",
+                    url: 'apartadosGuardar',
                     method: 'POST',
                     data: {
                         cliente: $("#cliente").val(),
                         fecha_inicio: $("#fecha_inicio").val(),
                         fecha_fin: $("#fecha_fin").val(),
                         anticipo: $("#anticipo").val(),
-                        total: $("#total").val(),
+                        total: $("#anticipo").val(),
                         cliente: $("#cliente").val(),
                         empleado: $("#empleado").val(),
                         _token: "{{ csrf_token() }}",
-                        id:"{{isset($apartado) ? $apartado->id : ''}}",
-                        accion: "{{$accion}}"
                     },
                     dataType: 'json',
                     beforeSend: function () {
@@ -170,6 +140,7 @@
                     }
 
                 })
+            }
         });
     </script>
 @endsection

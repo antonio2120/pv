@@ -39,8 +39,7 @@
                    <td>
                        {{$proveedor->correo}}
                    </td>
-                   <td>
-                    <a href="proveedoresEditar/{{$proveedor->id}}"><button type="button" class="btn btn-primary"><i class="fas fa-edit"></i></button></a></td>
+                   <td><button type="button" class="btn btn-primary"><i class="fas fa-edit"></i></button></td>
                    <td><button onclick="eliminarProveedor({{$proveedor->id}})" type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button></td>
     </tr>
   </tbody>

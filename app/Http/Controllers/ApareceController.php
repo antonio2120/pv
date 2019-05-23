@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 use App\Aparece;
-use App\Apartado;
-use Illuminate\Http\Request;
 
 class ApareceController extends Controller {
     public function index()
@@ -35,29 +33,25 @@ class ApareceController extends Controller {
 
     public function nuevo()
     {
-        $title = "Nuevo Aparece";
-        $apartados = Apartado::all();
+        $title = "Nuevo aparece";
         return view('apareceNuevo')
-            ->with('title', $title)
-            ->with('apartados', $apartados);
+            ->with('title', $title);
+
     }
 
-     public function guardar(Request $request)
+
+    public function editar($request)
     {
-        try {
-            $aparece = new Aparece();
-            $aparece->apartado_id = $request->apartado;
-            $aparece->codigo_barras = $request->codigo_barras;
-            $aparece->cantidadxPro = $request->cantidadxPro;
-            if($aparece->save()){
-                return response()->json(['mensaje' => 'Aparece agregado', 'status' => 'ok'], 200);
-            }else{
-                return response()->json(['mensaje' => 'Error al agregar el aparece', 'status' => 'error'], 400);
-            }
-        } catch (Exception $e) {
-            return response()->json(['mensaje' => 'Error al agregar el aparece'], 403);
-        }
-    }
-    
-}
 
+        $caparece=Aparece::where('id', '=', "$request->id")->first();
+
+
+        if(count($aparece)>=1){
+
+            $aparece->apartado_id = $request->nombre;
+            $aparece->save();
+        }
+
+
+    }
+}

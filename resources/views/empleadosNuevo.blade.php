@@ -1,53 +1,29 @@
 @extends('layout_principal')
 @section('content')
     <h1>{{$title}}</h1>
-    <form id="empleadoForm" >
+    <form id="empleadoForm" action="regis_val.php" method="POST">
   <div class="row">
     <div class="col">
       <label for="inputNombre">Nombre</label>
-      <input type="text" 
-      class="form-control" 
-      placeholder="Nombre del empleado" 
-      id="forNombre" 
-      name="nombre"
-      value="{{isset($empleado) ? $empleado->nombre : ''}}">
+      <input type="text" class="form-control" placeholder="Nombre del empleado" id="forNombre" name="nombre">
     </div>
-
     <div class="col">
       <label for="inputApellido">Apellido</label>
-    <input type="text" 
-    class="form-control" 
-    id="forApellido" 
-    placeholder="Apellido" 
-    name="apellido"
-    value="{{isset($empleado) ? $empleado->apellido : ''}}">
+    <input type="text" class="form-control" id="forApellido" placeholder="Apellido" name="apellido">
     </div>
-
     <div class="col">
       <label for="inputUsuario">Nombre de usuario</label>
-      <input type="text" 
-      class="form-control" 
-      placeholder="Usuario" 
-      id="forUsuario" 
-      name="usuario"
-      value="{{isset($empleado) ? $empleado->nombreUsuario : ''}}">
+      <input type="text" class="form-control" placeholder="Usuario" id="forUsuario" name="usuario">
     </div>
-
     <div class="form-group">
       <label for="inputPassword">Contraseña</label>
-      <input type="password" 
-      class="form-control" 
-      id="forPassword" 
-      placeholder="Password" 
-      name="password"
-      value="{{isset($empleado) ? $empleado->password : ''}}">
+      <input type="password" class="form-control" id="forPassword" placeholder="Password" name="password">
     </div>
   </div>
-  <button type="submit" class="btn btn-primary">{{$accion == 'nuevo' ? 'Alta de empleado' : 'Guardar cambios' }}</button>
+  <button type="submit" class="btn btn-primary">Guardar nuevo empleado</button>
 </form>
 
 <script>
-    $(document).ready(function () {
         $("#empleadoForm").validate({
             rules: {
                 nombre:{
@@ -77,28 +53,36 @@
                     required: "Ingresar Contraseña"
                 },
             },
+            highlight: function(element) {
+
+            },
+            unhighlight: function(element) {
+
+            },
+            errorPlacement: function(error, element) {
+
+            },
+            submitHandler: function(form) {
+                return true;
+            }
+
         });
-    });
 
         $("#empleadoForm").submit(function (event ) {
             console.log('submit');
             console.log('validate', $("#empleadoForm").validate());
             event.preventDefault();
 
-            var $form = $(this);
-            if(! $form.valid()) return false;
-
+            if( $("#empleadoForm").validate()) {
                 $.ajax({
-                    url: "{{ asset('empleadosGuardar')}}",
+                    url: 'empleadosGuardar',
                     method: 'POST',
                     data: {
-                        nombre: $("#forNombre").val(),
-                        apellido: $("#forApellido").val(),
-                        usuario: $("#forUsuario").val(),
-                        password: $("#forPassword").val(),
+                        nombre: $("#nombre").val(),
+                        apellido: $("#apellido").val(),
+                        usuario: $("#usuario").val(),
+                        password: $("#password").val(),
                         _token: "{{ csrf_token() }}",
-                        id:"{{isset($empleado) ? $empleado->id : ''}}",
-                        accion: "{{$accion}}"
                     },
                     dataType: 'json',
                     beforeSend: function () {
@@ -114,13 +98,14 @@
                         }
                     },
                     error: function () {
-                        toastr["error"]("Error al realizar el registro");
+                        toastr["error"]("Error al guardar empleado");
                     },
                     complete: function () {
 
                     }
 
                 })
+            }
         });
     </script>
 @endsection
