@@ -24,7 +24,10 @@
                 <td>{{$venta->empleado_id}}</td>
                 <td>
                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar">
-                        <button type="button" class="btn btn-primary"><i class="fas fa-edit"></i></button>
+                            <a href="ventasEditar/{{$venta->id}}">
+                                <button type="button" class="btn btn-primary"><i class="fas fa-edit"></i></button>
+                            </a>
+
                     </span>
                 </td>
                 <td>

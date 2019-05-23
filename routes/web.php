@@ -37,27 +37,31 @@ Route::post('/clientesGuardar/', 'ClientesController@guardar');
 Route::get('/ventas', 'VentasController@index');
 Route::get('/ventasEliminar/{venta_id}', 'VentasController@eliminar');
 Route::get('/ventasNuevo/', 'VentasController@nuevo');
-Route::post('/ventasGuardar/', 'VentasController@nuevo');
+Route::post('/ventasGuardar/', 'VentasController@guardar');
+Route::get('/ventasEditar/{venta_id}', 'VentasController@editar');
 
 Route::get('/empleados', 'EmpleadosController@index');
 Route::get('/empleadosEliminar/{empleado_id}', 'EmpleadosController@eliminar');
 Route::get('/empleadosNuevo/', 'EmpleadosController@nuevo');
 Route::post('/empleadosGuardar/', 'EmpleadosController@guardar');
+Route::get('/empleadosEditar/{empleado_id}', 'EmpleadosController@editar');
 
 Route::get('/categorias', 'CategoriaController@index');
 Route::get('/categoriasEliminar/{categoria_id}', 'CategoriaController@eliminar');
 Route::get('/categoriasNuevo/', 'CategoriaController@nuevo');
-Route::post('/categoriaGuardar/','CategoriaController@nuevo');
+Route::post('/categoriasGuardar/','CategoriaController@guardar');
+Route::get('/categoriasEditar/{categoria_id}','CategoriaController@editar');
 
 Route::get('/apartados', 'ApartadoController@index');
 Route::get('/apartadosEliminar/{apartado_id}', 'ApartadoController@eliminar');
 Route::get('/apartadosNuevo/', 'ApartadoController@nuevo');
 Route::post('/apartadosGuardar/', 'ApartadoController@guardar');
+Route::get('/apartadosEditar/{apartado_id}', 'ApartadoController@editar');
 
 Route::get('/aparece', 'ApareceController@index');
 Route::get('/apareceEliminar/{aparece_id}','ApareceController@eliminar');
 Route::get('/apareceNuevo/','ApareceController@nuevo');
-Route::post('/apareceGuardar/','ApareceController@nuevo');
+Route::post('/apareceGuardar/','ApareceController@guardar');
 
 Route::get('/compras', 'ComprasController@index');
 

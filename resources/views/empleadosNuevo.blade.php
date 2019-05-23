@@ -5,25 +5,49 @@
   <div class="row">
     <div class="col">
       <label for="inputNombre">Nombre</label>
-      <input type="text" class="form-control" placeholder="Nombre del empleado" id="forNombre" name="nombre">
+      <input type="text" 
+      class="form-control" 
+      placeholder="Nombre del empleado" 
+      id="forNombre" 
+      name="nombre"
+      value="{{isset($empleado) ? $empleado->nombre : ''}}">
     </div>
+
     <div class="col">
       <label for="inputApellido">Apellido</label>
-    <input type="text" class="form-control" id="forApellido" placeholder="Apellido" name="apellido">
+    <input type="text" 
+    class="form-control" 
+    id="forApellido" 
+    placeholder="Apellido" 
+    name="apellido"
+    value="{{isset($empleado) ? $empleado->apellido : ''}}">
     </div>
+
     <div class="col">
       <label for="inputUsuario">Nombre de usuario</label>
-      <input type="text" class="form-control" placeholder="Usuario" id="forUsuario" name="usuario">
+      <input type="text" 
+      class="form-control" 
+      placeholder="Usuario" 
+      id="forUsuario" 
+      name="usuario"
+      value="{{isset($empleado) ? $empleado->nombreUsuario : ''}}">
     </div>
+
     <div class="form-group">
       <label for="inputPassword">Contraseña</label>
-      <input type="password" class="form-control" id="forPassword" placeholder="Password" name="password">
+      <input type="password" 
+      class="form-control" 
+      id="forPassword" 
+      placeholder="Password" 
+      name="password"
+      value="{{isset($empleado) ? $empleado->password : ''}}">
     </div>
   </div>
-  <button type="submit" class="btn btn-primary">Guardar nuevo empleado</button>
+  <button type="submit" class="btn btn-primary">{{$accion == 'nuevo' ? 'Alta de empleado' : 'Guardar cambios' }}</button>
 </form>
 
 <script>
+    $(document).ready(function () {
         $("#empleadoForm").validate({
             rules: {
                 nombre:{
@@ -53,29 +77,19 @@
                     required: "Ingresar Contraseña"
                 },
             },
-            highlight: function(element) {
-
-            },
-            unhighlight: function(element) {
-
-            },
-            errorPlacement: function(error, element) {
-
-            },
-            submitHandler: function(form) {
-                return true;
-            }
-
         });
+    });
 
         $("#empleadoForm").submit(function (event ) {
             console.log('submit');
             console.log('validate', $("#empleadoForm").validate());
             event.preventDefault();
 
-            if( $("#empleadoForm").validate()) {
+            var $form = $(this);
+            if(! $form.valid()) return false;
+
                 $.ajax({
-                    url: 'empleadosGuardar',
+                    url: "{{ asset('empleadosGuardar')}}",
                     method: 'POST',
                     data: {
                         nombre: $("#forNombre").val(),
@@ -83,6 +97,8 @@
                         usuario: $("#forUsuario").val(),
                         password: $("#forPassword").val(),
                         _token: "{{ csrf_token() }}",
+                        id:"{{isset($empleado) ? $empleado->id : ''}}",
+                        accion: "{{$accion}}"
                     },
                     dataType: 'json',
                     beforeSend: function () {
@@ -98,14 +114,13 @@
                         }
                     },
                     error: function () {
-                        toastr["error"]("Error al guardar empleado");
+                        toastr["error"]("Error al realizar el registro");
                     },
                     complete: function () {
 
                     }
 
                 })
-            }
         });
     </script>
 @endsection

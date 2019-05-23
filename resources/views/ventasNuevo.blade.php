@@ -5,9 +5,18 @@
   <div class="row">
     <div class="col">
       <label for="exampleInputEmail1">Nombre de Empleado en turno</label>
-      <select class="form-control" id="id_empleado" name="id_empleado">
+
+      <select class="form-control" id="id_empleado" name="empleado_id">
         @foreach($empleados as $empleado)
-          <option value="{{$empleado->id}}">{{$empleado->nombre}}</option>
+          @if(isset($empleado))
+            @if($empleado->empleado_id == $empleado->id )
+              <option selected value="{{$empleado->id}}" >{{$empleado->nombre}}</option>
+            @else
+              <option value="{{$empleado->id}}">{{$empleado->nombre}}</option>
+            @endif
+          @else
+            <option value="{{$empleado->id}}">{{$empleado->nombre}}</option>
+          @endif
         @endforeach
       </select>
     </div>
@@ -15,11 +24,11 @@
   <div class="row">
   	<div class="col">
       <label for="inputFecha">Fecha de la venta (AA-MM-DD)</label>
-    <input type="text" class="form-control" id="Fecha" placeholder="Fecha" name="fecha">
+    <input type="text" class="form-control" id="Fecha" placeholder="Fecha" name="fecha" value="{{isset($venta) ? $venta->fecha : ''}}">
     </div>
     <div class="col">
-      <label for="inputHora">Hora de la venta</label>
-      <input type="text" class="form-control" placeholder="Hora" id="Hora" name="hora">
+      <label for="inputHora">Hora de la venta (HH:MM)</label>
+      <input type="text" class="form-control" placeholder="Hora" id="Hora" name="hora" value="{{isset($venta) ? $venta->hora : ''}}">
     </div>
 
   </div>
@@ -27,7 +36,7 @@
 
     <div class="form-group col-md-4">
       <label for="inputTotal">Total de la venta</label>
-      <input type="Total" class="form-control" id="Total" placeholder="Total" name="Total">
+      <input type="Total" class="form-control" id="Total" placeholder="Total" name="Total" value="{{isset($venta) ? $venta->total : ''}}">
     </div>
   </div>
   <div class="form-group">
@@ -38,35 +47,40 @@
       </label>
     </div>
   </div>
-  <button type="submit" class="btn btn-primary">Agregar Venta</button>
+  <button type="submit" class="btn btn-primary">{{$accion == 'nuevo' ? 'Alta de venta' : 'Guardar cambios de Venta' }}</button>
 </form>
 
     <script>
-
-       $("#FormularioVenta").validate({
-         errorClass:'errorForm',
-           rules:{
-             id_empleado:{required: true},
-             fecha:{required: true},
-             hora:{required: true},
-             Total:{required: true}
+      $(document).ready(function () {
+        $("#FormularioVenta").validate({
+          errorClass: 'errorForm',
+          rules: {
+            id_empleado: {required: true},
+            fecha: {required: true},
+            hora: {required: true},
+            Total: {required: true}
           },
-           messages:{
-             id_empleado:{required: "El ID de Empleado es OBLIGATORIO"},
-             fecha:{required: "Introduce la FECHA de venta"},
-             hora:{required: "Introduce la HORA de venta",},
-             Total:{required: "El total es OBLIGATORIO",}
+          messages: {
+            id_empleado: {required: "El ID de Empleado es OBLIGATORIO"},
+            fecha: {required: "Introduce la FECHA de venta"},
+            hora: {required: "Introduce la HORA de venta",},
+            Total: {required: "El total es OBLIGATORIO",}
 
-           }
+          }
+        });
       });
        $("#FormularioVenta").submit(function (event ) {
          console.log('submit');
          console.log('validate', $("#FormularioVenta").validate());
          event.preventDefault();
 
-         if ($("#FormularioVenta").validate()) {
+         var $form = $(this);
+         if(! $form.valid()) return false;
+
+
+
            $.ajax({
-             url: 'ventasGuardar',
+             url: "{{ asset('ventasGuardar')}}",
              method: 'POST',
              data: {
                fecha: $("#Fecha").val(),
@@ -74,6 +88,8 @@
                total: $("#Total").val(),
                empleado_id: $("#id_empleado").val(),
                _token: "{{ csrf_token() }}",
+               id:"{{isset($venta) ? $venta->id : ''}}",
+               accion: "{{$accion}}"
              },
              dataType: 'json',
              beforeSend: function () {
@@ -83,20 +99,20 @@
                console.log("response", response);
                if (response.status == 'ok') {
                  toastr["success"](response.mensaje);
-                 $("#productoForm").trigger("reset");
+                 $("#FormularioVenta").trigger("reset");
                } else {
                  toastr["error"](response.mensaje);
                }
              },
              error: function () {
-               toastr["error"]("Error al realizar el registro");
+               toastr["error"]("Error al realizar el registro XD");
              },
              complete: function () {
 
              }
 
            })
-         }
+
        });
 
     </script>
