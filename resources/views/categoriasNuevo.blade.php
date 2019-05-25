@@ -1,23 +1,19 @@
 @extends('layout_principal')
 @section('content')
     <h1>{{$title}}</h1>
-       <form id="CategoriaForm" action="regis_val.php"  method="POST">
+       <form id="CategoriaForm"  method="POST">
   <div class="row">
     <div class="col">
       <label for="inputNombre">Nombre</label>
     <input type="text" class="form-control" id="nombre" placeholder="Nombre de categoria" name="nombre" value="{{isset($categoria) ? $categoria->nombre: '' }}">
     </div>
     <div class="col">
+       <button type="submit" class="btn btn-primary">{{$accion =='nuevo' ? 'Alta de Categoria' : 'Guardar Cambios'}}</button> 
       
     </div>
 
     
   </div>
-  <div class="form-group">
-     <button type="submit" class="btn btn-primary">{{$accion =='nuevo' ? 'Alta de Categoria' : 'Guardar Cambios'}}</button> 
-      
-    </div>
-  </div
   
 </form>
 
@@ -34,7 +30,7 @@
             messages: {
                 
                 nombre: {
-                    required: "Ingresar Nombre d ela categoria"
+                    required: "Ingresar Nombre de la categoria"
                 },
                 
             },
