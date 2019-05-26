@@ -17,7 +17,7 @@ class CategoriaController extends Controller {
     {
        if($categoria_id){
          try{
-            if(Categoria::destroy($categoria_id)){
+            if(categoria::destroy($categoria_id)){
                return response()->json(['mensaje' => 'Categoria Elimindada', 'status' => 'ok'], 200);
             }else{
                 return response()->json(['mensaje'=>'La categoria no existe','status' =>'error'],400);
