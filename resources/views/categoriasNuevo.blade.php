@@ -1,7 +1,7 @@
 @extends('layout_principal')
 @section('content')
     <h1>{{$title}}</h1>
-       <form id="CategoriaForm"  method="POST">
+       <form id="CategoriaForm"  >
   <div class="row">
     <div class="col">
       <label for="inputNombre">Nombre</label>
@@ -18,7 +18,7 @@
 </form>
 
 <script>
-    $(document).ready(function{
+    $(document).ready(function (){
         $("#CategoriaForm").validate({
             rules: {
                 
