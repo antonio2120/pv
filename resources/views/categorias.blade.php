@@ -28,10 +28,11 @@
                     </span>
                 </td>
             </tr>
-        @endforeach
+        
 
 
         </tbody>
+        @endforeach
     </table>
 
   
@@ -40,7 +41,7 @@
 
         function eliminarCategoria(categoria_id){
             $.ajax({
-                url: "{{asset('categoriasEliminar')}}"+categoria_id,
+                url: 'categoriasEliminar/'+categoria_id,
                 method: 'GET',
                 data:{
                 },

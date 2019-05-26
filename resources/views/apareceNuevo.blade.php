@@ -1,12 +1,12 @@
 @extends('layout_principal')
 @section('content')
     <h1>{{$title}}</h1>
-       <form id="apareceForm" >
+       <form id="apareceForm">
   <div class="row">
     <div class="col">
-            <label for="proveedor">Apartado</label>
-            <select class="form-control" id="apartado" name="apartado" >
-                 @foreach($apartado as $apartado)
+            <label for="inputApartadp">Apartado</label>
+            <select class="form-control" id="forApartado" name="apartado" >
+                @foreach($apartados as $apartado)
                     <option value="{{$apartado->id}}">{{$apartado->id}}</option>
                 @endforeach
             </select>
@@ -19,15 +19,14 @@
   <div class="form-row">
     <div class="form-group col-md-4">
       <label for="inputPhone">CantidadxPro</label>
-      <input type="text" class="form-control" id="forcantidadxPro" placeholder="CantidadxPro" name="cantidadxPro">
+      <input type="text" class="form-control" id="forCantidadxPro" placeholder="CantidadxPro" name="cantidadxPro">
     </div>
   </div>
-    
-   <button type="submit" class="btn btn-primary">Guardar nuevo aparece</button>
+ 
+  <button type="submit" class="btn btn-primary">Agregar</button>
 </form>
 
 <script>
-    $(document).ready(function (){
         $("#apareceForm").validate({
             rules: {
                 apartado:{
@@ -38,9 +37,6 @@
                 },
                 cantidadxPro: {
                     required: true
-                },
-                terminos:{
-                    required: true,
                 }
             },
             messages: {
@@ -53,9 +49,7 @@
                 cantidadxPro: {
                     required: "Ingresar Cantidad"
                 },
-                terminos: {
-                    required: "Campo obligatorio"
-                },
+                
             },
             highlight: function(element) {
 
@@ -70,9 +64,6 @@
                 return true;
             }
 
-            });
-        
-
         });
 
         $("#apareceForm").submit(function (event ) {
@@ -80,19 +71,15 @@
             console.log('validate', $("#apareceForm").validate());
             event.preventDefault();
 
-            var $form = $(this);
-            if(! $form.valid()) return false ;
+            if( $("#apareceForm").validate()) {
                 $.ajax({
-                    url: "{{asset('apareceGuardar')}}",
+                    url: 'apareceGuardar',
                     method: 'POST',
                     data: {
-                        id:"{{isset($aparece) ? $aparece->id: ''}}",
-                        apartado: $("#apartado").val(),
-                        codigo: $("#codigo").val(),
-                        cantidadxPro: $("#cantidadxPro").val(),
-                        terminos: $("#terminos").val(),
+                        apartado: $("#forApartado").val(),
+                        codigo: $("#forCodigo").val(),
+                        cantidadxPro: $("#forCantidadxPro").val(),
                         _token: "{{ csrf_token() }}",
-                        accion: "{{$accion}}"
                     },
                     dataType: 'json',
                     beforeSend: function () {
@@ -115,6 +102,7 @@
                     }
 
                 })
+            }
         });
 </script>
 @endsection

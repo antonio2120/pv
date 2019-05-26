@@ -23,39 +23,83 @@ class ProveedoresController extends Controller {
                     return response()->json(['mensaje' => 'El proveedor no se pudo eliminar', 'status' => 'error'], 400);
                 }
             } catch (Exception $e) {
-                return response()->json(['mensaje' => 'Error al eliminar al proveedor'], 400);
+                return response()->json(['mensaje' => 'Error al eliminar al Proveedor'], 400);
             }
         }else{
-            return response()->json(['mensaje' => 'Error al eliminar el proveedor, proveedor no encontrado '], 400);
+            return response()->json(['mensaje' => 'Error al eliminar al Proveedor, Proveedor no encontrado '], 400);
         }
 
     }
     public function nuevo()
     {
         $title = "Nuevo Proveedor";
+        $proveedor = null;
+        $accion = "nuevo";
         return view('proveedoresNuevo')
-            ->with('title', $title);
-
+            ->with('title', $title)
+            ->with('proveedor', $proveedor)
+            ->with('accion', $accion);
     }
     
     public function guardar(Request $request)
     {
         try {
-            $proveedor = new Proveedor();
+            if($request->accion == 'nuevo') {
+                $proveedor = new Proveedor();
             $proveedor->nombre = $request->nombre;
             $proveedor->direccion = $request->direccion;
             $proveedor->ciudad = $request->ciudad;
             $proveedor->telefono = $request->telefono;
             $proveedor->fax = $request->fax;
             $proveedor->correo = $request->correo;
-            $proveedor->terminos = $request->terminos;
-            if($proveedor->save()){
-                return response()->json(['mensaje' => 'Proveedor agregado', 'status' => 'ok'], 200);
-            }else{
-                return response()->json(['mensaje' => 'Error al agregar al Proveedor', 'status' => 'error'], 400);
+                if ($proveedor->save()) {
+                    return response()->json(['mensaje' => 'Proveedor agregado', 'status' => 'ok'], 200);
+                } else {
+                    return response()->json(['mensaje' => 'Error al agregar al Proveedor', 'status' => 'error'], 400);
+                }
+            }else if($request->accion == 'editar'){
+                if($proveedor = Proveedor::find($request->id)){
+            $proveedor->nombre = $request->nombre;
+            $proveedor->direccion = $request->direccion;
+            $proveedor->ciudad = $request->ciudad;
+            $proveedor->telefono = $request->telefono;
+            $proveedor->fax = $request->fax;
+            $proveedor->correo = $request->correo;
+                    if ($proveedor->save()) {
+                        return response()->json(['mensaje' => 'Cambios guardados correctamente', 'status' => 'ok'], 200);
+                    } else {
+                        return response()->json(['mensaje' => 'Error al intentar guardar los cambios', 'status' => 'error'], 400);
+                    }
+                }else{
+                    return response()->json(['mensaje' => 'Proveedor no encontrado', 'status' => 'error'], 400);
+                }
             }
         } catch (Exception $e) {
-            return response()->json(['mensaje' => 'Error al agregar al Proveedor'], 403);
+            return response()->json(['mensaje' => 'Error al agregar el Proveedor'], 403);
         }
     }
+
+    public function editar($proveedor_id)
+    {
+        if ($proveedor_id) {
+            $accion = "editar";
+            try {
+                if($proveedor = Proveedor::find($proveedor_id)){
+                    $title = "Editar Proveedor";
+                    return view('proveedoresNuevo')
+                        ->with('title', $title)
+                        ->with('proveedor', $proveedor)
+                        ->with('accion', $accion);
+                }else{
+                    return response()->json(['mensaje' => 'Proveedor no encontrado', 'status' => 'error'], 400);
+                }
+            } catch (Exception $e) {
+                return response()->json(['mensaje' => 'Error al eliminar al Proveedor'], 400);
+            }
+        }else{
+            return response()->json(['mensaje' => 'Error al eliminar al Proveedor, Proveedor no encontrado '], 400);
+        }
+
+    }
+
 }

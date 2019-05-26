@@ -15,9 +15,10 @@ class CreateApareceTable extends Migration
     {
         Schema::create('aparece', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('apartado_id');
             $table->string('codigo_barras');
             $table->string('cantidadxPro');
+            $table->unsignedInteger('apartado_id');
+
             $table->timestamps();
         });
     }

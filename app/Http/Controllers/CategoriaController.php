@@ -17,7 +17,7 @@ class CategoriaController extends Controller {
     {
        if($categoria_id){
          try{
-            if(categoria::destroy($categoria_id)){
+            if(Categoria::destroy($categoria_id)){
                return response()->json(['mensaje' => 'Categoria Elimindada', 'status' => 'ok'], 200);
             }else{
                 return response()->json(['mensaje'=>'La categoria no existe','status' =>'error'],400);
@@ -34,12 +34,8 @@ class CategoriaController extends Controller {
     public function nuevo()
     {
         $title = "Nuevo categoria";
-        $categoria = null;
-        $accion = "nuevo";
         return view('categoriasNuevo')
-            ->with('title', $title)
-            ->with('categoria', $categoria)
-            ->with('accion', $accion);
+            ->with('title', $title);
 
     }
 
@@ -48,21 +44,21 @@ class CategoriaController extends Controller {
         try{
            
             if($request->accion == 'nuevo'){
-                 $categoria = new Categoria();
-                 $categoria->nombre = $request->nombre;
+                 $Categoria = new Categoria();
+                 $Categoria->nombre = $request->nombre;
 
-                     if($categoria->save()){
+                     if($Categoria->save()){
                         return response()->json(['mensaje' =>'Categoria agregada','status'=>'ok'],200);
                      }else{
                         return reponse()->json(['mensaje' =>'Error al agregar categoria','status' =>'error'],400);
                           }
             }else  if($request->accion == 'editar'){
-                   if($categoria=  Categoria::find($request->id)){
-                    $categoria->nombre = $request->nombre;
-                    if($categoria->save()){
+                   if($Categoria=  Categoria::find($request->id)){
+                    $Categoria->nombre = $request->nombre;
+                    if($Categoria->save()){
                         return response()->json(['mensaje'=>'Cambios Guardados','status' => 'ok'],200);
                       }else{
-                        return response()->json(['mensaje' =>'Error al guardar cambios','status' =>'error'],400);
+                        return response()->(['mensaje' =>'Error al guardar cambios','status' =>'error'],400);
                       }
                     }else{
                         return response()->json(['mensaje' =>'Categoria no encontrada','status' =>'error'],400);
@@ -78,10 +74,10 @@ class CategoriaController extends Controller {
        
     public function editar($categoria_id)
        {
-         if ($categoria_id) {
+         if ($Categoria_id) {
             $accion = "editar";
             try {
-                if($categoria = Categoria::find($categoria_id)){
+                if($Categoria = Categoria::find($categoria_id)){
                     $title = "Editar Categoria";
                     return view('categoriasNuevo')
                         ->with('title', $title)
@@ -99,5 +95,4 @@ class CategoriaController extends Controller {
 
         }
 
-     
     }
