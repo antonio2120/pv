@@ -23,7 +23,9 @@
                 <td>{{$empleado->password}}</td>
                 <td>
                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar">
+                        <a href="empleadosEditar/{{$empleado->id}}">
                         <button type="button" class="btn btn-primary"><i class="fas fa-edit"></i></button>
+                        </a>
                     </span>
                 </td>
                 <td>
@@ -39,7 +41,7 @@
 
         function eliminarEmpleado(empleado_id){
             $.ajax({
-                url: 'empleadosEliminar/'+empleado_id,
+                url: "{{asset('empleadosEliminar/')}}/"+empleado_id,
                 method: 'GET',
                 data:{
                 },

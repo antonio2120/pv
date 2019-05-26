@@ -9,6 +9,8 @@
             <th scope="col">Descripción</th>
             <th scope="col">Precio</th>
             <th scope="col">Costo</th>
+            <th scope="col">Proveedor</th>
+            <th scope="col">Categoría</th>
             <th scope="col">Editar</th>
             <th scope="col">Eliminar</th>
         </tr>
@@ -21,9 +23,13 @@
                 <td>{{$producto->descripcion}}</td>
                 <td>{{$producto->precio}}</td>
                 <td>{{$producto->costo}}</td>
+                <td>{{$producto->proveedor->nombre}}</td>
+                <td>{{$producto->categoria->nombre}}</td>
                 <td>
                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar">
-                        <button type="button" class="btn btn-primary"><i class="fas fa-edit"></i></button>
+                        <a href="productosEditar/{{$producto->id}}">
+                            <button type="button" class="btn btn-primary"><i class="fas fa-edit"></i></button>
+                        </a>
                     </span>
                 </td>
                 <td>
@@ -39,7 +45,7 @@
 
         function eliminarProducto(producto_id){
             $.ajax({
-                url: 'productosEliminar/'+producto_id,
+                url: "{{asset('productosEliminar/')}}/"+producto_id,
                 method: 'GET',
                 data:{
                 },
