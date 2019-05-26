@@ -12,7 +12,6 @@
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{url('css/style.css')}}">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 
@@ -62,58 +61,58 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="productoMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Productos</a>
                 <div class="dropdown-menu" aria-labelledby="productoMenu">
-                    <a class="dropdown-item" href="{{asset('productos/')}}">Listar</a>
-                    <a class="dropdown-item" href="{{asset('productosNuevo/')}}">Nuevo</a>
+                    <a class="dropdown-item" href="productos/">Listar</a>
+                    <a class="dropdown-item" href="productosNuevo/">Nuevo</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="proveedorMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Proveedores</a>
                 <div class="dropdown-menu" aria-labelledby="proveedorMenu">
-                    <a class="dropdown-item" href="{{asset('proveedores/')}}">Listar</a>
-                    <a class="dropdown-item" href="{{asset('proveedoresNuevo/')}}">Nuevo</a>
+                    <a class="dropdown-item" href="proveedores/">Listar</a>
+                    <a class="dropdown-item" href="proveedoresNuevo/">Nuevo</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="empleadoMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Empleados</a>
                 <div class="dropdown-menu" aria-labelledby="empleadoMenu">
-                    <a class="dropdown-item" href="{{asset('empleados/')}}">Listar</a>
-                    <a class="dropdown-item" href="{{asset('empleadosNuevo/')}}">Nuevo</a>
+                    <a class="dropdown-item" href="empleados/">Listar</a>
+                    <a class="dropdown-item" href="empleadosNuevo/">Nuevo</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="categoriaMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categorias</a>
                 <div class="dropdown-menu" aria-labelledby="categoriaMenu">
-                    <a class="dropdown-item" href="{{asset('categorias/')}}">Listar</a>
-                    <a class="dropdown-item" href="{{asset('categoriasNuevo/')}}">Nuevo</a>
+                    <a class="dropdown-item" href="categorias/">Listar</a>
+                    <a class="dropdown-item" href="categoriasNuevo/">Nuevo</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="apartadoMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Apartados</a>
                 <div class="dropdown-menu" aria-labelledby="apartadoMenu">
-                    <a class="dropdown-item" href="{{asset('apartados/')}}">Listar</a>
-                    <a class="dropdown-item" href="{{asset('apartadosNuevo')}}">Nuevo</a>
+                    <a class="dropdown-item" href="apartados/">Listar</a>
+                    <a class="dropdown-item" href="apartadosNuevo">Nuevo</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="clienteMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Clientes</a>
                 <div class="dropdown-menu" aria-labelledby="apartadoMenu">
-                    <a class="dropdown-item" href="{{asset('clientes/')}}">Listar</a>
-                    <a class="dropdown-item" href="{{asset('clientesNuevo/')}}">Nuevo</a>
+                    <a class="dropdown-item" href="clientes/">Listar</a>
+                    <a class="dropdown-item" href="clientesNuevo/">Nuevo</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="apartadoMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ventas</a>
                 <div class="dropdown-menu" aria-labelledby="ventasMenu">
-                    <a class="dropdown-item" href="{{asset('ventas/')}}">Listar</a>
-                    <a class="dropdown-item" href="{{asset('ventasNuevo')}}">Nuevo</a>
+                    <a class="dropdown-item" href="ventas/">Listar</a>
+                    <a class="dropdown-item" href="ventasNuevo">Nuevo</a>
 
                 </div>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="aparceMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Aparece</a>
                 <div class="dropdown-menu" aria-labelledby="apareceMenu">
-                    <a class="dropdown-item" href="{{asset('aparece/')}}">Listar</a>
-                    <a class="dropdown-item" href="{{asset('apareceNuevo')}}">Nuevo</a>
+                    <a class="dropdown-item" href="aparece/">Listar</a>
+                    <a class="dropdown-item" href="apareceNuevo">Nuevo</a>
 
                 </div>
             </li>
@@ -121,8 +120,8 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="aparceMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sucursal</a>
                 <div class="dropdown-menu" aria-labelledby="apareceMenu">
-                    <a class="dropdown-item" href="{{asset('sucursal/')}}">Listar</a>
-                    <a class="dropdown-item" href="{{asset('sucursalNuevo')}}">Nuevo</a>
+                    <a class="dropdown-item" href="sucursal/">Listar</a>
+                    <a class="dropdown-item" href="sucursalNuevo">Nuevo</a>
 
                 </div>
             </li>

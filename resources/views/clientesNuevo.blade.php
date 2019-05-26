@@ -1,7 +1,7 @@
 @extends('layout_principal')
 @section('content')
     <h1>{{$title}}</h1>
-    <form id="clientesForm" method="POST">
+    <form id="FormularioForm" action="regis_val.php" method="POST">
   <div class="row">
     <div class="col">
       <label for="inputNombre(s)">Nombre</label>
@@ -45,104 +45,4 @@
   <button type="submit" class="btn btn-primary">Agregar cliente</button>
 </form>
 
-<script>
-        $("#productoForm").validate({
-            rules: {
-                inputNombre: {
-                    required: true
-                },
-                inputApaterno: {
-                    required: true
-                },
-                inputAmaterno: {
-                    required: true
-                },
-                inputDireccion: {
-                    required: true
-                },
-                inputTelefono: {
-                    required: true
-                },
-                inputCorreo: {
-                    required: true
-                },
-            },
-            messages: {
-                inputNombre: {
-                    required: "Ingresar Nombre del producto"
-                },
-                inputApaterno: {
-                    required: "Ingresar Descripción del producto"
-                },
-                inputAmaterno: {
-                    required: "Ingresar Precio del producto"
-                },
-                inputDireccion: {
-                    required: "Ingresar Costo del producto"
-                },
-                inputTelefono: {
-                    required: "Seleccionar Proveedor del producto"
-                },
-                inputCorreo: {
-                    required: "Seleccionar Categoria del producto"
-                },
-            },
-            highlight: function(element) {
-
-            },
-            unhighlight: function(element) {
-
-            },
-            errorPlacement: function(error, element) {
-
-            },
-            submitHandler: function(form) {
-                return true;
-            }
-
-        });
-
-        $("#clientesForm").submit(function (event ) {
-            console.log('submit');
-            console.log('validate', $("#clientesForm").validate());
-            event.preventDefault();
-
-
-            if( $("#clientesForm").validate()) {
-                $.ajax({
-                    url: "{{asset('clientesGuardar')}}",
-                    method: 'POST',
-                    data: {
-                        nombres: $("#inputNombre").val(),
-                        apaterno: $("#inputApaterno").val(),
-                        amaterno: $("#inputAmaterno").val(),
-                        direccion: $("#inputDireccion").val(),
-                        telefono: $("#inputTelefono").val(),
-                        correo: $("#inputCorreo").val(),
-                        _token: "{{ csrf_token() }}",
-                    },
-                    dataType: 'json',
-                    beforeSend: function () {
-
-                    },
-                    success: function (response) {
-                        console.log("response", response);
-                        if (response.status == 'ok') {
-                            toastr["success"](response.mensaje);
-                            $("#clientesForm").trigger("reset");
-                        } else {
-                            toastr["error"](response.mensaje);
-                        }
-                    },
-                    error: function () {
-                        toastr["error"]("Error al realizar el registro");
-                    },
-                    complete: function () {
-
-                    }
-
-                })
-            }
-        });
-</script>
 @endsection

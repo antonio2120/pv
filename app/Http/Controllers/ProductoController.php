@@ -37,77 +37,29 @@ class ProductoController extends Controller {
         $title = "Nuevo Producto";
         $proveedores = Proveedor::all();
         $categorias = Categoria::all();
-        $producto = null;
-        $accion = "nuevo";
         return view('productosForm')
             ->with('title', $title)
             ->with('proveedores', $proveedores)
-            ->with('categorias', $categorias)
-            ->with('producto', $producto)
-            ->with('accion', $accion);
+            ->with('categorias', $categorias);
 
     }
     public function guardar(Request $request)
     {
         try {
-            if($request->accion == 'nuevo') {
-                $producto = new Producto();
-                $producto->nombre = $request->nombre_producto;
-                $producto->descripcion = $request->descripcion;
-                $producto->precio = $request->precio;
-                $producto->costo = $request->costo;
-                $producto->proveedor_id = $request->proveedor;
-                $producto->categoria_id = $request->categoria;
-                if ($producto->save()) {
-                    return response()->json(['mensaje' => 'Producto agregado', 'status' => 'ok'], 200);
-                } else {
-                    return response()->json(['mensaje' => 'Error al agregar el producto', 'status' => 'error'], 400);
-                }
-            }else if($request->accion == 'editar'){
-                if($producto = Producto::find($request->id)){
-                    $producto->nombre = $request->nombre_producto;
-                    $producto->descripcion = $request->descripcion;
-                    $producto->precio = $request->precio;
-                    $producto->costo = $request->costo;
-                    $producto->proveedor_id = $request->proveedor;
-                    $producto->categoria_id = $request->categoria;
-                    if ($producto->save()) {
-                        return response()->json(['mensaje' => 'Cambios guardados correctamente', 'status' => 'ok'], 200);
-                    } else {
-                        return response()->json(['mensaje' => 'Error al intentar guardar los cambios', 'status' => 'error'], 400);
-                    }
-                }else{
-                    return response()->json(['mensaje' => 'Producto no encontrado', 'status' => 'error'], 400);
-                }
+            $producto = new Producto();
+            $producto->nombre = $request->nombre_producto;
+            $producto->descripcion = $request->descripcion;
+            $producto->precio = $request->precio;
+            $producto->costo = $request->costo;
+            $producto->proveedor_id = $request->proveedor;
+            $producto->categoria_id = $request->categoria;
+            if($producto->save()){
+                return response()->json(['mensaje' => 'Producto agregado', 'status' => 'ok'], 200);
+            }else{
+                return response()->json(['mensaje' => 'Error al agregar el producto', 'status' => 'error'], 400);
             }
         } catch (Exception $e) {
             return response()->json(['mensaje' => 'Error al agregar el producto'], 403);
         }
-    }
-    public function editar($producto_id)
-    {
-        if ($producto_id) {
-            $accion = "editar";
-            try {
-                if($producto = Producto::find($producto_id)){
-                    $title = "Editar Producto";
-                    $proveedores = Proveedor::all();
-                    $categorias = Categoria::all();
-                    return view('productosForm')
-                        ->with('title', $title)
-                        ->with('proveedores', $proveedores)
-                        ->with('categorias', $categorias)
-                        ->with('producto', $producto)
-                        ->with('accion', $accion);
-                }else{
-                    return response()->json(['mensaje' => 'Producto no encontrado', 'status' => 'error'], 400);
-                }
-            } catch (Exception $e) {
-                return response()->json(['mensaje' => 'Error al eliminar el producto'], 400);
-            }
-        }else{
-            return response()->json(['mensaje' => 'Error al eliminar el producto, producto no encontrado '], 400);
-        }
-
     }
 }

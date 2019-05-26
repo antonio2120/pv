@@ -34,17 +34,13 @@ class EmpleadosController extends Controller {
    public function nuevo()
     {
         $title = "Nuevo Empleado";
-        $empleado = null;
-        $accion = "nuevo";
         return view('empleadosNuevo')
-            ->with('title', $title)
-            ->with('empleado', $empleado)
-            ->with('accion', $accion);
+            ->with('title', $title);
+
     }
     public function guardar(Request $request)
     {
         try {
-            if($request->accion == 'nuevo') {
             $empleado = new Empleado();
             $empleado->nombre = $request->nombre;
             $empleado->apellido = $request->apellido;
@@ -55,48 +51,10 @@ class EmpleadosController extends Controller {
             }else{
                 return response()->json(['mensaje' => 'Error al agregar Empleado', 'status' => 'error'], 400);
             }
-        }else if($request->accion == 'editar'){
-            if($empleado = Empleado::find($request->id)){
-                $empleado = new Empleado();
-                $empleado->nombre = $request->nombre;
-                $empleado->apellido = $request->apellido;
-                $empleado->nombreUsuario = $request->usuario;
-                $empleado->password = $request->password;
-                     if ($empleado->save()) {
-                        return response()->json(['mensaje' => 'Cambios guardados correctamente', 'status' => 'ok'], 200);
-                    } else {
-                        return response()->json(['mensaje' => 'Error al intentar guardar los cambios', 'status' => 'error'], 400);
-                    }
-                }else{
-                    return response()->json(['mensaje' => 'Proveedor no encontrado', 'status' => 'error'], 400);
-                }
-        }    
-      }catch (Exception $e) {
+        } catch (Exception $e) {
             return response()->json(['mensaje' => 'Error al agregar Empleado'], 403);
-       }
-    }
-
-    public function editar($empleado_id)
-    {
-        if ($empleado_id) {
-            $accion = "editar";
-            try {
-                if($empleado = Empleado::find($empleado_id)){
-                    $title = "Editar Empleado";
-                    return view('empleadosNuevo')
-                        ->with('title', $title)
-                        ->with('empleado', $empleado)
-                        ->with('accion', $accion);
-                }else{
-                    return response()->json(['mensaje' => 'Empleado no encontrado', 'status' => 'error'], 400);
-                }
-            } catch (Exception $e) {
-                return response()->json(['mensaje' => 'Error al eliminar al Empleado'], 400);
-            }
-        }else{
-            return response()->json(['mensaje' => 'Error al eliminar al Empleado, Empleado no encontrado '], 400);
         }
-
     }
+
 }
 

@@ -17,7 +17,7 @@
         </thead>
         <tbody>
         @foreach($clientes as $cliente)
-            <tr id="renglon_{{$cliente->id}}">
+            <tr>
                 <th scope="row">{{$cliente->id}}</th>
                 <td>{{$cliente->nombres}}</td>
                 <td>{{$cliente->apaterno}}</td>
@@ -44,7 +44,7 @@
 
         function eliminarCliente(cliente_id){
             $.ajax({
-                url: "{{asset('clientesEliminar')}}/"+cliente_id,
+                url: 'clientesEliminar/'+cliente_id,
                 method: 'GET',
                 data:{
                 },
