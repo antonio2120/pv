@@ -33,6 +33,7 @@ Route::get('/clientes', 'ClientesController@index');
 Route::get('/clientesEliminar/{cliente_id}', 'ClientesController@eliminar');
 Route::get('/clientesNuevo/', 'ClientesController@nuevo');
 Route::post('/clientesGuardar/', 'ClientesController@guardar');
+Route::get('/clientesEditar/{cliente_id}', 'ClientesController@editar');
 
 Route::get('/ventas', 'VentasController@index');
 Route::get('/ventasEliminar/{venta_id}', 'VentasController@eliminar');
