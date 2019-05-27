@@ -33,13 +33,18 @@ class ClientesController extends Controller{
     public function nuevo()
     {
         $title = "Nuevo Cliente";
+        $cliente = null;
+        $accion = "nuevo";
         return view('clientesNuevo')
-            ->with('title', $title);
+            ->with('title', $title)
+            ->with('cliente', $cliente)
+            ->with('accion', $accion);
     }
 
     public function guardar(Request $request)
     {
         try {
+            if($request->accion == 'nuevo'){
             $cliente = new Cliente();
             $cliente->nombres = $request->nombres;
             $cliente->apaterno = $request->apaterno;
@@ -47,13 +52,55 @@ class ClientesController extends Controller{
             $cliente->direccion = $request->direccion;
             $cliente->telefono = $request->telefono;
             $cliente->correo = $request->correo;
-            if($cliente->save()){
-                return response()->json(['mensaje' => 'Producto agregado', 'status' => 'ok'], 200);
-            }else{
-                return response()->json(['mensaje' => 'Error al agregar el producto', 'status' => 'error'], 400);
+                if($cliente->save()){
+                    return response()->json(['mensaje' => 'Cliente agregado', 'status' => 'ok'], 200);
+                }
+                else{
+                return response()->json(['mensaje' => 'Error al agregar el Cliente', 'status' => 'error'], 400);
+                }
             }
-        } catch (Exception $e) {
-            return response()->json(['mensaje' => 'Error al agregar el producto'], 403);
+        else if($request->accion == 'editar'){
+            if($cliente = Cliente::find($request->id)){
+                $cliente->nombres = $request->nombres;
+                $cliente->apaterno = $request->apaterno;
+                $cliente->amaterno = $request->amaterno;
+                $cliente->direccion = $request->direccion;
+                $cliente->telefono = $request->telefono;
+                $cliente->correo = $request->correo;
+                     if ($cliente->save()) {
+                        return response()->json(['mensaje' => 'Cambios guardados correctamente', 'status' => 'ok'], 200);
+                    } else {
+                        return response()->json(['mensaje' => 'Error al intentar guardar los cambios', 'status' => 'error'], 400);
+                    }
+                }else{
+                    return response()->json(['mensaje' => 'Cliente no encontrado', 'status' => 'error'], 400);
+                }
+         }   
+        }catch (Exception $e) {
+            return response()->json(['mensaje' => 'Error al agregar el Cliente'], 403);
         }
+    }
+
+    public function editar($cliente_id)
+    {
+        if ($cliente_id) {
+            $accion = "editar";
+            try {
+                if($cliente = Cliente::find($cliente_id)){
+                    $title = "Editar Cliente";
+                    return view('clientesNuevo')
+                        ->with('title', $title)
+                        ->with('cliente', $cliente)
+                        ->with('accion', $accion);
+                }else{
+                    return response()->json(['mensaje' => 'Cliente no encontrado', 'status' => 'error'], 400);
+                }
+            } catch (Exception $e) {
+                return response()->json(['mensaje' => 'Error al eliminar al Cliente'], 400);
+            }
+        }else{
+            return response()->json(['mensaje' => 'Error al eliminar al cliente, Cliente no encontrado '], 400);
+        }
+
     }
 }
