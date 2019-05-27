@@ -1,27 +1,28 @@
 @extends('layout_principal')
 @section('content')
     <h1>{{$title}}</h1>
-       <form id="CategoriaForm"  method="POST">
+       <form id="CategoriaForm" >
   <div class="row">
     <div class="col">
       <label for="inputNombre">Nombre</label>
-    <input type="text" class="form-control" id="nombre" placeholder="Nombre de categoria" name="nombre">
+    <input type="text" class="form-control" id="nombre" placeholder="Nombre de categoria" name="nombre" value="{{isset($categoria) ? $categoria->nombre: '' }}">
     </div>
     <div class="col">
-      <button type="submit" class="btn btn-primary">{{$accion =='nuevo' ? 'Alta de Categoria' : 'Guardar Cambios'}}</button>
+      
     </div>
 
     
   </div>
   <div class="form-group">
-    <div class="form-check" >
+     <button type="submit" class="btn btn-primary">{{$accion =='nuevo' ? 'Alta de Categoria' : 'Guardar Cambios'}}</button> 
       
     </div>
-  </div>
+  </div
   
 </form>
 
 <script>
+    $(document).ready(function (){
         $("#CategoriaForm").validate({
             rules: {
                 
@@ -33,7 +34,7 @@
             messages: {
                 
                 nombre: {
-                    required: "Ingresar Nombre d ela categoria"
+                    required: "Ingresar Nombre de la categoria"
                 },
                 
             },
@@ -51,6 +52,8 @@
             }
 
         });
+    });
+        
 
         $("#CategoriaForm").submit(function (event ) {
             console.log('submit');
