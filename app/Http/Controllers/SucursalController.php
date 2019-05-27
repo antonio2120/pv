@@ -51,7 +51,7 @@ class SucursalController extends Controller{
                 $sucursal->direccion = $request->direccion;
                 $sucursal->telefono = $request->telefono;
             
-                if ($sucursale->save()) {
+                if ($sucursal->save()) {
                     return response()->json(['mensaje' => 'Sucursal agregada', 'status' => 'ok'], 200);
                 } else {
                     return response()->json(['mensaje' => 'Error al agregar Sucursal', 'status' => 'error'], 400);
