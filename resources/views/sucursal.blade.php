@@ -3,14 +3,14 @@
     <h1>{{$title}}</h1>
     <table class="table">
         <thead class="thead-dark">
-        <tr>
+        <tr>  
             <th scope="col">#ID</th>
-            <th scope="col">Nombre(s)</th>
-            <th scope="col">Direccion</th>
-            <th scope="col">Telefono</th>
-            <th scope="col">Editar</th>
-            <th scope="col">Eliminar</th>
-        </tr>
+            <th scope="col">nombre(s)</th>
+            <th scope="col">direccion</th>
+            <th scope="col">telefono</th>
+            <th scope="col">editar</th>
+            <th scope="col">eliminar</th>
+        </tr> 
         </thead>
         <tbody>
         @foreach($sucursal as $sucursal)
@@ -19,8 +19,9 @@
                 <td>{{$sucursal->nombre}}</td>
                 <td>{{$sucursal->direccion}}</td>
                 <td>{{$sucursal->telefono}}</td>
-                       <td>
+                <td>
                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar">
+                        <a href="sucursalEditar/{{$sucursal->id}}">
                         <button type="button" class="btn btn-primary"><i class="fas fa-edit"></i></button>
                     </span>
                 </td>
@@ -28,7 +29,7 @@
                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Eliminar">
                         <button onclick="eliminarSucursal({{$sucursal->id}})" type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                     </span>
-                </td>
+                </td> 
             </tr>
         @endforeach
         </tbody>

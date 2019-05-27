@@ -1,62 +1,70 @@
 @extends('layout_principal')
-@section('content')
+@section('content')  
     <h1>{{$title}}</h1>
-    <form id="SucursalForm" method="POST">
-        <div class="form-group">
-            <label for="nombre_producto">Nombre</label>
-            <input type="text" class="form-control" id="forNombre" name="forNombre" placeholder="Sucursal">
-        </div>
-        <div class="form-group">
-            <label for="descripcion">Direccion</label>
-            <textarea class="form-control" id="forDireccion" name="forDireccion" rows="3"></textarea>
-        </div>
-        <div class="form-group">
-            <label for="precio">Telefono</label>
-            <input type="text" class="form-control" id="forTelefono" name="forTelefono" placeholder="$">
-        </div>
-       
-        </div>
-        <button type="submit" class="btn btn-primary">Guardar nueva sucursal</button>
-    </form>
+    <form id="SucursalForm" >
+  <div class="row">
+    <div class="col">
+      <label for="inputNombre">Nombre</label>
+      <input type="text" 
+      class="form-control" 
+      placeholder="Nombre sucursal" 
+      id="forNombre"  
+      name="nombre" 
+      value="{{isset($sucursal) ? $sucursal->nombre : ''}}">
+    </div>
+
+    <div class="col">
+      <label for="inputDireccion">Direccion</label>
+    <input type="text" 
+    class="form-control" 
+    id="forDireccion" 
+    placeholder="forDireccion" 
+    name="direccion"
+    value="{{isset($sucursal) ? $sucursal->direccion : ''}}">
+    </div>
+
+    <div class="col">
+      <label for="inputTelefono">Telefono</label>
+      <input type="text" 
+      class="form-control" 
+      placeholder="forTelefono" 
+      id="forTelefono" 
+      name="telefono"
+      value="{{isset($sucursal) ? $sucursal->telefono : ''}}">
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary">{{$accion == 'nuevo' ? 'Alta de empleado' : 'Guardar cambios' }}</button>
+</form>
+
+
     <script>
-
-
+  $(document).ready(function () {
         $("#SucursalForm").validate({
             rules: {
-                forNombre: {
+                nombre: {
                     required: true
                 },
-                forDireccion: {
+                direccion: {
                     required: true
                 },
-                fortelefono: {
+                telefono: {
                     required: true
                 },
                },
             messages: {
-                forNombre: {
+                nombre: {
                     required: "Ingresar Nombre de la sucursal"
                 },
-                forDireccion: {
+                direccion: {
                     required: "Ingresar Direccion de la sucursal"
                 },
-                fortelefono: {
+                telefono: {
                     required: "Ingresar Telefono de la sucursal"
                 },
                 
             },
-            highlight: function(element) {
-
-            },
-            unhighlight: function(element) {
-
-            },
-            errorPlacement: function(error, element) {
-
-            },
-            submitHandler: function(form) {
-                return true;
-            }
+        
 
         });
 
@@ -65,16 +73,20 @@
             console.log('validate', $("#SucursalForm").validate());
             event.preventDefault();
 
+            var $form = $(this);
+            if(! $form.valid()) return false;
 
-            if( $("#SucursalForm").validate()) {
                 $.ajax({
-                    url: 'SucursalGuardar',
+                    url: "{{ asset('sucursalGuardar')}}",
                     method: 'POST',
                     data: {
-                        forNombre: $("#forNombre").val(),
-                        forDireccion: $("#forDireccion").val(),
-                        fortelefono: $("#forTelefono").val(),
+                        nombre: $("#forNombre").val(),
+                        direccion: $("#forDireccion").val(),
+                        telefono: $("#forTelefono").val(),
+                      
                         _token: "{{ csrf_token() }}",
+                        id:"{{isset($sucursal) ? $sucursal->id : ''}}",
+                        accion: "{{$accion}}"
                     },
                     dataType: 'json',
                     beforeSend: function () {
@@ -97,7 +109,7 @@
                     }
 
                 })
-            }
         });
+    });
     </script>
 @endsection
