@@ -20,6 +20,7 @@
                     <span class="d-inline-block" tabindex="0"          data-toggle="tooltip" title="Editar">
                         <a href="categoriasEditar/{{$categoria->id}}">
                               <button type="button" class="btn btn-primary"><i class="fas fa-edit"></i></button>
+                          </a>
                     </span>
                 </td>
                 <td>
@@ -40,7 +41,7 @@
 
         function eliminarCategoria(categoria_id){
             $.ajax({
-                url: "{{asset('categoriaEliminar')}}"+categoria_id,
+                url: "{{asset('categoriasEliminar/')}}/"+categoria_id,
                 method: 'GET',
                 data:{
                 },
