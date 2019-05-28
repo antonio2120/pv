@@ -1,6 +1,13 @@
 @extends('layout_principal')
 @section('content')
-    <h1>{{$title}}</h1>
+
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand"><h1>{{$title}}</h1></a>
+            <form class="form-inline">
+                <input class="form-control mr-sm-2" type="search" id="busqueda" name = "busqueda"placeholder="Busqueda" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" onclick="buscarVenta()">Search</button>
+            </form>
+        </nav>
     <table class="table">
         <thead class="thead-dark">
         <tr>
@@ -46,6 +53,10 @@
     </table>
     <script type="text/javascript">
 
+        function buscarVenta() {
+            windows.location.href = "{{ asset('ventas')}}"
+        }
+
         function eliminarVenta(venta_id){
             $.ajax({
                 url: 'ventasEliminar/'+venta_id,
@@ -78,5 +89,10 @@
         $(document).ready(function() {
 
         });
+
+
+
+
+
     </script>
 @endsection

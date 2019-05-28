@@ -8,7 +8,7 @@ class Ventas extends Model
 
     protected $table = 'ventas';
     protected $fillable = ['fecha', 'hora', 'total','empleado_id'];
-/*
+
     public function collection(){
         return $this->belongsTo(Collection::class);
     }
@@ -20,6 +20,6 @@ class Ventas extends Model
     public function categories(){
         return $this->belongsToMany(Category::class);
     }
-*/
+
 
 }

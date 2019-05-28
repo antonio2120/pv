@@ -40,6 +40,7 @@ Route::get('/ventasEliminar/{venta_id}', 'VentasController@eliminar');
 Route::get('/ventasNuevo/', 'VentasController@nuevo');
 Route::post('/ventasGuardar/', 'VentasController@guardar');
 Route::get('/ventasEditar/{venta_id}', 'VentasController@editar');
+Route::get('/ventas/{busqueda}', 'VentasController@buscar');
 
 Route::get('/empleados', 'EmpleadosController@index');
 Route::get('/empleadosEliminar/{empleado_id}', 'EmpleadosController@eliminar');
