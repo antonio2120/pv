@@ -51,7 +51,7 @@ class ApareceController extends Controller {
         try {
             if($request->accion == 'nuevo') {
                 $aparece = new Aparece();
-                $aparece->apartado_id = $request->id;
+                $aparece->apartado_id = $request->apartado;
                 $aparece->codigo_barras= $request->codigo_barras;
                 $aparece->cantidadxPro= $request->cantidadxPro;
                 if ($aparece->save()) {
@@ -61,7 +61,7 @@ class ApareceController extends Controller {
                 }
             }else if($request->accion == 'editar'){
                 if($aparece = Aparece::find($request->id)){
-                $aparece->apartado_id = $request->id;
+                $aparece->apartado_id = $request->apartado;
                 $aparece->codigo_barras= $request->codigo_barras;
                 $aparece->cantidadxPro= $request->cantidadxPro;
                     if ($aparece->save()) {
@@ -87,12 +87,14 @@ class ApareceController extends Controller {
             $accion = "editar";
             try {
                 if($aparece = Aparece::find($aparece_id)){
-                    $title = "Editar Aparece";
+                    $title = "Editar Aparece (".$aparece_id.")";
                     $apartado= Apartado::all();
                     return view('apareceNuevo')
                     ->with('title', $title)
                     ->with('apartado', $apartado) 
-                    ->with('accion', $accion);
+                    ->with('accion', $accion)
+                    ->with('aparece',$aparece);
+
                 }else{
                     return response()->json(['mensaje' => 'No se encontro aparece', 'status' => 'error'], 400);
                 }
