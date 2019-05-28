@@ -11,9 +11,25 @@ class ProductoController extends Controller {
     {
         $productos = Producto::all();
         $title = "Lista de Productos";
+        $numRegistros = $productos->count();
         return view('productos')
             ->with('productos', $productos)
-            ->with('title', $title);
+            ->with('title', $title)
+            ->with('numRegistros', $numRegistros);
+    }
+    public function buscar($buscar)
+    {
+        $productos = Producto::where('nombre','like', $buscar.'%')
+            ->orWhere('descripcion','like', $buscar.'%')
+            ->orWhere('precio', $buscar)
+            ->orWhere('costo', $buscar)
+            ->get();
+        $title = "Lista de Productos | ".$buscar;
+        $numRegistros = $productos->count();
+        return view('productos')
+            ->with('productos', $productos)
+            ->with('title', $title)
+            ->with('numRegistros', $numRegistros);
     }
     public function eliminar($producto_id)
     {

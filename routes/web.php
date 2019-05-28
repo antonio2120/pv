@@ -18,6 +18,7 @@ Route::get('/login', function () {
     return view('login');
 });
 Route::get('/productos', 'ProductoController@index');
+Route::get('/productos/{buscar}', 'ProductoController@buscar');
 Route::get('/productosEliminar/{producto_id}', 'ProductoController@eliminar');
 Route::get('/productosNuevo/', 'ProductoController@nuevo');
 Route::post('/productosGuardar/', 'ProductoController@guardar');
