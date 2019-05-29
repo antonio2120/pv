@@ -1,12 +1,26 @@
 @extends('layout_principal')
 @section('content')
     <h1>{{$title}}</h1>
-    <table class="table">
+
+<div class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="buscar" aria-label="Search" id="buscar">
+            <button class="btn btn-outline-success my-2 my-sm-0" onclick="buscar()">Buscar</button>
+        </div>
+<h6>Numero de sucursales: {{$numRegistros}}</h6>
+<script type="text/javascript">
+    
+    function buscar(){
+        location.href = "{{asset('/sucursal/')}}/"+ $('#buscar').val();
+    }
+</script>
+
+
+<table class="table"> 
         <thead class="thead-dark">
         <tr>  
             <th scope="col">#ID</th>
             <th scope="col">nombre(s)</th>
-            <th scope="col">direccion</th>
+            <th scope="col">direccion</th> 
             <th scope="col">telefono</th>
             <th scope="col">editar</th>
             <th scope="col">eliminar</th>
@@ -35,6 +49,9 @@
         </tbody>
     </table>
 <script type="text/javascript">
+
+ 
+
 
         function eliminarSucursal(sucursal_id){
             $.ajax({

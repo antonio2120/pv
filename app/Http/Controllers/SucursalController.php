@@ -6,13 +6,17 @@ use App\Sucursal;
 use Illuminate\Http\Request;
 
 class SucursalController extends Controller{
+
     public function index(){
-    $sucursal = Sucursal::all();
-    $title = "sucursales ";
-    return view('sucursal')
-   ->with('sucursal', $sucursal)
-   ->with('title', $title);
+        $sucursal = Sucursal::all();
+        $title = "sucursales ";
+        $numRegistros = $sucursal->count();
+        return view('sucursal')
+       ->with('sucursal', $sucursal)
+       ->with('title', $title)
+        ->with('numRegistros', $numRegistros); 
     }
+
     public function eliminar($sucursal_id)
     {
         if ($sucursal_id) {
@@ -30,6 +34,22 @@ class SucursalController extends Controller{
         } 
 
     }
+
+public function buscar($buscar)
+{
+    $sucursal = Sucursal::where('nombre','like',$buscar."%")
+
+        ->orWhere('direccion','like',$buscar.'%')
+        ->orWhere('telefono',$buscar)
+        ->get();
+
+        $title = "Lista de Sucursal | ".$buscar;
+        $numRegistros = $sucursal->count();
+        return view('sucursal')
+        ->with('sucursal', $sucursal)
+        ->with('title', $title)
+        ->with('numRegistros', $numRegistros);        
+}
   
     public function nuevo()
     {
