@@ -1,6 +1,12 @@
 @extends('layout_principal')
 @section('content')
     <h1>{{$title}}</h1>
+   <div class="form-group">
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" onclick="imprimir()"type="text" placeholder="Search" aria-label="Search">
+            <button   class="btn btn-outline-success my-2 my-sm-0"  onclick="buscar()" >Buscar</button>
+        </form>
+    </div>
     <table class="table">
         <thead class="thead-dark">
         <tr>
@@ -15,6 +21,7 @@
 
             <tr id="renglon_{{$categoria->id}}">
                 <th scope="row">{{$categoria->id}}</th>
+
                 <td>{{$categoria->nombre}}</td>
                 <td>
                     <span class="d-inline-block" tabindex="0"          data-toggle="tooltip" title="Editar">
@@ -29,6 +36,9 @@
                     </span>
                 </td>
             </tr>
+
+
+
         @endforeach
 
 
@@ -38,7 +48,9 @@
   
 
      <script type="text/javascript">
-
+            function buscar(){
+                location.href = "{{asset('/categorias/')}}/" + $('#buscar').val();
+            }
         function eliminarCategoria(categoria_id){
             $.ajax({
                 url: "{{asset('categoriasEliminar/')}}/"+categoria_id,

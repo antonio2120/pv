@@ -1,6 +1,11 @@
-@extends('layout_principal')
+ @extends('layout_principal')
 @section('content')
     <h1>{{$title}}</h1>
+    <div class="form-group">
+    <form class="form-inline my-2 my-lg-0">
+    <input class="form-control mr-sm-2" onclick="imprimir()" type="text" placeholder="Ingresar búsqueda" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" onclick="buscar()">Buscar</button>
+  </form></div>
     <table class="table">
         <thead class="thead-dark">
         <tr>
@@ -37,7 +42,11 @@
         @endforeach
         </tbody>
     </table>
+
     <script type="text/javascript">
+        function buscar(){
+        location.href="{{asset('/empleados/')}}/" + $('#buscar').val();
+        }
 
         function eliminarEmpleado(empleado_id){
             $.ajax({
