@@ -14,14 +14,15 @@ class EmpleadosController extends Controller {
             ->with('title', $title);
     }
     public function buscar($buscar){
-       $empleados = Empleado::where ('nombre','like', $buscar.'%')
-        ->orWhere ('apellido', 'like', $buscar.'%')
-        ->orWhere('nombreUsuario', $buscar)
+       $empleados =Empleado::where ('nombre','like', $buscar.'%')
+        ->orWhere('id','like', $buscar)
+        ->orWhere('apellido','like', $buscar.'%')
+        ->orWhere('nombreUsuario','like', $buscar.'%')
         ->get();
        $title = "Lista de Empleados | ".$buscar;
         $numRegistros = $empleados->count(); 
-        return view(view.'empleado')
-        ->with('empleado', $empleado)
+        return view('empleados')
+        ->with('empleados', $empleados)
         ->with('title', $title)
         ->with('numRegistros', $numRegistros);
 

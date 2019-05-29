@@ -8,10 +8,12 @@ class ProveedoresController extends Controller {
     public function index()
     {
         $proveedores = Proveedor::all();
+        $numRegistros = $proveedores->count();
         $title = "Tabla de Proveedores";
         return view('proveedores')
             ->with('proveedores', $proveedores)
-            ->with('title', $title);
+            ->with('title', $title)
+            ->with('$numRegistros', $numRegistros);
     }
     public function eliminar($proveedor_id)
     {
@@ -104,14 +106,12 @@ class ProveedoresController extends Controller {
 
     public function buscar($buscar){
        $proveedores =Proveedor::where ('nombre','like', $buscar.'%')
-        ->orWhere ('descripcion', 'like', $buscar.'%')
         ->orWhere('nombre', $buscar)
-        ->orWhere('id', $buscar)
         ->get();
        $title = "Lista de proveedores | ".$buscar;
         $numRegistros = $proveedores->count(); 
-        return view(view.'proveedor')
-        ->with('proveedor', $proveedor)
+        return view('proveedores')
+        ->with('proveedores', $proveedores)
         ->with('title', $title)
         ->with('numRegistros', $numRegistros);
 

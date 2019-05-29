@@ -31,18 +31,21 @@ Route::get('/proveedoresEliminar/{proveedor_id}', 'ProveedoresController@elimina
 Route::get('/proveedores', 'ProveedoresController@index');
 Route::post('/proveedoresGuardar/', 'ProveedoresController@guardar');
 Route::get('/proveedoresEditar/{proveedor_id}', 'ProveedoresController@editar');
+Route::get('/proveedores/{buscar}', 'ProveedoresController@buscar');
 
 Route::get('/clientes', 'ClientesController@index');
 Route::get('/clientesEliminar/{cliente_id}', 'ClientesController@eliminar');
 Route::get('/clientesNuevo/', 'ClientesController@nuevo');
 Route::post('/clientesGuardar/', 'ClientesController@guardar');
 Route::get('/clientesEditar/{cliente_id}', 'ClientesController@editar');
+Route::get('/clientes/{buscar}', 'ClientesController@buscar');
 
 Route::get('/ventas', 'VentasController@index');
 Route::get('/ventasEliminar/{venta_id}', 'VentasController@eliminar');
 Route::get('/ventasNuevo/', 'VentasController@nuevo');
 Route::post('/ventasGuardar/', 'VentasController@guardar');
 Route::get('/ventasEditar/{venta_id}', 'VentasController@editar');
+Route::get('/ventas/{busqueda}', 'VentasController@buscar');
 
 Route::get('/empleados', 'EmpleadosController@index');
 Route::get('/empleados/{buscar}', 'EmpleadosController@buscar');
@@ -56,6 +59,7 @@ Route::get('/categoriasEliminar/{categoria_id}', 'CategoriaController@eliminar')
 Route::get('/categoriasNuevo/', 'CategoriaController@nuevo');
 Route::post('/categoriasGuardar/','CategoriaController@guardar');
 Route::get('/categoriasEditar/{categoria_id}','CategoriaController@editar');
+Route::get('/categorias/{buscar}','CategoriaController@buscar');
 
 Route::get('/apartados', 'ApartadoController@index');
 Route::get('/apartadosEliminar/{apartado_id}', 'ApartadoController@eliminar');

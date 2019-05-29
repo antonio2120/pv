@@ -1,10 +1,10 @@
 @extends('layout_principal')
 @section('content')
     <h1>{{$title}}</h1>
-    <form class="form-inline my-2 my-lg-0">
-    <input class="form-control mr-sm-2" onclick="imprimir()" type="text" placeholder="Search" aria-label="Search">
+    <div class="form-inline my-2 my-lg-0">
+    <input class="form-control mr-sm-2" id="buscar" type="text" placeholder="Search" aria-label="Search">
     <button class="btn btn-outline-success my-2 my-sm-0" onclick="buscar()">Buscar</button>
-  </form>
+  </div>
    <div class="table-responsive">
      <table class="table">
   <thead class="thead-dark">
@@ -51,10 +51,10 @@
  
    @endforeach
 </table>
-    
 
-   </div>
-    
+
+   </div>   
+
    <script type="text/javascript">
 
       function buscar(){

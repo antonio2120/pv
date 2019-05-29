@@ -103,4 +103,17 @@ class VentasController extends Controller{
             return response()->json(['mensaje' => 'Error al dar de alta la Venta, no fue encontrada'], 400);
         }
     }
+
+    public function buscar($busqueda){
+
+        $ventas = Ventas::where('fecha','like', $busqueda.'%')
+            ->orWhere('hora','like',$busqueda.'%')
+            ->orWhere('total','like',$busqueda.'%')
+            ->get();
+
+        $title = "Lista de Ventas |" .$busqueda;
+        return view('ventas')
+            ->with('ventas',$ventas)
+            ->with('title',$title);
+     }
 }
