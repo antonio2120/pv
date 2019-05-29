@@ -108,7 +108,7 @@ class CategoriaController extends Controller {
            ->get();
            $title = "Lista de Categoria |".$buscar;
            $numRegistros = $categorias->count();
-           return view(view. 'categoria')
+           return view('categorias')
            ->with('categorias',$categorias)
            ->with('title',$title)
            ->with('numRegistros',$numRegistros);
