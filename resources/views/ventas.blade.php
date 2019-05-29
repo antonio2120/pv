@@ -3,10 +3,10 @@
 
         <nav class="navbar navbar-light bg-light">
             <a class="navbar-brand"><h1>{{$title}}</h1></a>
-            <form class="form-inline">
-                <input class="form-control mr-sm-2" type="search" id="busqueda" name = "busqueda"placeholder="Busqueda" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" onclick="buscarVenta()">Search</button>
-            </form>
+            <div class="form-inline">
+                <input class="form-control mr-sm-2" id="busqueda" name = "busqueda"placeholder="Busqueda" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" onclick="buscarVenta()">Buscar</button>
+            </div>
         </nav>
     <table class="table">
         <thead class="thead-dark">
@@ -54,7 +54,7 @@
     <script type="text/javascript">
 
         function buscarVenta() {
-            windows.location.href = "{{ asset('ventas')}}"
+            location.href = "{{ asset('/ventas/')}}/" + $('#busqueda').val();
         }
 
         function eliminarVenta(venta_id){

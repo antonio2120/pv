@@ -104,20 +104,16 @@ class VentasController extends Controller{
         }
     }
 
-    public function busqueda($busqueda){
+    public function buscar($busqueda){
 
-        $busqueda = Ventas::where('fecha','like', $busqueda.'%')
+        $ventas = Ventas::where('fecha','like', $busqueda.'%')
             ->orWhere('hora','like',$busqueda.'%')
             ->orWhere('total','like',$busqueda.'%')
             ->get();
 
-        return view('ventas');
-
-
-
-
-
-
-
-    }
+        $title = "Lista de Ventas |" .$busqueda;
+        return view('ventas')
+            ->with('ventas',$ventas)
+            ->with('title',$title);
+     }
 }
