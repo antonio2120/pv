@@ -1,7 +1,10 @@
 @extends('layout_principal')
 @section('content')
     <h1>{{$title}}</h1>
-
+    <div class="form-inline my-2 my-lg-0">
+    <input class="form-control mr-sm-2" id="buscar" type="text" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" onclick="buscar()">Buscar</button>
+  </div>
    <div class="table-responsive">
      <table class="table">
   <thead class="thead-dark">
@@ -42,13 +45,21 @@
                    <td>
                     <a href="proveedoresEditar/{{$proveedor->id}}"><button type="button" class="btn btn-primary"><i class="fas fa-edit"></i></button></a></td>
                    <td><button onclick="eliminarProveedor({{$proveedor->id}})" type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button></td>
+
     </tr>
   </tbody>
+ 
    @endforeach
 </table>
-   </div>
-   
+
+
+   </div>   
+
    <script type="text/javascript">
+
+      function buscar(){
+        location.href="{{asset('/proveedores/')}}/" + $('#buscar').val();
+      }
 
         function eliminarProveedor(proveedor_id){
             $.ajax({
@@ -84,4 +95,3 @@
         });
     </script>
 @endsection
-

@@ -8,10 +8,12 @@ class ProveedoresController extends Controller {
     public function index()
     {
         $proveedores = Proveedor::all();
+        $numRegistros = $proveedores->count();
         $title = "Tabla de Proveedores";
         return view('proveedores')
             ->with('proveedores', $proveedores)
-            ->with('title', $title);
+            ->with('title', $title)
+            ->with('$numRegistros', $numRegistros);
     }
     public function eliminar($proveedor_id)
     {
@@ -99,6 +101,19 @@ class ProveedoresController extends Controller {
         }else{
             return response()->json(['mensaje' => 'Error al eliminar al Proveedor, Proveedor no encontrado '], 400);
         }
+
+    }
+
+    public function buscar($buscar){
+       $proveedores =Proveedor::where ('nombre','like', $buscar.'%')
+        ->orWhere('nombre', $buscar)
+        ->get();
+       $title = "Lista de proveedores | ".$buscar;
+        $numRegistros = $proveedores->count(); 
+        return view('proveedores')
+        ->with('proveedores', $proveedores)
+        ->with('title', $title)
+        ->with('numRegistros', $numRegistros);
 
     }
 

@@ -35,72 +35,54 @@
       <input type="email" class="form-control" placeholder="Correo" id="inputCorreo" name="inputCorreo" value="{{isset($cliente) ? $cliente->correo : ''}}">
     </div>
   </div>
-  <div class="form-group">
-    <div class="form-check" >
-      <input class="form-check-input" type="checkbox" id="forTerminos" name="terminos">
-      <label class="form-check-label" for="gridCheck">
-        Acepto los términos y condiciones
-      </label>
-    </div>
-  </div>
+
   <button type="submit" class="btn btn-primary">{{$accion == 'nuevo' ? 'Guardar Cliente' : 'Guardar Cambios'}}</button>
 </form>
 
 <script>
-        $("#clientesForm").validate({
-            rules: {
-                inputNombre: {
-                    required: true
+        $(document).ready(function () {
+            $("#clientesForm").validate({
+                rules: {
+                    inputNombre:{
+                        required: true
+                    },
+                    inputApaterno:{
+                        required: true
+                    },
+                    inputAmaterno:{
+                        required: true
+                    },
+                    inputDireccion:{
+                        required: true
+                    },
+                    inputTelefono: {
+                        required: true
+                    },
+                    inputCorreo:{
+                        required: true,
+                    }
                 },
-                inputApaterno: {
-                    required: true
+                messages: {
+                    inputNombre: {
+                        required: "Ingresar Nombre del Cliente"
+                    },
+                    inputApaterno: {
+                        required: "Ingresar Apellido Paterno del Cliente"
+                    },
+                    inputAmaterno: {
+                        required: "Ingresar Apellido Materno del Cliente"
+                    },
+                    inputDireccion: {
+                        required: "Ingresar Direccion del Cliente"
+                    },
+                    inputTelefono: {
+                        required: "Ingresar Telefono del Cliente"
+                    },
+                    inputCorreo: {
+                        required: "Ingresar Correo del Cliente"
+                    },
                 },
-                inputAmaterno: {
-                    required: true
-                },
-                inputDireccion: {
-                    required: true
-                },
-                inputTelefono: {
-                    required: true
-                },
-                inputCorreo: {
-                    required: true
-                },
-            },
-            messages: {
-                inputNombre: {
-                    required: "Ingresar Nombre del Cliente"
-                },
-                inputApaterno: {
-                    required: "Ingresar Apellido Paterno del Cliente"
-                },
-                inputAmaterno: {
-                    required: "Ingresar Apellido Materno del Cliente"
-                },
-                inputDireccion: {
-                    required: "Ingresar Direccion del Cliente"
-                },
-                inputTelefono: {
-                    required: "Ingresar Telefono del Cliente"
-                },
-                inputCorreo: {
-                    required: "Ingresar Correo del Cliente"
-                },
-            },
-            highlight: function(element) {
-
-            },
-            unhighlight: function(element) {
-
-            },
-            errorPlacement: function(error, element) {
-
-            },
-            submitHandler: function(form) {
-                return true;
-            }
-
+            });
         });
 
         $("#clientesForm").submit(function (event ) {
@@ -108,8 +90,9 @@
             console.log('validate', $("#clientesForm").validate());
             event.preventDefault();
 
-
-            if( $("#clientesForm").validate()) {
+            
+            var $form = $(this);
+            if(! $form.valid()) return false;
                 $.ajax({
                     url: "{{asset('clientesGuardar')}}",
                     method: 'POST',
@@ -145,7 +128,6 @@
                     }
 
                 })
-            }
         });
 </script>
 @endsection

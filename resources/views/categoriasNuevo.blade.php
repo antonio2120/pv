@@ -13,17 +13,17 @@
 
     
   </div>
-  <div class="form-group">
+ 
      <button type="submit" class="btn btn-primary">{{$accion =='nuevo' ? 'Alta de Categoria' : 'Guardar Cambios'}}</button> 
       
-    </div>
-  </div
+   
+
   
 </form>
 
 <script>
     $(document).ready(function (){
-        $("#CategoriaForm").validate({
+        $('#CategoriaForm').validate({
             rules: {
                 
                 nombre:{
@@ -38,18 +38,7 @@
                 },
                 
             },
-            highlight: function(element) {
-
-            },
-            unhighlight: function(element) {
-
-            },
-            errorPlacement: function(error, element) {
-
-            },
-            submitHandler: function(form) {
-                return true;
-            }
+            
 
         });
     });
@@ -70,7 +59,8 @@
                         
                         nombre: $("#nombre").val(),
                         _token: "{{ csrf_token() }}",
-                        id:"{{isset($categoria) ? $categoria->id: ''}}",accion: "{{$accion}}"
+                        id:"{{isset($categoria) ? $categoria->id: ''}}",
+                        accion: "{{$accion}}"
                     },
                     dataType: 'json',
                     beforeSend: function () {

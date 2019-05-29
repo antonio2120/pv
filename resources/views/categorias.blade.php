@@ -1,6 +1,12 @@
 @extends('layout_principal')
 @section('content')
     <h1>{{$title}}</h1>
+   <div class="form-group">
+        <div class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2"   type="text" placeholder="Search" aria-label="Search" id="buscar">
+            <button   class="btn btn-outline-success my-2 my-sm-0"  onclick="buscar()" >Buscar</button>
+        </div>
+    </div>
     <table class="table">
         <thead class="thead-dark">
         <tr>
@@ -15,11 +21,13 @@
 
             <tr id="renglon_{{$categoria->id}}">
                 <th scope="row">{{$categoria->id}}</th>
+
                 <td>{{$categoria->nombre}}</td>
                 <td>
                     <span class="d-inline-block" tabindex="0"          data-toggle="tooltip" title="Editar">
                         <a href="categoriasEditar/{{$categoria->id}}">
                               <button type="button" class="btn btn-primary"><i class="fas fa-edit"></i></button>
+                          </a>
                     </span>
                 </td>
                 <td>
@@ -28,19 +36,26 @@
                     </span>
                 </td>
             </tr>
+
+
+
         @endforeach
 
 
         </tbody>
     </table>
 
+    <h6>Numero de Registros: {{$numRegistros}}</h6>
+
   
 
      <script type="text/javascript">
-
+            function buscar(){
+               location.href = "{{asset('/categorias/')}}/" + $('#buscar').val();
+            }
         function eliminarCategoria(categoria_id){
             $.ajax({
-                url: "{{asset('categoriaEliminar')}}"+categoria_id,
+                url: "{{asset('categoriasEliminar/')}}/"+categoria_id,
                 method: 'GET',
                 data:{
                 },

@@ -5,6 +5,7 @@ use App\Aparece;
 use App\Apartado;
 use Illuminate\Http\Request;
 
+
 class ApareceController extends Controller {
     public function index()
     {
@@ -35,29 +36,77 @@ class ApareceController extends Controller {
 
     public function nuevo()
     {
-        $title = "Nuevo Aparece";
-        $apartados = Apartado::all();
+        $title = "Nuevo aparece";
+        $apartado= Apartado::all();
+        $aparece = null;
+        $accion = "nuevo";
         return view('apareceNuevo')
             ->with('title', $title)
-            ->with('apartados', $apartados);
+            ->with('apartado', $apartado) 
+            ->with('accion', $accion);
     }
 
      public function guardar(Request $request)
     {
         try {
-            $aparece = new Aparece();
-            $aparece->apartado_id = $request->apartado;
-            $aparece->codigo_barras = $request->codigo_barras;
-            $aparece->cantidadxPro = $request->cantidadxPro;
-            if($aparece->save()){
-                return response()->json(['mensaje' => 'Aparece agregado', 'status' => 'ok'], 200);
-            }else{
-                return response()->json(['mensaje' => 'Error al agregar el aparece', 'status' => 'error'], 400);
+            if($request->accion == 'nuevo') {
+                $aparece = new Aparece();
+                $aparece->apartado_id = $request->apartado;
+                $aparece->codigo_barras= $request->codigo_barras;
+                $aparece->cantidadxPro= $request->cantidadxPro;
+                if ($aparece->save()) {
+                    return response()->json(['mensaje' => 'aparece agregado', 'status' => 'ok'], 200);
+                } else {
+                    return response()->json(['mensaje' => 'Error al agregar el aparece', 'status' => 'error'], 400);
+                }
+            }else if($request->accion == 'editar'){
+                if($aparece = Aparece::find($request->id)){
+                $aparece->apartado_id = $request->apartado;
+                $aparece->codigo_barras= $request->codigo_barras;
+                $aparece->cantidadxPro= $request->cantidadxPro;
+                    if ($aparece->save()) {
+                        return response()->json(['mensaje' => 'Cambios guardados correctamente', 'status' => 'ok'], 200);
+                    } else {
+                        return response()->json(['mensaje' => 'Error al intentar guardar los cambios', 'status' => 'error'], 400);
+                    }
+                }else{
+                    return response()->json(['mensaje' => 'aparece no encontrado', 'status' => 'error'], 400);
+                }
             }
         } catch (Exception $e) {
-            return response()->json(['mensaje' => 'Error al agregar el aparece'], 403);
+            return response()->json(['mensaje' => 'Error al agregar el apartado'], 403);
         }
     }
-    
-}
+  
 
+
+   
+ public function editar($aparece_id)
+       {
+         if ($aparece_id) {
+            $accion = "editar";
+            try {
+                if($aparece = Aparece::find($aparece_id)){
+                    $title = "Editar Aparece (".$aparece_id.")";
+                    $apartado= Apartado::all();
+                    return view('apareceNuevo')
+                    ->with('title', $title)
+                    ->with('apartado', $apartado) 
+                    ->with('accion', $accion)
+                    ->with('aparece',$aparece);
+
+                }else{
+                    return response()->json(['mensaje' => 'No se encontro aparece', 'status' => 'error'], 400);
+                }
+            } catch (Exception $e) {
+                return response()->json(['mensaje' => 'Error aparece no Eliminada'], 400);
+            }
+           }else{
+            return response()->json(['mensaje' => 'Error al eliminar al aparece, aparece no encontrado '], 400);
+                  }
+
+
+    }
+   
+
+}

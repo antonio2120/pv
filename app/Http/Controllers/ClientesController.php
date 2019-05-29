@@ -8,9 +8,24 @@ class ClientesController extends Controller{
     public function index(){
     	$clientes = Cliente::all();
         $title = "Lista de Clientes";
+        $numRegistros = $clientes->count();
         return view('clientes')
             ->with('clientes', $clientes)
-            ->with('title', $title);
+            ->with('title', $title)
+            ->with('numRegistros', $numRegistros);
+    }
+
+    public function buscar($buscar){
+       $clientes = Cliente::where ('nombres','like', $buscar.'%')
+        ->orWhere ('apaterno', 'like', $buscar.'%')
+        ->orWhere('amaterno', $buscar)
+        ->get();
+       $title = "Lista de Clientes | ".$buscar;
+        $numRegistros = $clientes->count(); 
+        return view('clientes')
+        ->with('clientes', $clientes)
+        ->with('title', $title)
+        ->with('numRegistros', $numRegistros);
     }
 
     public function eliminar($cliente_id)

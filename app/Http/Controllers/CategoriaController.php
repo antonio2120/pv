@@ -9,9 +9,11 @@ class CategoriaController extends Controller {
     {
         $categorias = Categoria::all();
         $title = "Lista de Categorias";
+        $numRegistros = $categorias->count();
         return view('categorias')
             ->with('categorias', $categorias)
-            ->with('title', $title);
+            ->with('title', $title)
+            ->with('numRegistros',$numRegistros);
     }
     public function eliminar($categoria_id)
     {
@@ -97,6 +99,19 @@ class CategoriaController extends Controller {
             return response()->json(['mensaje' => 'Error al eliminar al Categoria, Categoria no encontrado '], 400);
                   }
 
+        }
+
+        public function buscar($buscar)
+        {
+          $categorias = Categoria:: where ('nombre','like', $buscar.'%')
+           ->orWhere('nombre', $buscar)
+           ->get();
+           $title = "Lista de Categoria |".$buscar;
+           $numRegistros = $categorias->count();
+           return view('categorias')
+           ->with('categorias',$categorias)
+           ->with('title',$title)
+           ->with('numRegistros',$numRegistros);
         }
 
      
