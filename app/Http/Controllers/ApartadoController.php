@@ -114,4 +114,19 @@ class ApartadoController extends Controller {
 
     }
 
+    public function buscar($buscar)
+    {
+        $apartados = Apartado::where('fecha_inicio','like', $buscar.'%')
+        ->orWhere('fecha_fin','like', $buscar.'%')
+        ->orWhere('anticipo', $buscar)
+        ->orWhere('total', $buscar)
+        ->get();
+        $title = "Tabla de Apartados | ".$buscar;
+        $numRegistros = $apartados->count();
+        return view(view.'apartados')
+            ->with('apartados', $apartados)
+            ->with('title', $title)
+            ->with('numRegistros',$numRegistros);
+    }
+
 }
