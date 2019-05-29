@@ -13,13 +13,13 @@ class Ventas extends Model
         return $this->belongsTo(Collection::class);
     }
 
-    public function pictures(){
-        return $this->hasMany(Picture::class);
-    }
+    //public function pictures(){
+      //  return $this->hasMany(Picture::class);
+    //}
 
-    public function categories(){
-        return $this->belongsToMany(Category::class);
-    }
+    //public function categories(){
+    ////    return $this->belongsToMany(Category::class);
+    //}
 
 
 }
