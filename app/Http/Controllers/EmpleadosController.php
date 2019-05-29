@@ -13,7 +13,19 @@ class EmpleadosController extends Controller {
             ->with('empleados', $empleados)
             ->with('title', $title);
     }
+    public function buscar($buscar){
+       $empleados = Empleado::where ('nombre','like', $buscar.'%')
+        ->orWhere ('apellido', 'like', $buscar.'%')
+        ->orWhere('nombreUsuario', $buscar)
+        ->get();
+       $title = "Lista de Empleados | ".$buscar;
+        $numRegistros = $empleados->count(); 
+        return view(view.'empleado')
+        ->with('empleado', $empleado)
+        ->with('title', $title)
+        ->with('numRegistros', $numRegistros);
 
+    }
     public function eliminar($empleado_id)
     {
         if ($empleado_id) {
