@@ -102,4 +102,19 @@ class ProveedoresController extends Controller {
 
     }
 
+    public function buscar($buscar){
+       $proveedores =Proveedor::where ('nombre','like', $buscar.'%')
+        ->orWhere ('descripcion', 'like', $buscar.'%')
+        ->orWhere('nombre', $buscar)
+        ->orWhere('id', $buscar)
+        ->get();
+       $title = "Lista de proveedores | ".$buscar;
+        $numRegistros = $proveedores->count(); 
+        return view(view.'proveedor')
+        ->with('proveedor', $proveedor)
+        ->with('title', $title)
+        ->with('numRegistros', $numRegistros);
+
+    }
+
 }

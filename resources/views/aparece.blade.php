@@ -22,13 +22,24 @@
                 <td>{{$aparece->cantidadxPro}}</td>
 
                  <td>
-                    <span class="d-inline-block" tabindex="0"          data-toggle="tooltip" title="Editar">
-                              <button type="button" class="btn btn-primary"><i class="fas fa-edit"></i></button>
+                    <span class="d-inline-block" 
+                    tabindex="0"  
+                    data-toggle="tooltip" 
+                    title="Editar">
+                        <a href="apareceEditar/{{$aparece->id}}">
+                              <button type="button" 
+                              class="btn btn-primary"><i class="fas fa-edit"></i></button>
+                        </a>
                     </span>
                 </td>
                 <td>
-                    <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Eliminar">
-                        <button onclick="eliminarAparece({{$aparece->id}})" type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                    <span class="d-inline-block" 
+                    tabindex="0" 
+                    data-toggle="tooltip" 
+                    title="Eliminar">
+                        <button onclick="eliminarAparece({{$aparece->id}})" 
+                            type="button" 
+                            class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                     </span>
                 </td>
                 
@@ -44,7 +55,7 @@
 
         function eliminarAparece(aparece_id){
             $.ajax({
-                url: 'apareceEliminar/'+aparece_id,
+                url: "{{ asset('apareceEliminar/')}}/"+aparece_id,
                 method: 'GET',
                 data:{
                 },
