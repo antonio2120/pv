@@ -18,10 +18,12 @@ Route::get('/login', function () {
     return view('login');
 });
 Route::get('/productos', 'ProductoController@index');
+Route::get('/productos/{buscar}', 'ProductoController@buscar');
 Route::get('/productosEliminar/{producto_id}', 'ProductoController@eliminar');
 Route::get('/productosNuevo/', 'ProductoController@nuevo');
 Route::post('/productosGuardar/', 'ProductoController@guardar');
 Route::get('/productosEditar/{producto_id}', 'ProductoController@editar');
+Route::get('/productosPDF/{buscar}','ProductoController@downloadPDF');
 
 Route::get('/proveedoresNuevo/', 'ProveedoresController@nuevo');
 Route::get('/proveedoresEliminar/{proveedor_id}', 'ProveedoresController@eliminar');
@@ -37,11 +39,13 @@ Route::post('/clientesGuardar/', 'ClientesController@guardar');
 Route::get('/clientesEditar/{cliente_id}', 'ClientesController@editar');
 Route::get('/clientes/{buscar}', 'ClientesController@buscar');
 
+
 Route::get('/ventas', 'VentasController@index');
 Route::get('/ventasEliminar/{venta_id}', 'VentasController@eliminar');
 Route::get('/ventasNuevo/', 'VentasController@nuevo');
 Route::post('/ventasGuardar/', 'VentasController@guardar');
 Route::get('/ventasEditar/{venta_id}', 'VentasController@editar');
+Route::get('/ventas/{busqueda}', 'VentasController@buscar');
 
 Route::get('/empleados', 'EmpleadosController@index');
 Route::get('/empleados/{buscar}', 'EmpleadosController@buscar');
@@ -55,6 +59,7 @@ Route::get('/categoriasEliminar/{categoria_id}', 'CategoriaController@eliminar')
 Route::get('/categoriasNuevo/', 'CategoriaController@nuevo');
 Route::post('/categoriasGuardar/','CategoriaController@guardar');
 Route::get('/categoriasEditar/{categoria_id}','CategoriaController@editar');
+Route::get('/categorias/{buscar}','CategoriaController@buscar');
 
 Route::get('/apartados', 'ApartadoController@index');
 Route::get('/apartadosEliminar/{apartado_id}', 'ApartadoController@eliminar');

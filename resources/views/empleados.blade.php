@@ -5,6 +5,7 @@
         <div class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2"   type="text" placeholder="Ingrese búsqueda" aria-label="Search" id="buscar">
             <button   class="btn btn-outline-success my-2 my-sm-0"  onclick="buscar()" >Buscar</button>
+            <button class="btn btn-outline-primary my-2 my-sm-0" onclick="imprimir('{{isset($buscar) ? $buscar : null }}')" type="button"><i class="fas fa-file-pdf"></i></button>
         </div>
     </div>
     <table class="table">
@@ -43,6 +44,7 @@
         @endforeach
         </tbody>
     </table>
+    <h6>Número de registros: {{$numRegistros}}</h6>
 
     <script type="text/javascript">
         function buscar(){
