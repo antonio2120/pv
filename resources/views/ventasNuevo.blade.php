@@ -54,7 +54,6 @@
     <script>
       $(document).ready(function () {
         $("#FormularioVenta").validate({
-          errorClass: 'errorForm',
           rules: {
             id_empleado: {required: true},
             fecha: {required: true},

@@ -5,15 +5,50 @@ use App\Producto;
 use App\Proveedor;
 use App\Categoria;
 use Illuminate\Http\Request;
+use PDF;
 
 class ProductoController extends Controller {
     public function index()
     {
         $productos = Producto::all();
         $title = "Lista de Productos";
+        $numRegistros = $productos->count();
         return view('productos')
             ->with('productos', $productos)
-            ->with('title', $title);
+            ->with('title', $title)
+            ->with('numRegistros', $numRegistros);
+    }
+    public function buscar($buscar)
+    {
+        $productos = Producto::where('nombre','like', $buscar.'%')
+            ->orWhere('descripcion','like', $buscar.'%')
+            ->orWhere('precio', $buscar)
+            ->orWhere('costo', $buscar)
+            ->get();
+        $title = "Lista de Productos | ".$buscar;
+        $numRegistros = $productos->count();
+        return view('productos')
+            ->with('productos', $productos)
+            ->with('title', $title)
+            ->with('numRegistros', $numRegistros)
+            ->with('buscar', $buscar);
+    }
+    public function downloadPDF($buscar = null){
+        if( !isset($buscar) || $buscar == null){
+            $productos = Producto::all();
+        }else {
+            $productos = Producto::where('nombre', 'like', $buscar . '%')
+                ->orWhere('descripcion', 'like', $buscar . '%')
+                ->orWhere('precio', $buscar)
+                ->orWhere('costo', $buscar)
+                ->get();
+        }
+        $title = "Lista de Productos | " . $buscar;
+        $numRegistros = $productos->count();
+
+        $pdf = PDF::loadView('productosPDF', compact('productos', 'title', 'numRegistros'));
+        return $pdf->download('productos.pdf');
+
     }
     public function eliminar($producto_id)
     {

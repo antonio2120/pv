@@ -3,25 +3,29 @@
 namespace App\Http\Controllers;
 use App\Empleado;
 use Illuminate\Http\Request;
+use PDF;
 
 class EmpleadosController extends Controller {
     public function index()
     {
         $empleados = Empleado::all();
         $title = "Lista de Empleados";
+        $numRegistros = $empleados->count();
         return view('empleados')
             ->with('empleados', $empleados)
-            ->with('title', $title);
+            ->with('title', $title)
+            ->with('numRegistros',$numRegistros);
     }
     public function buscar($buscar){
-       $empleados = Empleado::where ('nombre','like', $buscar.'%')
-        ->orWhere ('apellido', 'like', $buscar.'%')
-        ->orWhere('nombreUsuario', $buscar)
+       $empleados =Empleado::where ('nombre','like', $buscar.'%')
+        ->orWhere('id','like', $buscar)
+        ->orWhere('apellido','like', $buscar.'%')
+        ->orWhere('nombreUsuario','like', $buscar.'%')
         ->get();
        $title = "Lista de Empleados | ".$buscar;
         $numRegistros = $empleados->count(); 
-        return view(view.'empleado')
-        ->with('empleado', $empleado)
+        return view('empleados')
+        ->with('empleados', $empleados)
         ->with('title', $title)
         ->with('numRegistros', $numRegistros);
 
