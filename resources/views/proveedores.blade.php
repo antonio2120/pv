@@ -1,6 +1,6 @@
 @extends('layout_principal') 
 @section('content') 
-<div class="row mt-5">
+<div class="row mt-5"> 
    <div class="col-8">
             <h1>{{$title}}</h1>
         </div>

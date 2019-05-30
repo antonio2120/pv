@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 use App\Proveedor;
 use Illuminate\Http\Request;
 use PDF;
-use App\UserDetail;
 
 class ProveedoresController extends Controller {
     public function index()
@@ -120,35 +119,23 @@ class ProveedoresController extends Controller {
     }
 
     public function downloadPDF($buscar = null){
-        if( !isset($buscar) || $buscar == null){
+          if(!isset($buscar) || $buscar == null){
             $proveedores = Proveedor::all();
-        }else {
-            $proveedores = Proveedor::where('nombre', 'like', $buscar . '%')
-                ->orWhere('direccion', 'like', $buscar . '%')
-                ->orWhere('ciudad', $buscar)
-                ->orWhere('telefono', $buscar)
-                ->orWhere('fax', $buscar)
-                ->orWhere('correo', $buscar)
-                ->get();
+          }else {
+            $proveedores = Proveedor:: where('nombre','like',$buscar. '%')
+            ->orWhere('direccion','like',$buscar.'%')
+            ->orWhere('ciudad','like',$buscar.'%')
+            ->orWhere('telefono','like',$buscar.'%')
+            ->orWhere('fax','like',$buscar.'%')
+            ->orWhere('correo','like',$buscar.'%')
+            ->get();
+          }
+          $title = "Lista de Proveedores | ". $buscar;
+          $numRegistros = $proveedores->count();
+          $pdf = PDF ::loadView('proveedoresPDF', compact('proveedores','title','numRegistros'));
+          return $pdf->download('proveedores.pdf');
         }
-        $title = "Lista de Proveedores | " . $buscar;
-        $numRegistros = $proveedores->count();
 
-        $pdf = PDF::loadView('proveedoresPDF', compact('proveedores', 'title', 'numRegistros'));
-        return $pdf->download('proveedores.pdf');
-
-    }
-
-    public function store(Request $request){
-
-      $user = new UserDetail([
-        'nombre' => $request->get('nombre'),
-        'direccion' => $request->get('direccion'),
-        'telefono' => $request->get('telefono')
-      ]);
-
-      $user->save();
-      return redirect('/index');
-    }
+    
 
 }

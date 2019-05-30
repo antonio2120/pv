@@ -1,4 +1,4 @@
-@extends('layout_principal') 
+@extends('layout_principal_pdf') 
 @section('content') 
 <div class="row mt-5">
    <div class="col-8">
