@@ -1,5 +1,5 @@
-@extends('layout_principal')
-@section('content')
+@extends('layout_principal') 
+@section('content') 
 <div class="row mt-5">
    <div class="col-8">
             <h1>{{$title}}</h1>
@@ -62,12 +62,16 @@
 
    </div>   
 
+
    <script type="text/javascript">
-
+      
       function buscar(){
-        location.href="{{asset('/proveedores/')}}/" + $('#buscar').val();
-      }
-
+        location.href = "{{asset('/proveedores/')}}/"+ $('#buscar').val();
+    }
+    function imprimir(buscar) {
+            location.href = "{{asset('/proveedoresPDF/')}}/" + buscar;
+        }
+     
         function eliminarProveedor(proveedor_id){
             $.ajax({
                 url: 'proveedoresEliminar/'+proveedor_id,

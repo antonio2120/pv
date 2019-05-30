@@ -5,7 +5,7 @@
             <h1>{{$title}}</h1>
         </div>
     </div>
-
+ 
     <table class="table">
         <thead class="thead-dark">
         <tr>

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Proveedor;
 use Illuminate\Http\Request;
+use PDF;
+use App\UserDetail;
 
 class ProveedoresController extends Controller {
     public function index()
@@ -10,7 +12,7 @@ class ProveedoresController extends Controller {
         $proveedores = Proveedor::all();
         $numRegistros = $proveedores->count();
         $title = "Tabla de Proveedores";
-        return view('proveedores')
+        return view('proveedores') 
             ->with('proveedores', $proveedores)
             ->with('title', $title)
             ->with('$numRegistros', $numRegistros);
@@ -115,6 +117,38 @@ class ProveedoresController extends Controller {
         ->with('title', $title)
         ->with('numRegistros', $numRegistros);
 
+    }
+
+    public function downloadPDF($buscar = null){
+        if( !isset($buscar) || $buscar == null){
+            $proveedores = Proveedor::all();
+        }else {
+            $proveedores = Proveedor::where('nombre', 'like', $buscar . '%')
+                ->orWhere('direccion', 'like', $buscar . '%')
+                ->orWhere('ciudad', $buscar)
+                ->orWhere('telefono', $buscar)
+                ->orWhere('fax', $buscar)
+                ->orWhere('correo', $buscar)
+                ->get();
+        }
+        $title = "Lista de Proveedores | " . $buscar;
+        $numRegistros = $proveedores->count();
+
+        $pdf = PDF::loadView('proveedoresPDF', compact('proveedores', 'title', 'numRegistros'));
+        return $pdf->download('proveedores.pdf');
+
+    }
+
+    public function store(Request $request){
+
+      $user = new UserDetail([
+        'nombre' => $request->get('nombre'),
+        'direccion' => $request->get('direccion'),
+        'telefono' => $request->get('telefono')
+      ]);
+
+      $user->save();
+      return redirect('/index');
     }
 
 }
