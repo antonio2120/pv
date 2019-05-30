@@ -1,9 +1,10 @@
 @extends('layout_principal')
 @section('content')
-    <h1>{{$title}}<form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form></h1>
+    <h1>{{$title}}</h1>
+    <div class="form-inline my-2 my-lg-0">
+    <input class="form-control mr-sm-2" id="buscar" type="text" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" onclick="buscar()">Buscar</button>
+    </div>
     <table class="table">
         <thead class="thead-dark">
         <tr>
