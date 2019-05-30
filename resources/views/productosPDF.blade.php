@@ -8,7 +8,7 @@
             <div class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="buscar" id="buscar">
                 <button class="btn btn-outline-success my-2 my-sm-0 mr-sm-2" onclick="buscar()">Buscar</button>
-                <button class="btn btn-outline-primary my-2 my-sm-0" onclick="imprimir('{{isset($buscar) ? $buscar : null }}')" type="button"><i class="fas fa-file-pdf"></i></button>
+                <button class="btn btn-outline-primary my-2 my-sm-0" onclick="imprimir()" type="button"><i class="fas fa-file-pdf"></i></button>
             </div>
         </div>
     </div>
@@ -58,9 +58,6 @@
 
         function buscar() {
             location.href = "{{asset('/productos/')}}/" + $('#buscar').val();
-        }
-        function imprimir(buscar) {
-            location.href = "{{asset('/productosPDF/')}}/" + buscar;
         }
         function eliminarProducto(producto_id){
             $.ajax({

@@ -66,6 +66,8 @@ Route::get('/apareceEliminar/{aparece_id}','ApareceController@eliminar');
 Route::get('/apareceNuevo/','ApareceController@nuevo');
 Route::post('/apareceGuardar/','ApareceController@guardar');
 Route::get('/apareceEditar/{aparece_id}','ApareceController@editar');
+Route::get('/aparece/{aparece_id}','ApareceController@buscar');
+
 
 Route::get('/compras', 'ComprasController@index');
 

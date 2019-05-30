@@ -7,9 +7,10 @@
       <label for="exampleInputEmail1">Nombre de Empleado en turno</label>
 
       <select class="form-control" id="id_empleado" name="empleado_id">
+          <option value="">-----------</option>
         @foreach($empleados as $empleado)
-          @if(isset($empleado))
-            @if($empleado->empleado_id == $empleado->id )
+          @if(isset($venta))
+            @if($empleado->id == $venta->empleado_id )
               <option selected value="{{$empleado->id}}" >{{$empleado->nombre}}</option>
             @else
               <option value="{{$empleado->id}}">{{$empleado->nombre}}</option>
@@ -53,7 +54,6 @@
     <script>
       $(document).ready(function () {
         $("#FormularioVenta").validate({
-          errorClass: 'errorForm',
           rules: {
             id_empleado: {required: true},
             fecha: {required: true},

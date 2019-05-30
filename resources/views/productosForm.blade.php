@@ -99,7 +99,6 @@
                         required: true
                     },
                 },
-
                 messages: {
                     nombre_producto: {
                         required: "Ingresar Nombre del producto"
@@ -120,7 +119,6 @@
                         required: "Seleccionar Categoria del producto"
                     },
                 },
-
             });
         });
         $("#productoForm").submit(function (event ) {
@@ -150,10 +148,13 @@
 
                 },
                 success: function (response) {
-                    console.log("response", response);
                     if (response.status == 'ok') {
                         toastr["success"](response.mensaje);
-                        $("#productoForm").trigger("reset");
+                        if("{{$accion}}" == "nuevo"){
+                            $("#productoForm").trigger("reset");
+                        }else{
+                            window.setTimeout("location.href = \"{{asset('/productos/')}}\"", 3000)
+                        }
                     } else {
                         toastr["error"](response.mensaje);
                     }

@@ -2,10 +2,10 @@
 @section('content')
     <h1>{{$title}}</h1>
    <div class="form-group">
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" onclick="imprimir()"type="text" placeholder="Search" aria-label="Search">
+        <div class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2"   type="text" placeholder="Search" aria-label="Search" id="buscar">
             <button   class="btn btn-outline-success my-2 my-sm-0"  onclick="buscar()" >Buscar</button>
-        </form>
+        </div>
     </div>
     <table class="table">
         <thead class="thead-dark">
@@ -45,11 +45,13 @@
         </tbody>
     </table>
 
+    <h6>Numero de Registros: {{$numRegistros}}</h6>
+
   
 
      <script type="text/javascript">
             function buscar(){
-                location.href = "{{asset('/categorias/')}}/" + $('#buscar').val();
+               location.href = "{{asset('/categorias/')}}/" + $('#buscar').val();
             }
         function eliminarCategoria(categoria_id){
             $.ajax({
