@@ -17,8 +17,10 @@ class ClientesController extends Controller{
 
     public function buscar($buscar){
        $clientes = Cliente::where ('nombres','like', $buscar.'%')
+        ->orWhere('id','like', $buscar)
         ->orWhere ('apaterno', 'like', $buscar.'%')
-        ->orWhere('amaterno', $buscar)
+        ->orWhere ('amaterno', 'like', $buscar.'%')
+        ->orWhere ('nombres', 'like', $buscar.'%')
         ->get();
        $title = "Lista de Clientes | ".$buscar;
         $numRegistros = $clientes->count(); 
