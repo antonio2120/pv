@@ -63,6 +63,8 @@ Route::get('/categoriasNuevo/', 'CategoriaController@nuevo');
 Route::post('/categoriasGuardar/','CategoriaController@guardar');
 Route::get('/categoriasEditar/{categoria_id}','CategoriaController@editar');
 Route::get('/categorias/{buscar}','CategoriaController@buscar');
+Route::get('/categoriasPDF/','CategoriaController@downloadPDF');
+Route::get('/categoriasPDF/{buscar}','CategoriaController@downloadPDF');
 
 Route::get('/apartados', 'ApartadoController@index');
 Route::get('/apartadosEliminar/{apartado_id}', 'ApartadoController@eliminar');
