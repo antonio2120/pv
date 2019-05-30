@@ -1,10 +1,17 @@
 @extends('layout_principal')
 @section('content')
-    <h1>{{$title}}</h1>
+<div class="row mt-5">
+   <div class="col-8">
+            <h1>{{$title}}</h1>
+        </div>
+    <div class="col-4">
     <div class="form-inline my-2 my-lg-0">
-    <input class="form-control mr-sm-2" id="buscar" type="text" placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-success my-2 my-sm-0" onclick="buscar()">Buscar</button>
+    <input class="form-control mr-sm-2" id="buscar" type="text" placeholder="Buscar" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" onclick="buscar()"><i class="fas fa-search"></i></button>
+    <button class="btn btn-outline-primary my-2 my-sm-0" onclick="imprimir('{{isset($buscar) ? $buscar : null }}')" type="button"><i class="fas fa-file-pdf"></i></button>
   </div>
+</div>
+</div>
    <div class="table-responsive">
      <table class="table">
   <thead class="thead-dark">
