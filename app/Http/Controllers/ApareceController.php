@@ -11,9 +11,12 @@ class ApareceController extends Controller {
     {
         $aparece = Aparece::all();
         $title = "Lista de Aparece";
+        $numRegistros= $aparece->count();
         return view('aparece')
             ->with('aparece', $aparece)
-            ->with('title', $title);
+            ->with('title', $title)
+            ->with('numRegistros', $numRegistros) ;
+                    
     }
 
       public function eliminar($aparece_id)
@@ -105,8 +108,17 @@ class ApareceController extends Controller {
             return response()->json(['mensaje' => 'Error al eliminar al aparece, aparece no encontrado '], 400);
                   }
 
+}
+    
 
-    }
-   
-
+    public function buscar($buscar){
+            $aparece= Aparece::where('codigo_barras','like',$buscar.'%')
+            ->get();
+            $title="Lista de Aparece | ".$buscar;
+            $numRegistros= $aparece->count();
+            return view('aparece')
+            ->with('title', $title)
+                    ->with('numRegistros', $numRegistros) 
+                    ->with('aparece',$aparece);
+                      }
 }
