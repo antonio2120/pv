@@ -1,13 +1,16 @@
 <?php
 
- 
+   
 namespace App\Http\Controllers;
 use App\Sucursal;
 use Illuminate\Http\Request;
+use PDF;
+use App\UserDetail;
 
 class SucursalController extends Controller{
 
-    public function index(){
+    public function index()
+    {
         $sucursal = Sucursal::all();
         $title = "sucursales ";
         $numRegistros = $sucursal->count();
@@ -16,6 +19,28 @@ class SucursalController extends Controller{
        ->with('title', $title)
         ->with('numRegistros', $numRegistros); 
     }
+
+
+    public function downloadPDF($buscar = null){
+        if( !isset($buscar) || $buscar == null){
+            $sucursal = Sucursal::all();
+        }else {
+            $sucursal = Sucursal::where('nombre', 'like', $buscar . '%')
+                ->orWhere('descripcion', 'like', $buscar . '%')
+                ->orWhere('precio', $buscar)
+                ->orWhere('costo', $buscar)
+                ->get();
+        }
+        $title = "Lista de Sucursal | " . $buscar;
+        $numRegistros = $sucursal->count();
+
+        $pdf = PDF::loadView('sucursalPDF', compact('sucursal', 'title', 'numRegistros'));
+        return $pdf->download('sucursal.pdf');
+
+    }
+
+
+
 
     public function eliminar($sucursal_id)
     {
@@ -117,4 +142,19 @@ public function buscar($buscar)
         }
 
     }
+
+    public function store(Request $request){
+
+      $user = new UserDetail([
+        'nombre' => $request->get('nombre'),
+        'direccion' => $request->get('direccion'),
+        'telefono' => $request->get('telefono')
+      ]);
+
+      $user->save();
+      return redirect('/index');
+    }
+   
+
+  
 }

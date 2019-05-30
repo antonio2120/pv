@@ -1,10 +1,11 @@
 @extends('layout_principal')
 @section('content')
     <h1>{{$title}}</h1>
-
+ 
 <div class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="text" placeholder="buscar" aria-label="Search" id="buscar">
             <button class="btn btn-outline-success my-2 my-sm-0" onclick="buscar()">Buscar</button>
+            <button class="btn btn-outline-primary my-2 my-sm-0" onclick="imprimir('{{isset($buscar) ? $buscar : null }}')" type="button"><i class="fas fa-file-pdf"></i></button>
         </div>
 <h6>Numero de sucursales: {{$numRegistros}}</h6>
 <script type="text/javascript">
@@ -12,6 +13,9 @@
     function buscar(){
         location.href = "{{asset('/sucursal/')}}/"+ $('#buscar').val();
     }
+    function imprimir(buscar) {
+            location.href = "{{asset('/sucursalPDF/')}}/" + buscar;
+        }
 </script>
 
 
