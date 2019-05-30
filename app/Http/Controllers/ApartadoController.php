@@ -10,10 +10,12 @@ class ApartadoController extends Controller {
     public function index()
     {
         $apartados = Apartado::all();
+        $numRegistros = $apartados->count();
         $title = "Tabla de Apartados";
         return view('apartados')
             ->with('apartados', $apartados)
             ->with('title', $title);
+            ->with('numRegistros', $numRegistros);
     }
     public function eliminar($apartado_id)
     {
@@ -113,5 +115,19 @@ class ApartadoController extends Controller {
         }
 
     }
+
+    public function buscar($buscar)
+    {
+        $apartados = Apartado::where('fecha_inicio','like', $buscar.'%')
+        ->orWhere('fecha_fin','like', $buscar.'%')
+        ->orWhere('anticipo', $buscar)
+        ->orWhere('total', $buscar)
+        ->get();
+        $title = "Lista de apartados | ".$buscar;
+        $numRegistros = $apartados->count();
+        return view('apartados')
+        ->with('apartados', $apartados)
+        ->with('title', $title)
+        ->with('numRegistros', $numRegistros);
 
 }

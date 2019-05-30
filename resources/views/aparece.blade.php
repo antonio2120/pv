@@ -1,6 +1,12 @@
 @extends('layout_principal')
 @section('content')
     <h1>{{$title}}</h1>
+      <div class="form-group">
+        <div class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2"   onclick="imprimir()" type="text" placeholder="Search" aria-label="Search" id="buscar">
+            <button   class="btn btn-outline-success my-2 my-sm-0"  onclick="buscar()" >Buscar</button>
+        </div>
+    </div>
     <table class="table">
         <thead class="thead-dark">
         <tr>
@@ -49,9 +55,11 @@
 
         </tbody>
     </table>
-
-
+    <h6>Numero de Registros: {{$numRegistros}}</h6>
     <script type="text/javascript">
+        function buscar(){
+            location.href="{{asset('/aparece/')}}/"+$('#buscar').val();
+        }
 
         function eliminarAparece(aparece_id){
             $.ajax({

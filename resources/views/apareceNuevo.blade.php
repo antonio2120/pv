@@ -1,7 +1,7 @@
 @extends('layout_principal')
 @section('content')
     <h1>{{$title}}</h1>
-       <form id="apareceForm" >
+         <form id="apareceForm" >
             <div class="form-group">
                 <label for="apartado">Apardato</label>
                 <select class="form-control" id="apartado" name="apartado" >

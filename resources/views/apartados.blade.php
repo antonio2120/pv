@@ -1,12 +1,16 @@
 @extends('layout_principal')
 @section('content')
     <h1>{{$title}}</h1>
+    <div class="form-inline my-2 my-lg-0">
+    <input class="form-control mr-sm-2" id="buscar" type="text" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" onclick="buscar()">Buscar</button>
+    </div>
     <table class="table">
         <thead class="thead-dark">
         <tr>
             <th scope="col">#ID</th>
             <th scope="col">ID cliente</th>
-            <th scope="col">Fehca de inicio</th>
+            <th scope="col">Fecha de inicio</th>
             <th scope="col">Fecha final</th>
             <th scope="col">Anticipo</th>
             <th scope="col">Total</th>
