@@ -6,7 +6,6 @@ use App\Cliente;
 use App\Empleado;
 use Illuminate\Http\Request;
 use PDF;
-use App\UserDetail;
 
 class ApartadoController extends Controller {
     public function index()
@@ -135,7 +134,7 @@ class ApartadoController extends Controller {
     }
 
     public function downloadPDF($buscar = null){
-        if( !isset($buscar) || $buscar == null){
+        if(!isset($buscar) || $buscar == null){
             $apartados = Apartado::all();
         }else {
             $apartados = Apartado::where('fecha_inicio','like', $buscar.'%')
@@ -151,17 +150,4 @@ class ApartadoController extends Controller {
         return $pdf->download('apartados.pdf');
 
     }
-
-    public function store(Request $request){
-
-      $user = new UserDetail([
-        'nombre' => $request->get('nombre'),
-        'direccion' => $request->get('direccion'),
-        'telefono' => $request->get('telefono')
-      ]);
-
-      $user->save();
-      return redirect('/index');
-    }
-
 }

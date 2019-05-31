@@ -11,7 +11,7 @@ class ProveedoresController extends Controller {
         $proveedores = Proveedor::all();
         $numRegistros = $proveedores->count();
         $title = "Tabla de Proveedores";
-        return view('proveedores') 
+        return view('proveedores')
             ->with('proveedores', $proveedores)
             ->with('title', $title)
             ->with('$numRegistros', $numRegistros);
@@ -43,7 +43,7 @@ class ProveedoresController extends Controller {
             ->with('proveedor', $proveedor)
             ->with('accion', $accion);
     }
-    
+
     public function guardar(Request $request)
     {
         try {
@@ -110,7 +110,7 @@ class ProveedoresController extends Controller {
         ->orWhere('nombre', $buscar)
         ->get();
        $title = "Lista de proveedores | ".$buscar;
-        $numRegistros = $proveedores->count(); 
+        $numRegistros = $proveedores->count();
         return view('proveedores')
         ->with('proveedores', $proveedores)
         ->with('title', $title)
@@ -136,6 +136,6 @@ class ProveedoresController extends Controller {
           return $pdf->download('proveedores.pdf');
         }
 
-    
+
 
 }
