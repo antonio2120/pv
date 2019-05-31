@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Aparece;
 use App\Apartado;
 use Illuminate\Http\Request;
-
+use PDF;
 
 class ApareceController extends Controller {
     public function index()
@@ -121,4 +121,17 @@ class ApareceController extends Controller {
                     ->with('numRegistros', $numRegistros) 
                     ->with('aparece',$aparece);
                       }
+
+       public function downloadPDF($buscar = null){
+          if(!isset($buscar) || $buscar == null){
+            $aparece = Aparece::all();
+          }else {
+             $aparece= Aparece::where('codigo_barras','like',$buscar.'%')
+            ->get();
+          }
+          $title = "Lista de Aparece | ". $buscar;
+          $numRegistros = $aparece->count();
+          $pdf = PDF ::loadView('aparecePDF', compact('aparece','title','numRegistros'));
+          return $pdf->download('aparece.pdf');
+        }                 
 }

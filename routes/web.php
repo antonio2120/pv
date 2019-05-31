@@ -78,7 +78,8 @@ Route::get('/apareceNuevo/','ApareceController@nuevo');
 Route::post('/apareceGuardar/','ApareceController@guardar');
 Route::get('/apareceEditar/{aparece_id}','ApareceController@editar');
 Route::get('/aparece/{aparece_id}','ApareceController@buscar');
-
+Route::get('/aparecePDF/','ApareceController@downloadPDF');
+Route::get('/aparecePDF/{buscar}','ApareceController@downloadPDF');
 
 Route::get('/compras', 'ComprasController@index');
 
