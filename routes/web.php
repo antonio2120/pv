@@ -40,7 +40,8 @@ Route::get('/clientesNuevo/', 'ClientesController@nuevo');
 Route::post('/clientesGuardar/', 'ClientesController@guardar');
 Route::get('/clientesEditar/{cliente_id}', 'ClientesController@editar');
 Route::get('/clientes/{buscar}', 'ClientesController@buscar');
-
+Route::get('/clientesPDF/','ClientesController@downloadPDF');
+Route::get('/clientesPDF/{buscar}','ClientesController@downloadPDF');
 
 Route::get('/ventas', 'VentasController@index');
 Route::get('/ventasEliminar/{venta_id}', 'VentasController@eliminar');

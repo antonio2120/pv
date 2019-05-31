@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Cliente;
 use Illuminate\Http\Request;
+use PDF;
 
 class ClientesController extends Controller{
     public function index(){
@@ -28,6 +29,23 @@ class ClientesController extends Controller{
         ->with('clientes', $clientes)
         ->with('title', $title)
         ->with('numRegistros', $numRegistros);
+    }
+
+    public function downloadPDF($buscar = null){
+          if(!isset($buscar) || $buscar == null){
+            $clientes = Cliente::all();
+          }else {
+            $clientes = Cliente::where('nombres','like',$buscar. '%')
+            ->orWhere('id','like', $buscar)
+            ->orWhere ('apaterno', 'like', $buscar.'%')
+            ->orWhere ('amaterno', 'like', $buscar.'%')
+            ->orWhere ('nombres', 'like', $buscar.'%')
+            ->get();
+          }
+          $title = "Lista de Clientes | ". $buscar;
+          $numRegistros = $clientes->count();
+          $pdf = PDF ::loadView('clientesPDF', compact('clientes','title','numRegistros'));
+          return $pdf->download('clientes.pdf');
     }
 
     public function eliminar($cliente_id)
