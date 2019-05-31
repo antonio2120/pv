@@ -16,8 +16,6 @@
             <th scope="col">Anticipo</th>
             <th scope="col">Total</th>
             <th scope="col">ID de Empleado</th>
-            <th scope="col">Editar</th>
-            <th scope="col">Eliminar</th>
         </tr>
         </thead>
         <tbody>
@@ -30,7 +28,6 @@
                 <td>{{$apartado->anticipo}}</td>
                 <td>{{$apartado->total}}</td>
                 <td>{{$apartado->empleados_id}}</td>
-                <td>
         @endforeach
         </tbody>
     </table>
