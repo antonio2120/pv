@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Categoria;
 use Illuminate\Http\Request;
+use PDF;
 
 class CategoriaController extends Controller {
     public function index()
@@ -114,5 +115,19 @@ class CategoriaController extends Controller {
            ->with('numRegistros',$numRegistros);
         }
 
+
+        public function downloadPDF($buscar = null){
+          if(!isset($buscar) || $buscar == null){
+            $categorias = Categoria::all();
+          }else {
+            $categorias = Categoria:: where('nombre','like',$buscar. '%')
+            ->orWhere('nombre','like',$buscar.'%')
+            ->get();
+          }
+          $title = "Lista de Categorias | ". $buscar;
+          $numRegistros = $categorias->count();
+          $pdf = PDF ::loadView('categoriasPDF', compact('categorias','title','numRegistros'));
+          return $pdf->download('categorias.pdf');
+        }
      
     }

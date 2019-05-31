@@ -1,18 +1,47 @@
 <?php
 
- 
+   
 namespace App\Http\Controllers;
 use App\Sucursal;
 use Illuminate\Http\Request;
+use PDF;
+use App\UserDetail;
 
 class SucursalController extends Controller{
-    public function index(){
-    $sucursal = Sucursal::all();
-    $title = "sucursales ";
-    return view('sucursal')
-   ->with('sucursal', $sucursal)
-   ->with('title', $title);
+
+    public function index()
+    {
+        $sucursal = Sucursal::all();
+        $title = "sucursales ";
+        $numRegistros = $sucursal->count();
+        return view('sucursal')
+       ->with('sucursal', $sucursal)
+       ->with('title', $title)
+        ->with('numRegistros', $numRegistros); 
     }
+
+
+    public function downloadPDF($buscar = null){
+        if( !isset($buscar) || $buscar == null){
+            $sucursal = Sucursal::all();
+        }else {
+            $sucursal = Sucursal::where('nombre', 'like', $buscar . '%')
+                ->orWhere('descripcion', 'like', $buscar . '%')
+                ->orWhere('precio', $buscar)
+                ->orWhere('costo', $buscar)
+                ->get();
+        }
+        $title = "Lista de Sucursal | " . $buscar;
+        $numRegistros = $sucursal->count();
+
+        $pdf = PDF::loadView('sucursalPDF', compact('sucursal', 'title', 'numRegistros'));
+        return $pdf->download('sucursal.pdf');
+
+    }
+
+
+
+
     public function eliminar($sucursal_id)
     {
         if ($sucursal_id) {
@@ -30,6 +59,22 @@ class SucursalController extends Controller{
         } 
 
     }
+
+public function buscar($buscar)
+{
+    $sucursal = Sucursal::where('nombre','like',$buscar."%")
+
+        ->orWhere('direccion','like',$buscar.'%')
+        ->orWhere('telefono',$buscar)
+        ->get();
+
+        $title = "Lista de Sucursal | ".$buscar;
+        $numRegistros = $sucursal->count();
+        return view('sucursal')
+        ->with('sucursal', $sucursal)
+        ->with('title', $title)
+        ->with('numRegistros', $numRegistros);        
+}
   
     public function nuevo()
     {
@@ -97,4 +142,19 @@ class SucursalController extends Controller{
         }
 
     }
+
+    public function store(Request $request){
+
+      $user = new UserDetail([
+        'nombre' => $request->get('nombre'),
+        'direccion' => $request->get('direccion'),
+        'telefono' => $request->get('telefono')
+      ]);
+
+      $user->save();
+      return redirect('/index');
+    }
+   
+
+  
 }

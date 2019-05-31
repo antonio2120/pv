@@ -22,7 +22,7 @@
   </div>
   <div class="form-row">
 
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-4"> 
       <label for="inputEmail">Correo Electrónico</label>
       <input type="email" class="form-control" id="forCorreo" placeholder="Correo" name="correo" value="{{isset($proveedor) ? $proveedor->correo : ''}}">
     </div>
@@ -37,7 +37,7 @@
   </div>
   <button type="submit" class="btn btn-primary">{{$accion == 'nuevo' ? 'Alta de proveedores' : 'Guardar cambios' }}</button>
 </form>
-
+ 
 <script>
     $(document).ready(function () {
         $("#proveedorForm").validate({

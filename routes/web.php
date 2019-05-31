@@ -53,6 +53,9 @@ Route::get('/empleadosEliminar/{empleado_id}', 'EmpleadosController@eliminar');
 Route::get('/empleadosNuevo/', 'EmpleadosController@nuevo');
 Route::post('/empleadosGuardar/', 'EmpleadosController@guardar');
 Route::get('/empleadosEditar/{empleado_id}', 'EmpleadosController@editar');
+Route::get('/empleadosPDF/','EmpleadosController@downloadPDF');
+Route::get('/empleadosPDF/{buscar}','EmpleadosController@downloadPDF');
+
 
 Route::get('/categorias', 'CategoriaController@index');
 Route::get('/categoriasEliminar/{categoria_id}', 'CategoriaController@eliminar');
@@ -67,6 +70,8 @@ Route::get('/apartadosNuevo/', 'ApartadoController@nuevo');
 Route::post('/apartadosGuardar/', 'ApartadoController@guardar');
 Route::get('/apartadosEditar/{apartado_id}', 'ApartadoController@editar');
 Route::get('/apartados/{buscar}', 'ApartadoController@buscar');
+Route::get('/apartadosPDF/','ApartadoController@downloadPDF');
+Route::get('/apartadosPDF/{buscar}','ApartadoController@downloadPDF');
 
 Route::get('/aparece', 'ApareceController@index');
 Route::get('/apareceEliminar/{aparece_id}','ApareceController@eliminar');
@@ -74,7 +79,8 @@ Route::get('/apareceNuevo/','ApareceController@nuevo');
 Route::post('/apareceGuardar/','ApareceController@guardar');
 Route::get('/apareceEditar/{aparece_id}','ApareceController@editar');
 Route::get('/aparece/{aparece_id}','ApareceController@buscar');
-
+Route::get('/aparecePDF/','ApareceController@downloadPDF');
+Route::get('/aparecePDF/{buscar}','ApareceController@downloadPDF');
 
 Route::get('/compras', 'ComprasController@index');
 

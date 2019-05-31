@@ -4,7 +4,10 @@
       <div class="form-group">
         <div class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2"   onclick="imprimir()" type="text" placeholder="Search" aria-label="Search" id="buscar">
+           
             <button   class="btn btn-outline-success my-2 my-sm-0"  onclick="buscar()" >Buscar</button>
+
+            <button class="btn btn-outline-primary my-2 my-sm-0" onclick="imprimir('{{isset($buscar) ? $buscar : null }}')" type="button"><i class="fas fa-file-pdf"></i></button>
         </div>
     </div>
     <table class="table">
@@ -60,6 +63,10 @@
         function buscar(){
             location.href="{{asset('/aparece/')}}/"+$('#buscar').val();
         }
+
+         function imprimir(buscar){
+                location.href= "{{asset('/aparecePDF/')}}/" + buscar;
+            }
 
         function eliminarAparece(aparece_id){
             $.ajax({

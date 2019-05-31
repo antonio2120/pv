@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Proveedor;
 use Illuminate\Http\Request;
+use PDF;
 
 class ProveedoresController extends Controller {
     public function index()
@@ -42,7 +43,7 @@ class ProveedoresController extends Controller {
             ->with('proveedor', $proveedor)
             ->with('accion', $accion);
     }
-    
+
     public function guardar(Request $request)
     {
         try {
@@ -109,12 +110,32 @@ class ProveedoresController extends Controller {
         ->orWhere('nombre', $buscar)
         ->get();
        $title = "Lista de proveedores | ".$buscar;
-        $numRegistros = $proveedores->count(); 
+        $numRegistros = $proveedores->count();
         return view('proveedores')
         ->with('proveedores', $proveedores)
         ->with('title', $title)
         ->with('numRegistros', $numRegistros);
 
     }
+
+    public function downloadPDF($buscar = null){
+          if(!isset($buscar) || $buscar == null){
+            $proveedores = Proveedor::all();
+          }else {
+            $proveedores = Proveedor:: where('nombre','like',$buscar. '%')
+            ->orWhere('direccion','like',$buscar.'%')
+            ->orWhere('ciudad','like',$buscar.'%')
+            ->orWhere('telefono','like',$buscar.'%')
+            ->orWhere('fax','like',$buscar.'%')
+            ->orWhere('correo','like',$buscar.'%')
+            ->get();
+          }
+          $title = "Lista de Proveedores | ". $buscar;
+          $numRegistros = $proveedores->count();
+          $pdf = PDF ::loadView('proveedoresPDF', compact('proveedores','title','numRegistros'));
+          return $pdf->download('proveedores.pdf');
+        }
+
+
 
 }
