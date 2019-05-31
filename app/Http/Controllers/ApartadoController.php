@@ -5,16 +5,18 @@ use App\Apartado;
 use App\Cliente;
 use App\Empleado;
 use Illuminate\Http\Request;
+use PDF;
+use App\UserDetail;
 
 class ApartadoController extends Controller {
     public function index()
     {
         $apartados = Apartado::all();
+        $title = "Lista de apartados";
         $numRegistros = $apartados->count();
-        $title = "Tabla de Apartados";
         return view('apartados')
             ->with('apartados', $apartados)
-            ->with('title', $title);
+            ->with('title', $title)
             ->with('numRegistros', $numRegistros);
     }
     public function eliminar($apartado_id)
@@ -119,15 +121,47 @@ class ApartadoController extends Controller {
     public function buscar($buscar)
     {
         $apartados = Apartado::where('fecha_inicio','like', $buscar.'%')
-        ->orWhere('fecha_fin','like', $buscar.'%')
-        ->orWhere('anticipo', $buscar)
-        ->orWhere('total', $buscar)
-        ->get();
+            ->orWhere('fecha_fin','like', $buscar.'%')
+            ->orWhere('anticipo', $buscar)
+            ->orWhere('total', $buscar)
+            ->get();
         $title = "Lista de apartados | ".$buscar;
         $numRegistros = $apartados->count();
         return view('apartados')
-        ->with('apartados', $apartados)
-        ->with('title', $title)
-        ->with('numRegistros', $numRegistros);
+            ->with('apartados', $apartados)
+            ->with('title', $title)
+            ->with('numRegistros', $numRegistros)
+            ->with('buscar', $buscar);
+    }
+
+    public function downloadPDF($buscar = null){
+        if( !isset($buscar) || $buscar == null){
+            $apartados = Apartado::all();
+        }else {
+            $apartados = Apartado::where('fecha_inicio','like', $buscar.'%')
+                ->orWhere('fecha_fin','like', $buscar.'%')
+                ->orWhere('anticipo', $buscar)
+                ->orWhere('total', $buscar)
+                ->get();
+        }
+        $title = "Lista de apartados | " . $buscar;
+        $numRegistros = $apartados->count();
+
+        $pdf = PDF::loadView('apartadosPDF', compact('apartados', 'title', 'numRegistros'));
+        return $pdf->download('apartados.pdf');
+
+    }
+
+    public function store(Request $request){
+
+      $user = new UserDetail([
+        'nombre' => $request->get('nombre'),
+        'direccion' => $request->get('direccion'),
+        'telefono' => $request->get('telefono')
+      ]);
+
+      $user->save();
+      return redirect('/index');
+    }
 
 }
