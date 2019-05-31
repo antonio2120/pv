@@ -1,13 +1,18 @@
 @extends('layout_principal')
 @section('content')
-    <h1>{{$title}}</h1>
-    <div class="form-group">
-        <div class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2"   type="text" placeholder="Ingrese búsqueda" aria-label="Search" id="buscar">
-            <button   class="btn btn-outline-success my-2 my-sm-0"  onclick="buscar()" >Buscar</button>
-            <button class="btn btn-outline-primary my-2 my-sm-0" onclick="imprimir('{{isset($buscar) ? $buscar : null }}')" type="button"><i class="fas fa-file-pdf"></i></button>
+
+  <div class="row mt-5"> 
+   <div class="col-8">
+            <h1>{{$title}}</h1>
         </div>
-    </div>
+    <div class="col-4">
+    <div class="form-inline my-2 my-lg-0">
+    <input class="form-control mr-sm-2" id="buscar" type="text" placeholder="Ingresar búsqueda" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" onclick="buscar()">Buscar</button>
+    <button class="btn btn-outline-primary my-2 my-sm-0" onclick="imprimir('{{isset($buscar) ? $buscar : null }}')" type="button"><i class="fas fa-file-pdf"></i></button>
+  </div>
+</div>
+</div>
     <table class="table">
         <thead class="thead-dark">
         <tr>
@@ -49,6 +54,9 @@
     <script type="text/javascript">
         function buscar(){
         location.href="{{asset('/empleados/')}}/" + $('#buscar').val();
+        }
+        function imprimir(buscar) {
+            location.href = "{{asset('/empleadosPDF/')}}/" + buscar;
         }
 
         function eliminarEmpleado(empleado_id){

@@ -31,9 +31,6 @@ Route::get('/proveedores', 'ProveedoresController@index');
 Route::post('/proveedoresGuardar/', 'ProveedoresController@guardar');
 Route::get('/proveedoresEditar/{proveedor_id}', 'ProveedoresController@editar');
 Route::get('/proveedores/{buscar}', 'ProveedoresController@buscar');
-Route::get('/proveedoresPDF/','ProveedoresController@downloadPDF');
-Route::get('/proveedoresPDF/{buscar}','ProveedoresController@downloadPDF');
-
 
 Route::get('/clientes', 'ClientesController@index');
 Route::get('/clientesEliminar/{cliente_id}', 'ClientesController@eliminar');
@@ -56,6 +53,9 @@ Route::get('/empleadosEliminar/{empleado_id}', 'EmpleadosController@eliminar');
 Route::get('/empleadosNuevo/', 'EmpleadosController@nuevo');
 Route::post('/empleadosGuardar/', 'EmpleadosController@guardar');
 Route::get('/empleadosEditar/{empleado_id}', 'EmpleadosController@editar');
+Route::get('/empleadosPDF/','EmpleadosController@downloadPDF');
+Route::get('/empleadosPDF/{buscar}','EmpleadosController@downloadPDF');
+
 
 Route::get('/categorias', 'CategoriaController@index');
 Route::get('/categoriasEliminar/{categoria_id}', 'CategoriaController@eliminar');
@@ -63,8 +63,6 @@ Route::get('/categoriasNuevo/', 'CategoriaController@nuevo');
 Route::post('/categoriasGuardar/','CategoriaController@guardar');
 Route::get('/categoriasEditar/{categoria_id}','CategoriaController@editar');
 Route::get('/categorias/{buscar}','CategoriaController@buscar');
-Route::get('/categoriasPDF/','CategoriaController@downloadPDF'); 
-Route::get('/categoriasPDF/{buscar}','CategoriaController@downloadPDF');
 
 Route::get('/apartados', 'ApartadoController@index');
 Route::get('/apartadosEliminar/{apartado_id}', 'ApartadoController@eliminar');
@@ -84,11 +82,8 @@ Route::get('/aparece/{aparece_id}','ApareceController@buscar');
 Route::get('/compras', 'ComprasController@index');
 
 
-Route::get('/sucursal/', 'SucursalController@index');
+Route::get('/sucursal', 'SucursalController@index');
 Route::get('/sucursalEliminar/{sucursal_id}', 'SucursalController@eliminar');
 Route::get('/sucursalNuevo/', 'SucursalController@nuevo');
 Route::post('/sucursalGuardar/', 'SucursalController@guardar');
 Route::get('/sucursalEditar/{sucursal_id}', 'SucursalController@editar');
-Route::get('/sucursal/{buscar}', 'SucursalController@buscar');
-Route::get('/sucursalPDF/','SucursalController@downloadPDF');
-Route::get('/sucursalPDF/{buscar}','SucursalController@downloadPDF');

@@ -30,6 +30,26 @@ class EmpleadosController extends Controller {
         ->with('numRegistros', $numRegistros);
 
     }
+
+
+    public function downloadPDF($buscar = null){
+        if( !isset($buscar) || $buscar == null){
+            $empleados = Empleado::all();
+        }else {
+            $empleados =Empleado::where ('nombre','like', $buscar.'%')
+            ->orWhere('apellido','like', $buscar.'%')
+            ->orWhere('nombreUsuario','like', $buscar.'%')
+            ->orWhere('password','like', $buscar.'%')
+            ->get();
+        }
+        $title = "Lista de Empleados | " . $buscar;
+        $numRegistros = $empleados->count();
+        $pdf = PDF::loadView('empleadosPDF', compact('empleados', 'title', 'numRegistros'));
+        return $pdf->download('empleados.pdf');
+
+    }
+
+
     public function eliminar($empleado_id)
     {
         if ($empleado_id) {
