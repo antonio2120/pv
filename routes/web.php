@@ -31,6 +31,8 @@ Route::get('/proveedores', 'ProveedoresController@index');
 Route::post('/proveedoresGuardar/', 'ProveedoresController@guardar');
 Route::get('/proveedoresEditar/{proveedor_id}', 'ProveedoresController@editar');
 Route::get('/proveedores/{buscar}', 'ProveedoresController@buscar');
+Route::get('/proveedoresPDF/','ProveedoresController@downloadPDF');
+Route::get('/proveedoresPDF/{buscar}','ProveedoresController@downloadPDF');
 
 Route::get('/clientes', 'ClientesController@index');
 Route::get('/clientesEliminar/{cliente_id}', 'ClientesController@eliminar');
@@ -38,7 +40,8 @@ Route::get('/clientesNuevo/', 'ClientesController@nuevo');
 Route::post('/clientesGuardar/', 'ClientesController@guardar');
 Route::get('/clientesEditar/{cliente_id}', 'ClientesController@editar');
 Route::get('/clientes/{buscar}', 'ClientesController@buscar');
-
+Route::get('/clientesPDF/','ClientesController@downloadPDF');
+Route::get('/clientesPDF/{buscar}','ClientesController@downloadPDF');
 
 Route::get('/ventas', 'VentasController@index');
 Route::get('/ventasEliminar/{venta_id}', 'VentasController@eliminar');
