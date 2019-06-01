@@ -25,6 +25,7 @@
             <th scope="col">ID de Empleado</th>
             <th scope="col">Editar</th>
             <th scope="col">Eliminar</th>
+            <th scope="col">Imagen</th>
         </tr>
         </thead>
         <tbody>
@@ -49,6 +50,16 @@
                         <button onclick="eliminarApartado({{$apartado->id}})" type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                     </span>
                 </td>
+                <td>
+                    <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Imagen">
+                        <a href="apartados-image-upload/">
+                            <button type="button" class="btn btn-warning"><i class="fas fa-upload"></i></button>
+                        </a>
+                        <a href="apartados-remove-image/">
+                            <button type="button" class="btn btn-warning"><i class="fas fa-trash-alt"></i></button>
+                        </a>
+                    </span>
+                </td>
             </tr>
         @endforeach
         </tbody>
@@ -62,6 +73,59 @@
 
         function imprimir(buscar) {
             location.href = "{{asset('/apartadosPDF/')}}/" + buscar;
+        }
+
+        function upload(img) {
+            var form_data = new FormData();
+            form_data.append('file', img.files[0]);
+            form_data.append('_token', '{{csrf_token()}}');
+            $('#loading').css('display', 'block');
+            $.ajax({
+                url: "{{url('apartados-image-upload')}}",
+                data: form_data,
+                type: 'POST',
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    if (data.fail) {
+                        $('#preview_image').attr('src', '{{asset('images/noimage.jpg')}}');
+                        alert(data.errors['file']);
+                    }
+                    else {
+                        $('#file_name').val(data);
+                        $('#preview_image').attr('src', '{{asset('uploads')}}/' + data);
+                    }
+                    $('#loading').css('display', 'none');
+                },
+                error: function (xhr, status, error) {
+                    alert(xhr.responseText);
+                    $('#preview_image').attr('src', '{{asset('images/noimage.jpg')}}');
+                }
+            });
+        }
+        function removeFile() {
+            if ($('#file_name').val() != '')
+                if (confirm('Are you sure want to remove profile picture?')) {
+                    $('#loading').css('display', 'block');
+                    var form_data = new FormData();
+                    form_data.append('_method', 'DELETE');
+                    form_data.append('_token', '{{csrf_token()}}');
+                    $.ajax({
+                        url: "apartados-remove-image/" + $('#file_name').val(),
+                        data: form_data,
+                        type: 'POST',
+                        contentType: false,
+                        processData: false,
+                        success: function (data) {
+                            $('#preview_image').attr('src', '{{asset('images/noimage.jpg')}}');
+                            $('#file_name').val('');
+                            $('#loading').css('display', 'none');
+                        },
+                        error: function (xhr, status, error) {
+                            alert(xhr.responseText);
+                        }
+                    });
+                }
         }
 
         function eliminarApartado(apartado_id){
