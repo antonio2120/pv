@@ -68,6 +68,10 @@ Route::get('/categoriasNuevo/', 'CategoriaController@nuevo');
 Route::post('/categoriasGuardar/','CategoriaController@guardar');
 Route::get('/categoriasEditar/{categoria_id}','CategoriaController@editar');
 Route::get('/categorias/{buscar}','CategoriaController@buscar');
+Route::match(['get', 'post'], 'categorias-image-upload', 'CategoriaController@ajaxImage');
+Route::delete('categorias-remove-image/{filename}', 'CategoriaController@deleteImage');
+
+
 
 Route::get('/apartados', 'ApartadoController@index');
 Route::get('/apartadosEliminar/{apartado_id}', 'ApartadoController@eliminar');
