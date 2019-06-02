@@ -8,8 +8,8 @@
     <div class="col-4">
     <div class="form-inline my-2 my-lg-0">
     <input class="form-control mr-sm-2" id="buscar" type="text" placeholder="Ingresar búsqueda" aria-label="Search">
-    <button class="btn btn-outline-success my-2 my-sm-0" onclick="buscar()">Buscar</button>
-    <button class="btn btn-outline-primary my-2 my-sm-0" onclick="imprimir('{{isset($buscar) ? $buscar : null }}')" type="button"><i class="fas fa-file-pdf"></i></button>
+    <button class="btn btn-outline-success my-2 my-sm-0 mr-sm-2" onclick="buscar()">Buscar</button>
+    <button class="btn btn-outline-primary my-2 my-sm-2" onclick="imprimir('{{isset($buscar) ? $buscar : null }}')" type="button"><i class="fas fa-file-pdf"></i></button>
   </div>
 </div>
 </div>
