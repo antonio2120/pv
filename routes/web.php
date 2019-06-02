@@ -60,6 +60,8 @@ Route::post('/empleadosGuardar/', 'EmpleadosController@guardar');
 Route::get('/empleadosEditar/{empleado_id}', 'EmpleadosController@editar');
 Route::get('/empleadosPDF/','EmpleadosController@downloadPDF');
 Route::get('/empleadosPDF/{buscar}','EmpleadosController@downloadPDF');
+Route::match(['get', 'post'], 'empleados-image-upload', 'EmpleadosController@ajaxImage');
+Route::delete('empleados-remove-image/{filename}', 'EmpleadosController@deleteImage');
 
 
 Route::get('/categorias', 'CategoriaController@index');
