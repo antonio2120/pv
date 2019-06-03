@@ -44,6 +44,8 @@ Route::get('/clientesEditar/{cliente_id}', 'ClientesController@editar');
 Route::get('/clientes/{buscar}', 'ClientesController@buscar');
 Route::get('/clientesPDF/','ClientesController@downloadPDF');
 Route::get('/clientesPDF/{buscar}','ClientesController@downloadPDF');
+Route::match(['get', 'post'], '/clientesImagen/', 'ClientesController@Image');
+Route::delete('/clientesImagen/{filename}', 'ClientesController@deleteImage');
 
 Route::get('/ventas', 'VentasController@index');
 Route::get('/ventasEliminar/{venta_id}', 'VentasController@eliminar');
