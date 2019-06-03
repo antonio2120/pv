@@ -132,10 +132,14 @@ class CategoriaController extends Controller {
           return $pdf->download('categorias.pdf');
         }
 
-         public function ajaxImage(Request $request)
+         public function Image(Request $request)
         {
             if ($request->isMethod('get'))
-                return view('categorias-image-upload');
+            {
+               $title = "Imagen Categoria";
+                return view('categoriasImagen ')
+                ->with('title', $title);
+              }
             else {
                 $validator = Validator::make($request->all(),
                     [

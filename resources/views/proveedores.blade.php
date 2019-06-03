@@ -55,7 +55,7 @@
                    <td><button onclick="eliminarProveedor({{$proveedor->id}})" type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button></td>
                    <td>
                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Imagen">
-                        <a href="proveedores-image-upload/">
+                        <a href="proveedoresImagen/">
                             <button type="button" class="btn btn-warning"><i class="fas fa-upload"></i></button>
                         </a>
                         <a href="proveedores-remove-image/">
