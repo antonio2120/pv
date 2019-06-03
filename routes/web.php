@@ -33,8 +33,8 @@ Route::get('/proveedoresEditar/{proveedor_id}', 'ProveedoresController@editar');
 Route::get('/proveedores/{buscar}', 'ProveedoresController@buscar');
 Route::get('/proveedoresPDF/','ProveedoresController@downloadPDF'); 
 Route::get('/proveedoresPDF/{buscar}','ProveedoresController@downloadPDF');
-Route::match(['get', 'post'], 'proveedores-image-upload', 'ProveedoresController@ajaxImage');
-Route::delete('proveedores-remove-image/{filename}', 'ProveedoresController@deleteImage');
+Route::match(['get', 'post'], '/proveedoresImagen/', 'ProveedoresController@Image');
+Route::delete('/proveedoresImagen/{filename}', 'ProveedoresController@deleteImage');
 
 Route::get('/clientes', 'ClientesController@index');
 Route::get('/clientesEliminar/{cliente_id}', 'ClientesController@eliminar');
