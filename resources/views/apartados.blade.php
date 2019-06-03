@@ -52,10 +52,10 @@
                 </td>
                 <td>
                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Imagen">
-                        <a href="apartados-image-upload/">
+                        <a href="apartadosImagen">
                             <button type="button" class="btn btn-warning"><i class="fas fa-upload"></i></button>
                         </a>
-                        <a href="apartados-remove-image/">
+                        <a href="apartadosImagen">
                             <button type="button" class="btn btn-warning"><i class="fas fa-trash-alt"></i></button>
                         </a>
                     </span>
