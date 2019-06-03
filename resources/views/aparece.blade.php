@@ -21,6 +21,8 @@
             <th scope="col">CantidadxPro</th>
             <th scope="col">Editar</th>
             <th scope="col">Eliminar</th>
+            <th scope="col">Imagen</th>
+
         </tr>
         </thead>
         <tbody>
