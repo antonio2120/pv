@@ -57,7 +57,7 @@
                 </td>
                  <td>
                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Imagen">
-                        <a href="aparece-image-upload/">
+                        <a href="apareceImagen/">
                             <button type="button" class="btn btn-warning"><i class="fas fa-upload"></i></button>
                         </a>
                         <a href="aparece-remove-image/">

@@ -98,8 +98,8 @@ Route::get('/apareceEditar/{aparece_id}','ApareceController@editar');
 Route::get('/aparece/{aparece_id}','ApareceController@buscar');
 Route::get('/aparecePDF/','ApareceController@downloadPDF');
 Route::get('/aparecePDF/{buscar}','ApareceController@downloadPDF');
-Route::match(['get', 'post'], 'aparece-image-upload', 'ApareceController@ajaxImage');
-Route::delete('aparece-remove-image/{filename}', 'ApareceController@deleteImage');
+Route::match(['get', 'post'], '/apareceImagen', 'ApareceController@Image');
+Route::delete('/apareceImagen/{filename}', 'ApareceController@deleteImage');
 
 Route::get('/compras', 'ComprasController@index');
 
