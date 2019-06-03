@@ -51,6 +51,11 @@ Route::get('/ventasNuevo/', 'VentasController@nuevo');
 Route::post('/ventasGuardar/', 'VentasController@guardar');
 Route::get('/ventasEditar/{venta_id}', 'VentasController@editar');
 Route::get('/ventas/{busqueda}', 'VentasController@buscar');
+Route::get('/ventasPDF/', 'VentasController@descargarPDF');
+Route::get('/ventasPDF/{busqueda}', 'VentasController@descargarPDF');
+Route::match(['get', 'post'], 'ventasNuevo', 'VentasController@ajaxImage');
+Route::delete('ventasNuevo/{filename}', 'VentasController@deleteImage');
+
 
 Route::get('/empleados', 'EmpleadosController@index');
 Route::get('/empleados/{buscar}', 'EmpleadosController@buscar');

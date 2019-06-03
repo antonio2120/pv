@@ -6,6 +6,7 @@
             <div class="form-inline">
                 <input class="form-control mr-sm-2" id="busqueda" name = "busqueda"placeholder="Busqueda" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" onclick="buscarVenta()">Buscar</button>
+                <button class="btn btn-outline-primary my-2 my-sm-0" onclick="imprimir('{{isset($busqueda) ? $busqueda : null }}')" type="button"><i class="fas fa-file-pdf"></i></button>
             </div>
         </nav>
     <table class="table">
@@ -16,6 +17,7 @@
             <th scope="col">Hora</th>
             <th scope="col">Total</th>
             <th scope="col">ID del Empleado</th>
+            <th scope="col">Imagen</th>
             <th scope="col">Editar</th>
             <th scope="col">Eliminar</th>
         </tr>
@@ -29,6 +31,7 @@
                 <td>{{$venta->hora}}</td>
                 <td>{{$venta->total}}</td>
                 <td>{{$venta->empleado_id}}</td>
+                <td><img src="{{$venta->imagen}}"></td>
                 <td>
                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar">
                             <a href="ventasEditar/{{$venta->id}}">
@@ -55,6 +58,10 @@
 
         function buscarVenta() {
             location.href = "{{ asset('/ventas/')}}/" + $('#busqueda').val();
+        }
+
+        function imprimir(busqueda) {
+            location.href = "{{asset('/ventasPDF/')}}/" + busqueda;
         }
 
         function eliminarVenta(venta_id){
