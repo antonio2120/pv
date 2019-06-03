@@ -160,8 +160,8 @@ public function buscar($buscar)
 public function Image(Request $request)
     {
         if ($request->isMethod('get')){
-            $title = "Imagen Cliente";
-            return view('clientesImagen')
+            $title = "Imagen Sucursal";
+            return view('sucursalImagen')
                 ->with('title', $title);
         }
         else {
