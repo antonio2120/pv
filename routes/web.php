@@ -109,3 +109,5 @@ Route::get('/sucursalEliminar/{sucursal_id}', 'SucursalController@eliminar');
 Route::get('/sucursalNuevo/', 'SucursalController@nuevo');
 Route::post('/sucursalGuardar/', 'SucursalController@guardar');
 Route::get('/sucursalEditar/{sucursal_id}', 'SucursalController@editar');
+Route::match(['get', 'post'], '/sucursalImagen/', 'SucursalController@Image');
+Route::delete('/sucuralImagen/{filename}', 'SucursalController@deleteImage');

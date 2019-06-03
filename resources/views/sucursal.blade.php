@@ -16,7 +16,7 @@
     function imprimir(buscar) {
             location.href = "{{asset('/sucursalPDF/')}}/" + buscar;
         }
-</script>
+</script> 
 
 
 <table class="table"> 
@@ -49,6 +49,24 @@
                     </span>
                 </td> 
             </tr>
+
+
+            <td>
+                    <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Imagen">
+                        <a href="sucursalImagen/">
+                            <button type="button" class="btn btn-warning"><i class="fas fa-upload"></i></button>
+                        </a>
+                        <a href="sucursal-remove-image/">
+                            <button type="button" class="btn btn-warning"><i class="fas fa-trash-alt"></i></button>
+                        </a>
+                    </span>
+                </td>
+            </tr>
+
+
+
+
+
         @endforeach
         </tbody>
     </table>
