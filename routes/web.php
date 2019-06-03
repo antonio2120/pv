@@ -74,8 +74,8 @@ Route::get('/categoriasEditar/{categoria_id}','CategoriaController@editar');
 Route::get('/categorias/{buscar}','CategoriaController@buscar');
 Route::get('/categoriasPDF/','CategoriaController@downloadPDF');
 Route::get('/categoriasPDF/{buscar}','CategoriaController@downloadPDF');
-Route::match(['get', 'post'], 'categorias-image-upload', 'CategoriaController@ajaxImage');
-Route::delete('categorias-remove-image/{filename}', 'CategoriaController@deleteImage');
+Route::match(['get', 'post'], 'categoriasImagen/', 'CategoriaController@Image');
+Route::delete('categoriasImagen/{filename}', 'CategoriaController@deleteImage');
 
 
 
