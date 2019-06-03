@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 use App\Empleado;
 use Illuminate\Http\Request;
 use PDF;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Validator;
+
 
 class EmpleadosController extends Controller {
     public function index()
@@ -48,7 +51,35 @@ class EmpleadosController extends Controller {
         return $pdf->download('empleados.pdf');
 
     }
+    public function ajaxImage(Request $request)
+        {
+            if ($request->isMethod('get'))
+                return view('empleados-image-upload');
+            else {
+                $validator = Validator::make($request->all(),
+                    [
+                        'file' => 'image',
+                    ],
+                    [
+                        'file.image' => 'Este archivo debe ser una imagen de tipo (jpeg, png, bmp, gif, or svg)'
+                    ]);
+                if ($validator->fails())
+                    return array(
+                        'fail' => true,
+                        'errors' => $validator->errors()
+                    );
+                $extension = $request->file('file')->getClientOriginalExtension();
+                $dir = 'uploads/';
+                $filename = uniqid() . '_' . time() . '.' . $extension;
+                $request->file('file')->move($dir, $filename);
+                return $filename;
+            }
+        }
 
+    public function deleteImage($filename)
+    {
+        File::delete('uploads/' . $filename);
+    }
 
     public function eliminar($empleado_id)
     {
