@@ -141,7 +141,7 @@ class ProveedoresController extends Controller {
         public function Image(Request $request)
     {
         if ($request->isMethod('get')){
-            $title = "Imagen Proveedor";
+            $title = "Imágen del proveedor";
             return view('proveedoresImagen') 
                 ->with('title', $title);
         }
