@@ -14,6 +14,7 @@
         <thead class="thead-dark">
         <tr>
             <th scope="col">#ID</th>
+            <th scope="col">Imagen</th>
             <th scope="col">Nombre(s)</th>
             <th scope="col">Apaterno</th>
             <th scope="col">Amaterno</th>
@@ -22,13 +23,17 @@
             <th scope="col">Correo</th>
             <th scope="col">Editar</th>
             <th scope="col">Eliminar</th>
-            <th scope="col">Imagenes</th>
         </tr>
         </thead>
         <tbody>
         @foreach($clientes as $cliente)
             <tr id="renglon_{{$cliente->id}}">
                 <th scope="row">{{$cliente->id}}</th>
+                <td>
+                    @if(file_exists(public_path('img/clientes/'.$cliente->id.'.jpg')))
+                        <img src="{{url('img/clientes/'.$cliente->id)}}.jpg" width="50px">
+                    @endif
+                </td>
                 <td>{{$cliente->nombres}}</td>
                 <td>{{$cliente->apaterno}}</td>
                 <td>{{$cliente->amaterno}}</td>
@@ -45,16 +50,6 @@
                 <td>
                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Eliminar">
                         <button onclick="eliminarCliente({{$cliente->id}})" type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
-                    </span>
-                </td>
-                <td>
-                    <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Imagen">
-                        <a href="clientesImagen/">
-                            <button type="button" class="btn btn-warning"><i class="fas fa-upload"></i></button>
-                        </a>
-                        <a href="proveedores-remove-image/">
-                            <button type="button" class="btn btn-warning"><i class="fas fa-trash-alt"></i></button>
-                        </a>
                     </span>
                 </td>
             </tr>

@@ -34,6 +34,15 @@
       <label for="inputCorreo">Correo Electronico</label>
       <input type="email" class="form-control" placeholder="Correo" id="inputCorreo" name="inputCorreo" value="{{isset($cliente) ? $cliente->correo : ''}}">
     </div>
+    <div class="form-group">
+            <label class="col-md-4 control-label">Imagen</label>
+            <div class="col-md-6">
+                @if(isset($cliente) && file_exists(public_path('img/clientes/'.$cliente->id.'.jpg')))
+                    <img src="{{url('img/clientes/'.$cliente->id)}}.jpg" width="200px">
+                @endif
+                <input type="file" id="imagen" name="imagen" accept="image/x-png,image/gif,image/jpeg">
+            </div>
+    </div>
   </div>
 
   <button type="submit" class="btn btn-primary">{{$accion == 'nuevo' ? 'Guardar Cliente' : 'Guardar Cambios'}}</button>
@@ -86,12 +95,84 @@
         });
 
         $("#clientesForm").submit(function (event ) {
+           event.preventDefault();
+
+            var form_data = new FormData();
+            form_data.append('imagen', $('#imagen')[0].files[0]);
+            //form_data.append('imagen', $('#imagen')[0]);
+            form_data.append('_token', '{{csrf_token()}}');
+            form_data.append('accion', '{{$accion}}');
+            form_data.append('id', '{{isset($cliente) ? $cliente->id : ''}}');
+            form_data.append('nombres',  $("#inputNombre").val());
+            form_data.append('apaterno',  $("#inputApaterno").val());
+            form_data.append('amaterno',  $("#inputAmaterno").val());
+            form_data.append('direccion',  $("#inputDireccion").val());
+            form_data.append('telefono',  $("#inputTelefono").val());
+            form_data.append('correo',  $("#inputCorreo").val());
+
+            var form = $('#clientesForm');
+
+            console.log(form_data);
+            console.log(form);
+
+            if(! form.valid()) return false;
+
+            $.ajax({
+                url: "{{ asset('clientesGuardar')}}",
+                method: 'POST',
+                cache: false,// no almacenar nada en memoria cache
+                contentType: false,
+                processData: false,
+                data: form_data,
+                dataType: 'json',
+                beforeSend: function () {
+
+                },
+                success: function (response) {
+                    if (response.status == 'ok') {
+                        toastr["success"](response.mensaje);
+                        if("{{$accion}}" == "nuevo"){
+                            $("#clientesForm").trigger("reset");
+                        }else{
+                            window.setTimeout("location.href = \"{{asset('/clientes/')}}\"", 3000)
+                        }
+                    } else {
+                        toastr["error"](response.mensaje);
+                    }
+                },
+                error: function () {
+                    toastr["error"]("Error al realizar el registro");
+                },
+                complete: function () {
+
+                }
+
+            })
+
+        });
+
+
+
+
+
+
+
+
+
+
+        /*$("#clientesForm").submit(function (event ) {
             console.log('submit');
             console.log('validate', $("#clientesForm").validate());
             event.preventDefault();
 
+            var form_data = new FormData();
+            form_data.append('imagen', $('#imagen')[0].files[0]);
             
-            var $form = $(this);
+            var $form = $('#clientesForm');
+
+            console.log(form_data);
+            console.log($form);
+
             if(! $form.valid()) return false;
                 $.ajax({
                     url: "{{asset('clientesGuardar')}}",
@@ -128,6 +209,6 @@
                     }
 
                 })
-        });
+        });*/
 </script>
 @endsection

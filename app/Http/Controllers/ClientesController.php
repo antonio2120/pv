@@ -30,6 +30,7 @@ class ClientesController extends Controller{
         return view('clientes')
         ->with('clientes', $clientes)
         ->with('title', $title)
+        ->with('buscar', $buscar)
         ->with('numRegistros', $numRegistros);
     }
 
@@ -90,6 +91,14 @@ class ClientesController extends Controller{
             $cliente->telefono = $request->telefono;
             $cliente->correo = $request->correo;
                 if($cliente->save()){
+                    $cliente_id = $cliente->id;
+                    if( $request->hasFile('imagen')) {
+                        $file = $request->file('imagen');
+                        $extension = $file->getClientOriginalExtension();
+                        $fileName = $cliente_id . '.' . $extension;
+                        $path = public_path('img/clientes/');
+                        $request->file('imagen')->move($path, $fileName);
+                    }
                     return response()->json(['mensaje' => 'Cliente agregado', 'status' => 'ok'], 200);
                 }
                 else{
@@ -105,6 +114,16 @@ class ClientesController extends Controller{
                 $cliente->telefono = $request->telefono;
                 $cliente->correo = $request->correo;
                      if ($cliente->save()) {
+                        $cliente_id = $cliente->id;
+                        if( $request->hasFile('imagen')) {
+                            $cliente_id = $request->id;
+                            $file = $request->file('imagen');
+                            //$extension = $file->getClientOriginalExtension();
+                            $extension = 'jpg';
+                            $fileName = $cliente_id . '.' . $extension;
+                            $path = public_path('img/clientes/');
+                            $request->file('imagen')->move($path, $fileName);
+                        }
                         return response()->json(['mensaje' => 'Cambios guardados correctamente', 'status' => 'ok'], 200);
                     } else {
                         return response()->json(['mensaje' => 'Error al intentar guardar los cambios', 'status' => 'error'], 400);
@@ -139,38 +158,5 @@ class ClientesController extends Controller{
             return response()->json(['mensaje' => 'Error al eliminar al cliente, Cliente no encontrado '], 400);
         }
 
-    }
-
-    public function Image(Request $request)
-    {
-        if ($request->isMethod('get')){
-            $title = "Imagen Cliente";
-            return view('clientesImagen')
-                ->with('title', $title);
-        }
-        else {
-            $validator = Validator::make($request->all(),
-                [
-                    'file' => 'image',
-                ],
-                [
-                    'file.image' => 'The file must be an image (jpeg, png, bmp, gif, or svg)'
-                ]);
-            if ($validator->fails())
-                return array(
-                    'fail' => true,
-                    'errors' => $validator->errors()
-                );
-            $extension = $request->file('file')->getClientOriginalExtension();
-            $dir = 'uploads/';
-            $filename = uniqid() . '_' . time() . '.' . $extension;
-            $request->file('file')->move($dir, $filename);
-            return $filename;
-        }
-    }
-
-    public function deleteImage($filename)
-    {
-        File::delete('uploads/' . $filename);
     }
 }
