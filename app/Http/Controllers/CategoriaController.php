@@ -72,10 +72,12 @@ class CategoriaController extends Controller {
                      }else{
                         return reponse()->json(['mensaje' =>'Error al agregar categoria','status' =>'error'],400);
                           }
-            }else  if($request->accion == 'editar'){
-                   if($categoria=  Categoria::find($request->id)){
+            }
+            else  if($request->accion == 'editar'){
+                   if($categoria =  Categoria::find($request->id)){
                     $categoria->nombre = $request->nombre;
                     if($categoria->save()){
+                      $categoria_id = $categoria->id;
                       if($request->hasFile('imagen')){
                          $categoria_id = $request->id;
                             $file = $request->file('imagen');
@@ -141,7 +143,18 @@ class CategoriaController extends Controller {
 
 
         
-
+        public function downloadPDF($buscar = null){
+          if(!isset($buscar) || $buscar == null){
+            $categorias = Categoria::all();
+          }else {
+             $categorias = Categoria::where('nombre','like',$buscar.'%')
+            ->get();
+          }
+          $title = "Lista de Categorias | ". $buscar;
+          $numRegistros = $categorias->count();
+          $pdf = PDF ::loadView('categoriasPDF', compact('categorias','title','numRegistros'));
+          return $pdf->download('categorias.pdf');
+        } 
         
 
 

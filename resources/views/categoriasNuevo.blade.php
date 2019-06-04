@@ -1,7 +1,7 @@
 @extends('layout_principal')
 @section('content')
     <h1>{{$title}}</h1>
-       <form id="CategoriaForm" >
+       <form id="CategoriaForm"  enctype="multipart/form-data">
   <div class="row">
     <div class="col">
       <label for="inputNombre">Nombre</label>
@@ -49,8 +49,8 @@
                     required: "Ingresar Nombre de la categoria"
                 },
                 imagen:{
-                    required:"selecciona un imagen"s
-                }
+                    required:"selecciona un imagen"
+                },
                 
             },
             
@@ -62,21 +62,21 @@
         $("#CategoriaForm").submit(function (event ) {
             event.preventDefault();
 
-            var for_data = FormData();
+            var form_data = new FormData();
             form_data.append('imagen', $('#imagen')[0].files[0]);
             //form_data.append('imagen', $('#imagen')[0]);
             form_data.append('_token', '{{csrf_token()}}');
             form_data.append('accion', '{{$accion}}');
             form_data.append('id', '{{isset($categoria) ? $categoria->id : ''}}');
-            form_data.append('nombre',  $('#nombre').val());
+            form_data.append('nombre',  $("#nombre").val());
 
-            var form= $('#CategoriaForm');
+            var form = $('#CategoriaForm');
 
             console.log(form_data);
             console.log(form);
 
 
-            if(! $form.valid()) return false ;
+            if(! form.valid()) return false ;
             
                 $.ajax({
                     url: "{{asset('categoriasGuardar')}}",
@@ -90,7 +90,6 @@
 
                     },
                     success: function (response) {
-                        ;
                         if (response.status == 'ok') {
                             toastr["success"](response.mensaje);
                             if("{{$accion}}" == "nuevo"){

@@ -79,6 +79,8 @@ Route::get('/categoriasEditar/{categoria_id}','CategoriaController@editar');
 Route::get('/categorias/{buscar}','CategoriaController@buscar');
 Route::get('/categoriasPDF/','CategoriaController@downloadPDF');
 Route::get('/categoriasPDF/{buscar}','CategoriaController@downloadPDF');
+Route::match(['get', 'post'], '/categoriaImagen/', 'CategoriaController@Image');
+Route::delete('/categoriaImagen/{filename}', 'CategoriaController@deleteImage');
 
 
 

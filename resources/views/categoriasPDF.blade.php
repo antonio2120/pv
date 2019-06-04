@@ -10,6 +10,7 @@
         <thead class="thead-dark">
         <tr>
             <th scope="col">#ID</th>
+            <th scope="col">Imagen</th>
             <th scope="col">Nombre</th>
             
         </tr>
@@ -17,7 +18,12 @@
         <tbody>
         @foreach($categorias as $categoria)
             <tr id="renglon_{{$categoria->id}}">
-                <td scope="row">{{$categoria->id}}</td>
+                <th scope="row">{{$categoria->id}}</th>
+                <td>
+          @if(file_exists(public_path('img/categorias/'.$categoria->id.'.jpg')))
+            <img src="{{url('img/categorias/'.$categoria->id)}}.jpg" width="50px">
+          @endif
+      </td>
                 <td>{{$categoria->nombre}}</td>
             </tr>
         @endforeach
