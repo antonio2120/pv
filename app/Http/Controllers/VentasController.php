@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use App\UserDetail;
 
 class VentasController extends Controller{
+
     public function index(){
     	$ventas = Ventas::all();
         $title = "Lista de Ventas";
@@ -34,8 +35,7 @@ class VentasController extends Controller{
         }
 
     }
-    public function nuevo()
-    {
+    public function nuevo(){
         $title = "Nueva Venta";
         $empleados = Empleado::All();
         $venta = null;
@@ -44,7 +44,7 @@ class VentasController extends Controller{
             ->with('title', $title)
             ->with('empleados', $empleados)
             ->with('venta', $venta)
-             ->with('accion', $accion);
+            ->with('accion', $accion);
 
     }
     public function guardar(Request $request)
@@ -56,7 +56,7 @@ class VentasController extends Controller{
                 $venta->hora = $request->hora;
                 $venta->total = $request->total;
                 $venta->empleado_id = $request->empleado_id;
-                $venta->imagen = $request->imagen;
+
 
 
                 if ($venta->save()) {
@@ -70,7 +70,7 @@ class VentasController extends Controller{
                     $venta->hora = $request->hora;
                     $venta->total = $request->total;
                     $venta->empleado_id = $request->empleado_id;
-                    $venta->imagen = $request->imagen;
+
                     if ($venta->save()) {
                         return response()->json(['mensaje' => 'Cambios guardados correctamente', 'status' => 'ok'], 200);
                     } else {

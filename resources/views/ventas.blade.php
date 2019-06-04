@@ -17,7 +17,7 @@
             <th scope="col">Hora</th>
             <th scope="col">Total</th>
             <th scope="col">ID del Empleado</th>
-            <th scope="col">Imagen</th>
+            <th scope="col">Subir Imagen</th>
             <th scope="col">Editar</th>
             <th scope="col">Eliminar</th>
         </tr>
@@ -31,7 +31,22 @@
                 <td>{{$venta->hora}}</td>
                 <td>{{$venta->total}}</td>
                 <td>{{$venta->empleado_id}}</td>
-                <td><img src="{{$venta->imagen}}"></td>
+                <td>
+                    <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar">
+                            <a href="ventasEditar/{{$venta->id}}">
+                                <button type="button" class="btn btn-primary"><i class="fas fa-edit"></i></button>
+                            </a>
+
+                    </span>
+                </td>
+                <td>
+                    <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar">
+                            <a href="ventasEditar/{{$venta->id}}">
+                                <button type="button" class="btn btn-primary"><i class="fas fa-edit"></i></button>
+                            </a>
+
+                    </span>
+                </td>
                 <td>
                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar">
                             <a href="ventasEditar/{{$venta->id}}">

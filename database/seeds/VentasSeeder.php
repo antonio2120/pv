@@ -13,12 +13,12 @@ class VentasSeeder extends Seeder
     public function run()
     {
         DB::table($this->table)->delete();
+
         DB::table($this->table)->insert([
             'fecha' => '2012-02-29',
             'hora' => '14:00',
             'total' => 200.5,
             'empleado_id' => App\Empleado::all()->random()->id,
-            'imagen' => '',
             'created_at' => '2019-04-16',
             'updated_at' => '2019-04-16',
         ]);
@@ -28,7 +28,6 @@ class VentasSeeder extends Seeder
             'hora' => '12:00',
             'total' => 89.70,
             'empleado_id' => App\Empleado::all()->random()->id,
-            'imagen' => '',
             'created_at' => '2019-05-16',
             'updated_at' => '2019-05-16',
         ]);
@@ -38,7 +37,6 @@ class VentasSeeder extends Seeder
             'hora' => '13:35',
             'total' => 170.5,
             'empleado_id' => App\Empleado::all()->random()->id,
-            'imagen' => '',
             'created_at' => '2019-05-16',
             'updated_at' => '2019-05-16',
         ]);
@@ -48,7 +46,6 @@ class VentasSeeder extends Seeder
             'hora' => '10:40',
             'total' => 5500,
             'empleado_id' => App\Empleado::all()->random()->id,
-            'imagen' => '',
             'created_at' => '2019-05-16',
             'updated_at' => '2019-05-16',
         ]);
