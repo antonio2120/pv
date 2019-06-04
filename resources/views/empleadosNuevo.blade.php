@@ -43,6 +43,15 @@
       value="{{isset($empleado) ? $empleado->password : ''}}">
     </div>
   </div>
+  <div class="form-group">
+            <label class="col-md-4 control-label">Imagen</label>
+            <div class="col-md-6">
+                @if(isset($empleado) && file_exists(public_path('img/empleados/'.$empleado->id.'.jpg')))
+                    <img src="{{url('img/empleados/'.$empleado->id)}}.jpg" width="200px">
+                @endif
+                <input type="file" id="imagen" name="imagen" accept="image/x-png,image/gif,image/jpeg">
+            </div>
+  </div>
   <button type="submit" class="btn btn-primary">{{$accion == 'nuevo' ? 'Alta de empleado' : 'Guardar cambios' }}</button>
 </form>
 

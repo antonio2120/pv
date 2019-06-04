@@ -31,6 +31,11 @@
 
             <tr id="renglon_{{$empleado->id}}">
                 <th scope="row">{{$empleado->id}}</th>
+                <td>
+                    @if(file_exists(public_path('img/empleados/'.$empleado->id.'.jpg')))
+                        <img src="{{url('img/empleados/'.$empleado->id)}}.jpg" width="50px">
+                    @endif
+                </td>
                 <td>{{$empleado->nombre}}</td>
                 <td>{{$empleado->apellido}}</td>
                 <td>{{$empleado->nombreUsuario}}</td>
