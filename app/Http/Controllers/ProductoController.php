@@ -94,7 +94,16 @@ class ProductoController extends Controller {
                 $producto->proveedor_id = $request->proveedor;
                 $producto->categoria_id = $request->categoria;
                 if ($producto->save()) {
-                    return response()->json(['mensaje' => 'Producto agregado', 'status' => 'ok'], 200);
+                    $producto_id = $producto->id;
+                    if( $request->hasFile('imagen')) {
+                        $file = $request->file('imagen');
+                        $extension = $file->getClientOriginalExtension();
+                        $fileName = $producto_id . '.' . $extension;
+                        $path = public_path('img/productos/');
+                        $request->file('imagen')->move($path, $fileName);
+                    }
+                    return response()->json(['mensaje' => 'Producto agregado sin imagen', 'status' => 'ok'], 200);
+
                 } else {
                     return response()->json(['mensaje' => 'Error al agregar el producto', 'status' => 'error'], 400);
                 }
@@ -107,6 +116,15 @@ class ProductoController extends Controller {
                     $producto->proveedor_id = $request->proveedor;
                     $producto->categoria_id = $request->categoria;
                     if ($producto->save()) {
+                        if( $request->hasFile('imagen')) {
+                            $producto_id = $request->id;
+                            $file = $request->file('imagen');
+                            //$extension = $file->getClientOriginalExtension();
+                            $extension = 'jpg';
+                            $fileName = $producto_id . '.' . $extension;
+                            $path = public_path('img/productos/');
+                            $request->file('imagen')->move($path, $fileName);
+                        }
                         return response()->json(['mensaje' => 'Cambios guardados correctamente', 'status' => 'ok'], 200);
                     } else {
                         return response()->json(['mensaje' => 'Error al intentar guardar los cambios', 'status' => 'error'], 400);
@@ -115,6 +133,7 @@ class ProductoController extends Controller {
                     return response()->json(['mensaje' => 'Producto no encontrado', 'status' => 'error'], 400);
                 }
             }
+
         } catch (Exception $e) {
             return response()->json(['mensaje' => 'Error al agregar el producto'], 403);
         }
