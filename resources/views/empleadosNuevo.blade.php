@@ -1,7 +1,7 @@
 @extends('layout_principal')
 @section('content')
     <h1>{{$title}}</h1>
-    <form id="empleadoForm" >
+    <form id="empleadoForm" method="POST" enctype="multipart/form-data">
   <div class="row">
     <div class="col">
       <label for="inputNombre">Nombre</label>

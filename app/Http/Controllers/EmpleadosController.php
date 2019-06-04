@@ -120,7 +120,7 @@ class EmpleadosController extends Controller {
             $empleado->nombreUsuario = $request->usuario;
             $empleado->password = $request->password;
             if($empleado->save()){
-                $producto_id = $producto->id;
+                $empleado_id = $empleado->id;
                     if( $request->hasFile('imagen')) {
                         $file = $request->file('imagen');
                         $extension = $file->getClientOriginalExtension();
