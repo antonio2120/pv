@@ -48,8 +48,8 @@
                     </span>
                 </td>
                  <td>
-                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Imagen">
-                        <a href="empleados-image-upload/">
+                    <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Imágen">
+                        <a href="empleadosImagen/">
                             <button type="button" class="btn btn-warning"><i class="fas fa-upload"></i></button>
                         </a>
                         <a href="empleados-remove-image/">
@@ -101,7 +101,7 @@
 
         }
 
-        function upload(img) {
+       function upload(img) {
             var form_data = new FormData();
             form_data.append('file', img.files[0]);
             form_data.append('_token', '{{csrf_token()}}');
@@ -128,31 +128,31 @@
                     $('#preview_image').attr('src', '{{asset('images/noimage.jpg')}}');
                 }
             });
-            }
-            function removeFile() {
-                if ($('#file_name').val() != '')
-                    if (confirm('¿Está seguro de eliminar la imágen?')) {
-                        $('#loading').css('display', 'block');
-                        var form_data = new FormData();
-                        form_data.append('_method', 'DELETE');
-                        form_data.append('_token', '{{csrf_token()}}');
-                        $.ajax({
-                            url: "empleados-remove-image/" + $('#file_name').val(),
-                            data: form_data,
-                            type: 'POST',
-                            contentType: false,
-                            processData: false,
-                            success: function (data) {
-                                $('#preview_image').attr('src', '{{asset('images/noimage.jpg')}}');
-                                $('#file_name').val('');
-                                $('#loading').css('display', 'none');
-                            },
-                            error: function (xhr, status, error) {
-                                alert(xhr.responseText);
-                            }
-                        });
-                    }
-            } 
+        }
+        function removeFile() {
+            if ($('#file_name').val() != '')
+                if (confirm('¿Está seguro de eliminar la imágen?')) {
+                    $('#loading').css('display', 'block');
+                    var form_data = new FormData();
+                    form_data.append('_method', 'DELETE');
+                    form_data.append('_token', '{{csrf_token()}}');
+                    $.ajax({
+                        url: "empleados-remove-image/" + $('#file_name').val(),
+                        data: form_data,
+                        type: 'POST',
+                        contentType: false,
+                        processData: false,
+                        success: function (data) {
+                            $('#preview_image').attr('src', '{{asset('images/noimage.jpg')}}');
+                            $('#file_name').val('');
+                            $('#loading').css('display', 'none');
+                        },
+                        error: function (xhr, status, error) {
+                            alert(xhr.responseText);
+                        }
+                    });
+                }
+        } 
         $(document).ready(function() {
 
         });

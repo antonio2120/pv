@@ -33,8 +33,6 @@ class EmpleadosController extends Controller {
         ->with('numRegistros', $numRegistros);
 
     }
-
-
     public function downloadPDF($buscar = null){
         if( !isset($buscar) || $buscar == null){
             $empleados = Empleado::all();
@@ -51,53 +49,39 @@ class EmpleadosController extends Controller {
         return $pdf->download('empleados.pdf');
 
     }
-    public function ajaxImage(Request $request)
-        {
-            if ($request->isMethod('get'))
-                return view('empleados-image-upload');
-            else {
-                $validator = Validator::make($request->all(),
-                    [
-                        'file' => 'image',
-                    ],
-                    [
-                        'file.image' => 'Este archivo debe ser una imagen de tipo (jpeg, png, bmp, gif, or svg)'
-                    ]);
-                if ($validator->fails())
-                    return array(
-                        'fail' => true,
-                        'errors' => $validator->errors()
-                    );
-                $extension = $request->file('file')->getClientOriginalExtension();
-                $dir = 'uploads/';
-                $filename = uniqid() . '_' . time() . '.' . $extension;
-                $request->file('file')->move($dir, $filename);
-                return $filename;
-            }
+       public function cargaImagen(Request $request)
+    {
+        if ($request->isMethod('get')){
+            $title = "Imágen del empleado";
+            return view('empleadosImagen') 
+                ->with('title', $title);
         }
+        else {
+            $validator = Validator::make($request->all(),
+                [
+                    'file' => 'image',
+                ],
+                [
+                    'file.image' => 'El archivo debe ser de tipo: jpeg, png, bmp, gif, or svg'
+                ]);
+            if ($validator->fails())
+                return array(
+                    'fail' => true,
+                    'errors' => $validator->errors()
+                );
+            $extension = $request->file('file')->getClientOriginalExtension();
+            $dir = 'uploads/';
+            $filename = uniqid() . '_' . time() . '.' . $extension;
+            $request->file('file')->move($dir, $filename);
+            return $filename;
+        }
+    }
 
     public function deleteImage($filename)
     {
         File::delete('uploads/' . $filename);
     }
-
-    public function eliminar($empleado_id)
-    {
-        if ($empleado_id) {
-            try {
-                if(Empleado::destroy($empleado_id)){
-                    return response()->json(['mensaje' => 'Empleado eliminado', 'status' => 'ok'], 200);
-                }else{
-                    return response()->json(['mensaje' => 'El empleado no se pudo eliminar', 'status' => 'error'], 400);
-                }
-            } catch (Exception $e) {
-                return response()->json(['mensaje' => 'Error al eliminar empleado'], 400);
-            }
-        }else{
-            return response()->json(['mensaje' => 'Error al eliminar el empleado, empleado no encontrado '], 400);
-        }
-
-    }
+    
    public function nuevo()
     {
         $title = "Nuevo Empleado";
