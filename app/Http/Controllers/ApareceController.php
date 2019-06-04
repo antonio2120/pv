@@ -60,6 +60,15 @@ class ApareceController extends Controller {
                 $aparece->codigo_barras= $request->codigo_barras;
                 $aparece->cantidadxPro= $request->cantidadxPro;
                 if ($aparece->save()) {
+                    $aparece_id = $aparece->id;
+                    if( $request->hasFile('imagen')) {
+                        $file = $request->file('imagen');
+                        $extension = $file->getClientOriginalExtension();
+                        $fileName = $aparece_id . '.' . $extension;
+                        $path = public_path('img/aparece/');
+                        $request->file('imagen')->move($path, $fileName);
+                    }
+
                     return response()->json(['mensaje' => 'aparece agregado', 'status' => 'ok'], 200);
                 } else {
                     return response()->json(['mensaje' => 'Error al agregar el aparece', 'status' => 'error'], 400);
@@ -70,6 +79,15 @@ class ApareceController extends Controller {
                 $aparece->codigo_barras= $request->codigo_barras;
                 $aparece->cantidadxPro= $request->cantidadxPro;
                     if ($aparece->save()) {
+                        if( $request->hasFile('imagen')) {
+                            $aparece_id = $request->id;
+                            $file = $request->file('imagen');
+                            //$extension = $file->getClientOriginalExtension();
+                            $extension = 'jpg';
+                            $fileName = $aparece_id . '.' . $extension;
+                            $path = public_path('img/aparece/');
+                            $request->file('imagen')->move($path, $fileName);
+                        }
                         return response()->json(['mensaje' => 'Cambios guardados correctamente', 'status' => 'ok'], 200);
                     } else {
                         return response()->json(['mensaje' => 'Error al intentar guardar los cambios', 'status' => 'error'], 400);
@@ -121,7 +139,8 @@ class ApareceController extends Controller {
             return view('aparece')
             ->with('title', $title)
                     ->with('numRegistros', $numRegistros) 
-                    ->with('aparece',$aparece);
+                    ->with('aparece',$aparece)
+                    ->with('buscar',$buscar);
                       }
 
        public function downloadPDF($buscar = null){
