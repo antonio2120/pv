@@ -30,7 +30,8 @@ class EmpleadosController extends Controller {
         return view('empleados')
         ->with('empleados', $empleados)
         ->with('title', $title)
-        ->with('numRegistros', $numRegistros);
+        ->with('numRegistros', $numRegistros)
+        ->with('buscar', $buscar);
 
     }
     public function eliminar($empleado_id)
@@ -119,6 +120,14 @@ class EmpleadosController extends Controller {
             $empleado->nombreUsuario = $request->usuario;
             $empleado->password = $request->password;
             if($empleado->save()){
+                $empleado_id = $empleado->id;
+                    if( $request->hasFile('imagen')) {
+                        $file = $request->file('imagen');
+                        $extension = $file->getClientOriginalExtension();
+                        $fileName = $empleado_id . '.' . $extension;
+                        $path = public_path('img/empleados/');
+                        $request->file('imagen')->move($path, $fileName);
+                    }
                 return response()->json(['mensaje' => 'Empleado agregado', 'status' => 'ok'], 200);
             }else{
                 return response()->json(['mensaje' => 'Error al agregar Empleado', 'status' => 'error'], 400);
@@ -130,12 +139,20 @@ class EmpleadosController extends Controller {
                 $empleado->nombreUsuario = $request->usuario;
                 $empleado->password = $request->password;
                      if ($empleado->save()) {
-                        return response()->json(['mensaje' => 'Cambios guardados correctamente', 'status' => 'ok'], 200);
+                        if( $request->hasFile('imagen')) {
+                            $empleado_id = $request->id;
+                            $file = $request->file('imagen');
+                            //$extension = $file->getClientOriginalExtension();
+                            $extension = 'jpg';
+                            $fileName = $empleado_id . '.' . $extension;
+                            $path = public_path('img/empleados/');
+                            $request->file('imagen')->move($path, $fileName);
+                        }return response()->json(['mensaje' => 'Cambios guardados correctamente', 'status' => 'ok'], 200);
                     } else {
                         return response()->json(['mensaje' => 'Error al intentar guardar los cambios', 'status' => 'error'], 400);
                     }
                 }else{
-                    return response()->json(['mensaje' => 'Proveedor no encontrado', 'status' => 'error'], 400);
+                    return response()->json(['mensaje' => 'Empleado no encontrado', 'status' => 'error'], 400);
                 }
         }    
       }catch (Exception $e) {

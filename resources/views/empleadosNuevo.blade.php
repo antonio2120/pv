@@ -1,7 +1,7 @@
 @extends('layout_principal')
 @section('content')
     <h1>{{$title}}</h1>
-    <form id="empleadoForm" >
+    <form id="empleadoForm" method="POST" enctype="multipart/form-data">
   <div class="row">
     <div class="col">
       <label for="inputNombre">Nombre</label>
@@ -42,6 +42,15 @@
       name="password"
       value="{{isset($empleado) ? $empleado->password : ''}}">
     </div>
+  </div>
+  <div class="form-group">
+            <label class="col-md-4 control-label">Imagen</label>
+            <div class="col-md-6">
+                @if(isset($empleado) && file_exists(public_path('img/empleados/'.$empleado->id.'.jpg')))
+                    <img src="{{url('img/empleados/'.$empleado->id)}}.jpg" width="200px">
+                @endif
+                <input type="file" id="imagen" name="imagen" accept="image/x-png,image/gif,image/jpeg">
+            </div>
   </div>
   <button type="submit" class="btn btn-primary">{{$accion == 'nuevo' ? 'Alta de empleado' : 'Guardar cambios' }}</button>
 </form>

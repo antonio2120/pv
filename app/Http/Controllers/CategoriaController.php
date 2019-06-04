@@ -57,7 +57,18 @@ class CategoriaController extends Controller {
                  $categoria->nombre = $request->nombre;
 
                      if($categoria->save()){
+                      $categoria_id =$categoria->id;
+                      if($request->hasFile('imagen'))
+                      {
+                        $file = $request->file('imagen');
+                        $extension = $file->getClientOriginalExtension();
+                        $fileName = $categoria_id . '.' . $extension;
+                        $path = public_path('img/categorias/');
+                        $request->file('imagen')->move($path, $fileName);
+
+                      }
                         return response()->json(['mensaje' =>'Categoria agregada','status'=>'ok'],200);
+                      
                      }else{
                         return reponse()->json(['mensaje' =>'Error al agregar categoria','status' =>'error'],400);
                           }
@@ -65,7 +76,17 @@ class CategoriaController extends Controller {
                    if($categoria=  Categoria::find($request->id)){
                     $categoria->nombre = $request->nombre;
                     if($categoria->save()){
+                      if($request->hasFile('imagen')){
+                         $categoria_id = $request->id;
+                            $file = $request->file('imagen');
+                            //$extension = $file->getClientOriginalExtension();
+                            $extension = 'jpg';
+                            $fileName = $categoria_id . '.' . $extension;
+                            $path = public_path('img/categorias/');
+                            $request->file('imagen')->move($path, $fileName);
+                      }
                         return response()->json(['mensaje'=>'Cambios Guardados','status' => 'ok'],200);
+                      
                       }else{
                         return response()->json(['mensaje' =>'Error al guardar cambios','status' =>'error'],400);
                       }
@@ -114,60 +135,18 @@ class CategoriaController extends Controller {
            return view('categorias')
            ->with('categorias',$categorias)
            ->with('title',$title)
-           ->with('numRegistros',$numRegistros);
+           ->with('numRegistros',$numRegistros)
+           ->with('buscar',$buscar);
         }
 
 
-        public function downloadPDF($buscar = null){
-          if(!isset($buscar) || $buscar == null){
-            $categorias = Categoria::all();
-          }else {
-            $categorias = Categoria:: where('nombre','like',$buscar. '%')
-            ->orWhere('nombre','like',$buscar.'%')
-            ->get();
-          }
-          $title = "Lista de Categorias | ". $buscar;
-          $numRegistros = $categorias->count();
-          $pdf = PDF ::loadView('categoriasPDF', compact('categorias','title','numRegistros'));
-          return $pdf->download('categorias.pdf');
-        }
+        
 
-         public function Image(Request $request)
-        {
-            if ($request->isMethod('get'))
-            {
-               $title = "Imagen Categoria";
-                return view('categoriasImagen ')
-                ->with('title', $title);
-              }
-            else {
-                $validator = Validator::make($request->all(),
-                    [
-                        'file' => 'image',
-                    ],
-                    [
-                        'file.image' => 'Este archivo debe ser una imagen de tipo (jpeg, png, bmp, gif, or svg)'
-                    ]);
-                if ($validator->fails())
-                    return array(
-                        'fail' => true,
-                        'errors' => $validator->errors()
-                    );
-                $extension = $request->file('file')->getClientOriginalExtension();
-                $dir = 'uploads/';
-                $filename = uniqid() . '_' . time() . '.' . $extension;
-                $request->file('file')->move($dir, $filename);
-                return $filename;
-            }
-        }
+        
 
 
 
-        public function deleteImage($filename)
-    {
-        File::delete('uploads/' . $filename);
-    }
-   
+     
 
      
     }

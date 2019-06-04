@@ -17,10 +17,11 @@
         <thead class="thead-dark">
         <tr>
             <th scope="col">#ID</th>
+            <th scope="col">Imagen</th>
             <th scope="col">Nombre</th>
             <th scope="col">Editar</th>
             <th scope="col">Eliminar</th>
-            <th scope="col">Imagen</th>
+            
         </tr>
         </thead>
         <tbody>
@@ -28,6 +29,11 @@
 
             <tr id="renglon_{{$categoria->id}}">
                 <th scope="row">{{$categoria->id}}</th>
+                    <td>
+                        @if(file_exists(public_path('img/categorias/'.$categoria->id.'.jpg')))
+                        <img src="{{url('img/categorias/'.$categoria->id)}}.jpg" width="50px">
+                    @endif
+                    </td>
 
                 <td>{{$categoria->nombre}}</td>
                 <td>
@@ -42,16 +48,7 @@
                         <button onclick="eliminarCategoria({{$categoria->id}})" type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                     </span>
                 </td>
-                <td>
-                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Imagen">
-                        <a href="categoriasImagen/">
-                            <button type="button" class="btn btn-warning"><i class="fas fa-upload"></i></button>
-                        </a>
-                        <a href="categoriasImagen/">
-                            <button type="button" class="btn btn-warning"><i class="fas fa-trash-alt"></i></button>
-                        </a>
-                    </span>
-                </td>
+                
 
             </tr>
 
