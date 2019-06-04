@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 use App\Ventas;
 use App\Empleado;
 use Illuminate\Http\Request;
+use PDF;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Validator;
+use App\UserDetail;
+
 class VentasController extends Controller{
     public function index(){
     	$ventas = Ventas::all();
@@ -51,6 +56,8 @@ class VentasController extends Controller{
                 $venta->hora = $request->hora;
                 $venta->total = $request->total;
                 $venta->empleado_id = $request->empleado_id;
+                $venta->imagen = $request->imagen;
+
 
                 if ($venta->save()) {
                     return response()->json(['mensaje' => 'Venta Registrada', 'status' => 'ok'], 200);
@@ -63,6 +70,7 @@ class VentasController extends Controller{
                     $venta->hora = $request->hora;
                     $venta->total = $request->total;
                     $venta->empleado_id = $request->empleado_id;
+                    $venta->imagen = $request->imagen;
                     if ($venta->save()) {
                         return response()->json(['mensaje' => 'Cambios guardados correctamente', 'status' => 'ok'], 200);
                     } else {
@@ -116,4 +124,55 @@ class VentasController extends Controller{
             ->with('ventas',$ventas)
             ->with('title',$title);
      }
+
+     public function  descargarPDF($busqueda = null){
+         if(!isset($busqueda) ||$busqueda == null){
+             $ventas = Ventas::all();
+         }else {
+             $ventas = Ventas::where('fecha','like', $busqueda.'%')
+                 ->orWhere('hora','like',$busqueda.'%')
+                 ->orWhere('total','like',$busqueda.'%')
+                 ->get();
+         }
+         $title = "Lista de Ventas |" .$busqueda;
+         $numRegistros = $ventas->count();
+         $pdf = PDF ::loadView('ventasPDF', compact('ventas','title','numRegistros'));
+         return $pdf->download('ventas.pdf');
+
+
+
+     }
+
+     //imagen
+    public function ajaxImage(Request $request)
+    {
+        if ($request->isMethod('get'))
+            return view('ventasNuevo');
+        else {
+            $validator = Validator::make($request->all(),
+                [
+                    'file' => 'image',
+                ],
+                [
+                    'file.image' => 'The file must be an image (jpeg, png, bmp, gif, or svg)'
+                ]);
+            if ($validator->fails())
+                return array(
+                    'fail' => true,
+                    'errors' => $validator->errors()
+                );
+            $extension = $request->file('file')->getClientOriginalExtension();
+            $dir = 'uploads/';
+            $filename = uniqid() . '_' . time() . '.' . $extension;
+            $request->file('file')->move($dir, $filename);
+            return $filename;
+        }
+    }
+
+    public function deleteImage($filename)
+    {
+        File::delete('uploads/' . $filename);
+    }
+
+
 }

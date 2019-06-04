@@ -4,7 +4,10 @@
     <div class="form-group">
         <div class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" id="buscar" type="text" placeholder="Ingresar búsqueda">
-            <button class="btn btn-outline-success my-2 my-sm-0" onclick="buscar()">Buscar</button>
+            <span>
+                <button class="btn btn-outline-success my-2 my-sm-0" onclick="buscar()">Buscar</button>
+                <button class="btn btn-outline-primary my-2 my-sm-0" onclick="imprimir('{{isset($buscar) ? $buscar : null }}')" type="button"><i class="fas fa-file-pdf"></i></button>   
+           </span> 
         </div>
     </div>
     <table class="table">
@@ -19,6 +22,7 @@
             <th scope="col">Correo</th>
             <th scope="col">Editar</th>
             <th scope="col">Eliminar</th>
+            <th scope="col">Imagenes</th>
         </tr>
         </thead>
         <tbody>
@@ -43,6 +47,16 @@
                         <button onclick="eliminarCliente({{$cliente->id}})" type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                     </span>
                 </td>
+                <td>
+                    <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Imagen">
+                        <a href="clientesImagen/">
+                            <button type="button" class="btn btn-warning"><i class="fas fa-upload"></i></button>
+                        </a>
+                        <a href="proveedores-remove-image/">
+                            <button type="button" class="btn btn-warning"><i class="fas fa-trash-alt"></i></button>
+                        </a>
+                    </span>
+                </td>
             </tr>
         @endforeach
         </tbody>
@@ -54,6 +68,10 @@
 
         function buscar(){
             location.href="{{asset('/clientes/')}}/" + $('#buscar').val();
+        }
+
+        function imprimir(buscar) {
+            location.href = "{{asset('/clientesPDF/')}}/" + buscar;
         }
 
         function eliminarCliente(cliente_id){

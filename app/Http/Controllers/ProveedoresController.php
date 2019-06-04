@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\Proveedor;
 use Illuminate\Http\Request;
 use PDF;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Validator;
 
 class ProveedoresController extends Controller {
     public function index()
@@ -128,13 +130,46 @@ class ProveedoresController extends Controller {
             ->orWhere('telefono','like',$buscar.'%')
             ->orWhere('fax','like',$buscar.'%')
             ->orWhere('correo','like',$buscar.'%')
-            ->get();
+            ->get(); 
           }
           $title = "Lista de Proveedores | ". $buscar;
           $numRegistros = $proveedores->count();
           $pdf = PDF ::loadView('proveedoresPDF', compact('proveedores','title','numRegistros'));
           return $pdf->download('proveedores.pdf');
         }
+
+        public function Image(Request $request)
+    {
+        if ($request->isMethod('get')){
+            $title = "Imágen del proveedor";
+            return view('proveedoresImagen') 
+                ->with('title', $title);
+        }
+        else {
+            $validator = Validator::make($request->all(),
+                [
+                    'file' => 'image',
+                ],
+                [
+                    'file.image' => 'The file must be an image (jpeg, png, bmp, gif, or svg)'
+                ]);
+            if ($validator->fails())
+                return array(
+                    'fail' => true,
+                    'errors' => $validator->errors()
+                );
+            $extension = $request->file('file')->getClientOriginalExtension();
+            $dir = 'uploads/';
+            $filename = uniqid() . '_' . time() . '.' . $extension;
+            $request->file('file')->move($dir, $filename);
+            return $filename;
+        }
+    }
+
+    public function deleteImage($filename)
+    {
+        File::delete('uploads/' . $filename);
+    }
 
 
 

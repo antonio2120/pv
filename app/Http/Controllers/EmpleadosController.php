@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 use App\Empleado;
 use Illuminate\Http\Request;
 use PDF;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Validator;
+
 
 class EmpleadosController extends Controller {
     public function index()
@@ -30,26 +33,6 @@ class EmpleadosController extends Controller {
         ->with('numRegistros', $numRegistros);
 
     }
-
-
-    public function downloadPDF($buscar = null){
-        if( !isset($buscar) || $buscar == null){
-            $empleados = Empleado::all();
-        }else {
-            $empleados =Empleado::where ('nombre','like', $buscar.'%')
-            ->orWhere('apellido','like', $buscar.'%')
-            ->orWhere('nombreUsuario','like', $buscar.'%')
-            ->orWhere('password','like', $buscar.'%')
-            ->get();
-        }
-        $title = "Lista de Empleados | " . $buscar;
-        $numRegistros = $empleados->count();
-        $pdf = PDF::loadView('empleadosPDF', compact('empleados', 'title', 'numRegistros'));
-        return $pdf->download('empleados.pdf');
-
-    }
-
-
     public function eliminar($empleado_id)
     {
         if ($empleado_id) {
@@ -67,6 +50,55 @@ class EmpleadosController extends Controller {
         }
 
     }
+    public function downloadPDF($buscar = null){
+        if( !isset($buscar) || $buscar == null){
+            $empleados = Empleado::all();
+        }else {
+            $empleados =Empleado::where ('nombre','like', $buscar.'%')
+            ->orWhere('apellido','like', $buscar.'%')
+            ->orWhere('nombreUsuario','like', $buscar.'%')
+            ->orWhere('password','like', $buscar.'%')
+            ->get();
+        }
+        $title = "Lista de Empleados | " . $buscar;
+        $numRegistros = $empleados->count();
+        $pdf = PDF::loadView('empleadosPDF', compact('empleados', 'title', 'numRegistros'));
+        return $pdf->download('empleados.pdf');
+
+    }
+       public function cargaImagen(Request $request)
+    {
+        if ($request->isMethod('get')){
+            $title = "Imágen del empleado";
+            return view('empleadosImagen') 
+                ->with('title', $title);
+        }
+        else {
+            $validator = Validator::make($request->all(),
+                [
+                    'file' => 'image',
+                ],
+                [
+                    'file.image' => 'El archivo debe ser de tipo: jpeg, png, bmp, gif, or svg'
+                ]);
+            if ($validator->fails())
+                return array(
+                    'fail' => true,
+                    'errors' => $validator->errors()
+                );
+            $extension = $request->file('file')->getClientOriginalExtension();
+            $dir = 'uploads/';
+            $filename = uniqid() . '_' . time() . '.' . $extension;
+            $request->file('file')->move($dir, $filename);
+            return $filename;
+        }
+    }
+
+    public function deleteImage($filename)
+    {
+        File::delete('uploads/' . $filename);
+    }
+    
    public function nuevo()
     {
         $title = "Nuevo Empleado";

@@ -5,6 +5,8 @@ use App\Aparece;
 use App\Apartado;
 use Illuminate\Http\Request;
 use PDF;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Validator;
 
 class ApareceController extends Controller {
     public function index()
@@ -133,5 +135,38 @@ class ApareceController extends Controller {
           $numRegistros = $aparece->count();
           $pdf = PDF ::loadView('aparecePDF', compact('aparece','title','numRegistros'));
           return $pdf->download('aparece.pdf');
-        }                 
+        }  
+
+        public function Image(Request $request)
+        {
+           if ($request->isMethod('get')){
+             $title = "Imagen Aparece";
+             return view('apareceImagen') 
+                ->with('title', $title);
+            }
+            else {
+                $validator = Validator::make($request->all(),
+                [
+                    'file' => 'image',
+                ],
+                [
+                    'file.image' => 'The file must be an image (jpeg, png, bmp, gif, or svg)'
+                ]);
+            if ($validator->fails())
+                return array(
+                    'fail' => true,
+                    'errors' => $validator->errors()
+                );
+            $extension = $request->file('file')->getClientOriginalExtension();
+            $dir = 'uploads/';
+            $filename = uniqid() . '_' . time() . '.' . $extension;
+            $request->file('file')->move($dir, $filename);
+            return $filename;
+        }
+    }
+
+    public function deleteImage($filename)
+    {
+        File::delete('uploads/' . $filename);
+    }
 }

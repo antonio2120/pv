@@ -1,13 +1,18 @@
 @extends('layout_principal')
 @section('content')
-    <h1>{{$title}}</h1>
-   <div class="form-group">
-        <div class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2"   type="text" placeholder="Search" aria-label="Search" id="buscar">
-            <button   class="btn btn-outline-success my-2 my-sm-0"  onclick="buscar()" >Buscar</button>
-            <button class="btn btn-outline-primary my-2 my-sm-0" onclick="imprimir('{{isset($buscar) ? $buscar : null }}')" type="button"><i class="fas fa-file-pdf"></i></button>
+     <div class="row mt-5">
+            <div class="col-8">
+                <h1>{{$title}}</h1>
+            </div>
+            <div class="col-4">
+                <div class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="buscar" id="buscar">
+                    <button class="btn btn-outline-success my-2 my-sm-0 mr-sm-2" onclick="buscar()">Buscar</button>
+                    <button class="btn btn-outline-primary my-2 my-sm-0" onclick="imprimir('{{isset($buscar) ? $buscar : null }}')" type="button"><i class="fas fa-file-pdf"></i></button>
+                </div>
+            </div>
         </div>
-    </div>
+
     <table class="table">
         <thead class="thead-dark">
         <tr>
@@ -15,6 +20,7 @@
             <th scope="col">Nombre</th>
             <th scope="col">Editar</th>
             <th scope="col">Eliminar</th>
+            <th scope="col">Imagen</th>
         </tr>
         </thead>
         <tbody>
@@ -36,6 +42,17 @@
                         <button onclick="eliminarCategoria({{$categoria->id}})" type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                     </span>
                 </td>
+                <td>
+                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Imagen">
+                        <a href="categoriasImagen/">
+                            <button type="button" class="btn btn-warning"><i class="fas fa-upload"></i></button>
+                        </a>
+                        <a href="categoriasImagen/">
+                            <button type="button" class="btn btn-warning"><i class="fas fa-trash-alt"></i></button>
+                        </a>
+                    </span>
+                </td>
+
             </tr>
 
 
@@ -87,9 +104,11 @@
             })
 
         }
+
         $(document).ready(function() {
 
         });
+
     </script>
 
 @endsection

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\Categoria;
 use Illuminate\Http\Request;
 use PDF;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Validator;
 
 class CategoriaController extends Controller {
     public function index()
@@ -129,5 +131,43 @@ class CategoriaController extends Controller {
           $pdf = PDF ::loadView('categoriasPDF', compact('categorias','title','numRegistros'));
           return $pdf->download('categorias.pdf');
         }
+
+         public function Image(Request $request)
+        {
+            if ($request->isMethod('get'))
+            {
+               $title = "Imagen Categoria";
+                return view('categoriasImagen ')
+                ->with('title', $title);
+              }
+            else {
+                $validator = Validator::make($request->all(),
+                    [
+                        'file' => 'image',
+                    ],
+                    [
+                        'file.image' => 'Este archivo debe ser una imagen de tipo (jpeg, png, bmp, gif, or svg)'
+                    ]);
+                if ($validator->fails())
+                    return array(
+                        'fail' => true,
+                        'errors' => $validator->errors()
+                    );
+                $extension = $request->file('file')->getClientOriginalExtension();
+                $dir = 'uploads/';
+                $filename = uniqid() . '_' . time() . '.' . $extension;
+                $request->file('file')->move($dir, $filename);
+                return $filename;
+            }
+        }
+
+
+
+        public function deleteImage($filename)
+    {
+        File::delete('uploads/' . $filename);
+    }
+   
+
      
     }
