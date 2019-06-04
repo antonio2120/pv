@@ -52,16 +52,7 @@
                         <button onclick="eliminarEmpleado({{$empleado->id}})" type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                     </span>
                 </td>
-                 <td>
-                    <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Imágen">
-                        <a href="empleadosImagen/">
-                            <button type="button" class="btn btn-warning"><i class="fas fa-upload"></i></button>
-                        </a>
-                        <a href="empleados-remove-image/">
-                            <button type="button" class="btn btn-warning"><i class="fas fa-trash-alt"></i></button>
-                        </a>
-                    </span>
-                </td>
+                 
             </tr>
         @endforeach
         </tbody>
