@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(SucursalSeeder::class);
         $this->call(ComprasSeeder::class);
         $this->call(ApartadosSeeder::class);
-        $this->call(VentasSeeder::class);
+        //$this->call(VentasSeeder::class);
         $this->call(ApareceSeeder::class);
     }
 }

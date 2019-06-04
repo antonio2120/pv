@@ -32,12 +32,12 @@
         @foreach($productos as $producto)
             <tr id="renglon_{{$producto->id}}">
                 <th scope="row">{{$producto->id}}</th>
-                <td>{{$producto->nombre}}</td>
                 <td>
                     @if(file_exists(public_path('img/productos/'.$producto->id.'.jpg')))
                         <img src="{{url('img/productos/'.$producto->id)}}.jpg" width="50px">
                     @endif
                 </td>
+                <td>{{$producto->nombre}}</td>
                 <td>{{$producto->descripcion}}</td>
                 <td>{{$producto->precio}}</td>
                 <td>{{$producto->costo}}</td>
