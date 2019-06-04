@@ -18,6 +18,7 @@ class VentasSeeder extends Seeder
             'hora' => '14:00',
             'total' => 200.5,
             'empleado_id' => App\Empleado::all()->random()->id,
+            'imagen' => '',
             'created_at' => '2019-04-16',
             'updated_at' => '2019-04-16',
         ]);
@@ -27,6 +28,7 @@ class VentasSeeder extends Seeder
             'hora' => '12:00',
             'total' => 89.70,
             'empleado_id' => App\Empleado::all()->random()->id,
+            'imagen' => '',
             'created_at' => '2019-05-16',
             'updated_at' => '2019-05-16',
         ]);
@@ -36,6 +38,7 @@ class VentasSeeder extends Seeder
             'hora' => '13:35',
             'total' => 170.5,
             'empleado_id' => App\Empleado::all()->random()->id,
+            'imagen' => '',
             'created_at' => '2019-05-16',
             'updated_at' => '2019-05-16',
         ]);
@@ -45,6 +48,7 @@ class VentasSeeder extends Seeder
             'hora' => '10:40',
             'total' => 5500,
             'empleado_id' => App\Empleado::all()->random()->id,
+            'imagen' => '',
             'created_at' => '2019-05-16',
             'updated_at' => '2019-05-16',
         ]);
