@@ -1,7 +1,7 @@
 @extends('layout_principal')
 @section('content')
     <h1>{{$title}}</h1>
-    <form id="productoForm" method="POST">
+    <form id="productoForm" method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <label for="nombre_producto">Nombre</label>
             <input type="text"
@@ -74,6 +74,15 @@
 
             </select>
         </div>
+        <div class="form-group">
+            <label class="col-md-4 control-label">Imagen</label>
+            <div class="col-md-6">
+                @if(isset($producto) && file_exists(public_path('img/productos/'.$producto->id.'.jpg')))
+                    <img src="{{url('img/productos/'.$producto->id)}}.jpg" width="200px">
+                @endif
+                <input type="file" id="imagen" name="imagen" accept="image/x-png,image/gif,image/jpeg">
+            </div>
+        </div>
         <button type="submit" class="btn btn-primary">{{$accion == 'nuevo' ? 'Alta de producto' : 'Guardar cambios' }}</button>
     </form>
     <script>
@@ -98,6 +107,9 @@
                     categoria: {
                         required: true
                     },
+                    imagen:{
+                        required: true
+                    }
                 },
                 messages: {
                     nombre_producto: {
@@ -118,31 +130,42 @@
                     categoria: {
                         required: "Seleccionar Categoria del producto"
                     },
+                    imagen:{
+                        required: "Seleccionar una imagen para el producto"
+                    }
                 },
             });
         });
         $("#productoForm").submit(function (event ) {
-            console.log('submit');
-            console.log('validate', $("#productoForm").validate());
-            event.preventDefault();
+           event.preventDefault();
 
-            var $form = $(this);
-            if(! $form.valid()) return false;
+            var form_data = new FormData();
+            form_data.append('imagen', $('#imagen')[0].files[0]);
+            //form_data.append('imagen', $('#imagen')[0]);
+            form_data.append('_token', '{{csrf_token()}}');
+            form_data.append('accion', '{{$accion}}');
+            form_data.append('id', '{{isset($producto) ? $producto->id : ''}}');
+            form_data.append('nombre_producto',  $('#nombre_producto').val());
+            form_data.append('descripcion',  $('#descripcion').val());
+            form_data.append('precio',  $('#precio').val());
+            form_data.append('costo',  $('#costo').val());
+            form_data.append('proveedor',  $('#proveedor').val());
+            form_data.append('categoria',  $('#categoria').val());
+
+            var form = $('#productoForm');
+
+            console.log(form_data);
+            console.log(form);
+
+            if(! form.valid()) return false;
 
             $.ajax({
                 url: "{{ asset('productosGuardar')}}",
                 method: 'POST',
-                data: {
-                    nombre_producto: $("#nombre_producto").val(),
-                    descripcion: $("#descripcion").val(),
-                    precio: $("#precio").val(),
-                    costo: $("#costo").val(),
-                    proveedor: $("#proveedor").val(),
-                    categoria: $("#categoria").val(),
-                    _token: "{{ csrf_token() }}",
-                    id:"{{isset($producto) ? $producto->id : ''}}",
-                    accion: "{{$accion}}"
-                },
+                cache: false,// no almacenar nada en memoria cache
+                contentType: false,
+                processData: false,
+                data: form_data,
                 dataType: 'json',
                 beforeSend: function () {
 

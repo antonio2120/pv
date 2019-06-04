@@ -85,14 +85,14 @@
                 </div>
 
                 <div class="links">
-                    <a href="productos/">Productos</a>
-                    <a href="proveedores/">Proveedores</a>
-                    <a href="empleados/">Empleados</a>
-                    <a href="clientes/">Clientes</a>
-                    <a href="categorias/">Categorias</a>
+                    <a href="{{asset('productos/')}}">Productos</a>
+                    <a href="{{asset('proveedores/')}}">Proveedores</a>
+                    <a href="{{asset('empleados/')}}">Empleados</a>
+                    <a href="{{asset('clientes/')}}">Clientes</a>
+                    <a href="{{asset('categorias/')}}">Categorias</a>
                     <a href="ventas/">Ventas</a>
                     <a href="apartados/">Apartados</a>
-                    <a href="aparece/">Aparece</a>
+                    <a href="{{asset('aparece/')}}">Aparece</a>
                      <a href="sucursal/">Sucursal</a>
                 </div>
             </div>

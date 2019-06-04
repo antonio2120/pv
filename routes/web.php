@@ -67,8 +67,8 @@ Route::post('/empleadosGuardar/', 'EmpleadosController@guardar');
 Route::get('/empleadosEditar/{empleado_id}', 'EmpleadosController@editar');
 Route::get('/empleadosPDF/','EmpleadosController@downloadPDF');
 Route::get('/empleadosPDF/{buscar}','EmpleadosController@downloadPDF');
-Route::match(['get', 'post'], 'empleados-image-upload', 'EmpleadosController@ajaxImage');
-Route::delete('empleados-remove-image/{filename}', 'EmpleadosController@deleteImage');
+Route::match(['get', 'post'], '/empleadosImagen/', 'EmpleadosController@cargaImagen');
+Route::delete('/empleadosImagen/{filename}', 'EmpleadosController@deleteImage');
 
 
 Route::get('/categorias', 'CategoriaController@index');
@@ -116,3 +116,6 @@ Route::post('/sucursalGuardar/', 'SucursalController@guardar');
 Route::get('/sucursalEditar/{sucursal_id}', 'SucursalController@editar');
 Route::match(['get', 'post'], '/sucursalImagen/', 'SucursalController@Image');
 Route::delete('/sucuralImagen/{filename}', 'SucursalController@deleteImage');
+Route::get('/sucursalPDF/','SucursalController@downloadPDF');
+Route::get('/sucursalPDF/{buscar}','SucursalController@downloadPDF');
+Route::get('/sucursal/{buscar}', 'SucursalController@buscar');
