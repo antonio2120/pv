@@ -33,6 +33,23 @@ class EmpleadosController extends Controller {
         ->with('numRegistros', $numRegistros);
 
     }
+    public function eliminar($empleado_id)
+    {
+        if ($empleado_id) {
+            try {
+                if(Empleado::destroy($empleado_id)){
+                    return response()->json(['mensaje' => 'Empleado eliminado', 'status' => 'ok'], 200);
+                }else{
+                    return response()->json(['mensaje' => 'El empleado no se pudo eliminar', 'status' => 'error'], 400);
+                }
+            } catch (Exception $e) {
+                return response()->json(['mensaje' => 'Error al eliminar empleado'], 400);
+            }
+        }else{
+            return response()->json(['mensaje' => 'Error al eliminar el empleado, empleado no encontrado '], 400);
+        }
+
+    }
     public function downloadPDF($buscar = null){
         if( !isset($buscar) || $buscar == null){
             $empleados = Empleado::all();
